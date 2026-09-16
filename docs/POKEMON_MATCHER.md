@@ -86,3 +86,20 @@ PokemonMatcher special =
 ```
 
 The checks use the current form's effective labels through `PokemonLabels`.
+
+## Native size categories
+
+Cobblemon's native XS/S/M/L/XL size categories can be matched directly:
+
+```java
+PokemonMatcher large =
+        PokemonMatcher.any()
+                .anySize(List.of(
+                        PokemonSizeCategory.L,
+                        PokemonSizeCategory.XL
+                ));
+```
+
+Use `size(...)` when exactly one category is accepted. Size matching is kept
+outside `PokemonProperties` because the native property syntax does not expose
+this category.
