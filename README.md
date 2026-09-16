@@ -89,7 +89,7 @@ See [docs/BRANCHING.md](docs/BRANCHING.md) for the multi-version strategy.
 
 Keep additions focused, reusable and Cobblemon-specific. New helpers should represent a real shared need or isolate a meaningful compatibility boundary.
 
-See [docs/POKEMON.md](docs/POKEMON.md), [docs/POKEMON_MATCHER.md](docs/POKEMON_MATCHER.md), [docs/POKEMON_CREATION.md](docs/POKEMON_CREATION.md), [docs/POKEMON_IVS.md](docs/POKEMON_IVS.md), [docs/POKEMON_ABILITIES.md](docs/POKEMON_ABILITIES.md), [docs/STORAGE.md](docs/STORAGE.md), [docs/EVENTS.md](docs/EVENTS.md), [docs/BATTLE.md](docs/BATTLE.md) and [docs/POKEDEX.md](docs/POKEDEX.md) for the current shared helper APIs.
+See [docs/POKEMON.md](docs/POKEMON.md), [docs/POKEMON_MATCHER.md](docs/POKEMON_MATCHER.md), [docs/POKEMON_CREATION.md](docs/POKEMON_CREATION.md), [docs/POKEMON_IVS.md](docs/POKEMON_IVS.md), [docs/POKEMON_ABILITIES.md](docs/POKEMON_ABILITIES.md), [docs/POKEMON_TYPES.md](docs/POKEMON_TYPES.md), [docs/STORAGE.md](docs/STORAGE.md), [docs/EVENTS.md](docs/EVENTS.md), [docs/BATTLE.md](docs/BATTLE.md) and [docs/POKEDEX.md](docs/POKEDEX.md) for the current shared helper APIs.
 
 For local development consumption, see [docs/LOCAL_MAVEN.md](docs/LOCAL_MAVEN.md).
 
