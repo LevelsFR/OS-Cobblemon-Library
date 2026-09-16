@@ -2,22 +2,23 @@
 
 All notable public changes to OS Cobblemon Library are documented here.
 
-## Unreleased
+## 1.0.0 - 2026-09-16
 
 ### Added
 
 - Multi-loader Fabric and NeoForge project structure.
 - Pokémon identity, matching, species resolution and creation helpers.
-- IV, ability, type and label helpers.
-- Party and PC storage queries.
-- Cobblemon event subscription helpers.
-- Battle inspection helpers.
-- Pokédex query helpers.
+- IV, ability, type, label and native size helpers.
+- Party and PC storage queries, matching and counts.
+- Cobblemon event subscription and lifecycle helpers.
+- Battle classification and event inspection helpers.
+- Pokédex species, form, variation and completion queries.
 - Local Maven development publishing.
+- Public integration, API stability and release documentation.
 
 ### Changed
 
-- Development builds now use a `-SNAPSHOT` version.
-- Runtime metadata now targets Minecraft 1.21.1 and Cobblemon 1.8.x explicitly.
-- CI builds and publishing now use the committed Gradle wrapper.
+- Runtime metadata explicitly targets Minecraft 1.21.1 and Cobblemon 1.8.x.
+- CI builds and Maven publication use the committed Gradle wrapper.
 - Architectury build plugins are pinned to reproducible versions.
+- Public API boundaries are documented and internal packages are excluded from the supported API.
