@@ -19,7 +19,8 @@ import java.util.function.Predicate;
  * <p>Use the native property string for species, form, level, shiny, gender,
  * nature, ability, type, IVs, EVs and registered custom properties. This class
  * only adds recurring constraints that are not already convenient in
- * {@code PokemonProperties}: Alpha state, aspects, marks, data labels and native size categories.</p>
+ * {@code PokemonProperties}: Alpha state, aspects, marks, data labels and
+ * native size categories.</p>
  *
  * <p>Instances are immutable and safe to reuse.</p>
  */
@@ -90,15 +91,14 @@ public final class PokemonMatcher implements Predicate<Pokemon> {
      * Requires the Pokémon to match or not match Alpha state.
      */
     public PokemonMatcher alpha(boolean required) {
-        return new PokemonMatcher(
-                propertyQuery,
-                properties,
+        return copy(
                 required,
                 requiredAspects,
                 anyAspects,
                 requiredMarks,
                 requiredLabels,
-                anyLabels
+                anyLabels,
+                allowedSizes
         );
     }
 
@@ -112,10 +112,7 @@ public final class PokemonMatcher implements Predicate<Pokemon> {
         if (!normalized.isEmpty()) {
             copy.add(normalized);
         }
-        return new PokemonMatcher(
-                propertyQuery, properties, alpha, copy, anyAspects,
-                requiredMarks, requiredLabels, anyLabels
-        );
+        return copy(alpha, copy, anyAspects, requiredMarks, requiredLabels, anyLabels, allowedSizes);
     }
 
     /**
@@ -124,10 +121,7 @@ public final class PokemonMatcher implements Predicate<Pokemon> {
     public PokemonMatcher aspects(Collection<String> aspects) {
         Objects.requireNonNull(aspects, "aspects");
         LinkedHashSet<String> copy = normalizedCopy(requiredAspects, aspects);
-        return new PokemonMatcher(
-                propertyQuery, properties, alpha, copy, anyAspects,
-                requiredMarks, requiredLabels, anyLabels
-        );
+        return copy(alpha, copy, anyAspects, requiredMarks, requiredLabels, anyLabels, allowedSizes);
     }
 
     /**
@@ -136,10 +130,7 @@ public final class PokemonMatcher implements Predicate<Pokemon> {
     public PokemonMatcher anyAspect(Collection<String> aspects) {
         Objects.requireNonNull(aspects, "aspects");
         LinkedHashSet<String> copy = normalizedCopy(anyAspects, aspects);
-        return new PokemonMatcher(
-                propertyQuery, properties, alpha, requiredAspects, copy,
-                requiredMarks, requiredLabels, anyLabels
-        );
+        return copy(alpha, requiredAspects, copy, requiredMarks, requiredLabels, anyLabels, allowedSizes);
     }
 
     /**
@@ -149,10 +140,7 @@ public final class PokemonMatcher implements Predicate<Pokemon> {
         Objects.requireNonNull(markId, "markId");
         LinkedHashSet<ResourceLocation> copy = new LinkedHashSet<>(requiredMarks);
         copy.add(markId);
-        return new PokemonMatcher(
-                propertyQuery, properties, alpha, requiredAspects, anyAspects,
-                copy, requiredLabels, anyLabels
-        );
+        return copy(alpha, requiredAspects, anyAspects, copy, requiredLabels, anyLabels, allowedSizes);
     }
 
     /**
@@ -166,10 +154,7 @@ public final class PokemonMatcher implements Predicate<Pokemon> {
                 copy.add(markId);
             }
         }
-        return new PokemonMatcher(
-                propertyQuery, properties, alpha, requiredAspects, anyAspects,
-                copy, requiredLabels, anyLabels
-        );
+        return copy(alpha, requiredAspects, anyAspects, copy, requiredLabels, anyLabels, allowedSizes);
     }
 
     /**
@@ -182,10 +167,7 @@ public final class PokemonMatcher implements Predicate<Pokemon> {
         if (!normalized.isEmpty()) {
             copy.add(normalized);
         }
-        return new PokemonMatcher(
-                propertyQuery, properties, alpha, requiredAspects, anyAspects,
-                requiredMarks, copy, anyLabels
-        );
+        return copy(alpha, requiredAspects, anyAspects, requiredMarks, copy, anyLabels, allowedSizes);
     }
 
     /**
@@ -194,10 +176,7 @@ public final class PokemonMatcher implements Predicate<Pokemon> {
     public PokemonMatcher labels(Collection<String> labels) {
         Objects.requireNonNull(labels, "labels");
         LinkedHashSet<String> copy = normalizedCopy(requiredLabels, labels);
-        return new PokemonMatcher(
-                propertyQuery, properties, alpha, requiredAspects, anyAspects,
-                requiredMarks, copy, anyLabels
-        );
+        return copy(alpha, requiredAspects, anyAspects, requiredMarks, copy, anyLabels, allowedSizes);
     }
 
     /**
@@ -206,10 +185,7 @@ public final class PokemonMatcher implements Predicate<Pokemon> {
     public PokemonMatcher anyLabel(Collection<String> labels) {
         Objects.requireNonNull(labels, "labels");
         LinkedHashSet<String> copy = normalizedCopy(anyLabels, labels);
-        return new PokemonMatcher(
-                propertyQuery, properties, alpha, requiredAspects, anyAspects,
-                requiredMarks, requiredLabels, copy
-        );
+        return copy(alpha, requiredAspects, anyAspects, requiredMarks, requiredLabels, copy, allowedSizes);
     }
 
     /**
@@ -217,9 +193,14 @@ public final class PokemonMatcher implements Predicate<Pokemon> {
      */
     public PokemonMatcher size(PokemonSizeCategory size) {
         Objects.requireNonNull(size, "size");
-        return new PokemonMatcher(
-                propertyQuery, properties, alpha, requiredAspects, anyAspects,
-                requiredMarks, requiredLabels, anyLabels, Set.of(size)
+        return copy(
+                alpha,
+                requiredAspects,
+                anyAspects,
+                requiredMarks,
+                requiredLabels,
+                anyLabels,
+                Set.of(size)
         );
     }
 
@@ -235,9 +216,14 @@ public final class PokemonMatcher implements Predicate<Pokemon> {
                 copy.add(size);
             }
         }
-        return new PokemonMatcher(
-                propertyQuery, properties, alpha, requiredAspects, anyAspects,
-                requiredMarks, requiredLabels, anyLabels, copy
+        return copy(
+                alpha,
+                requiredAspects,
+                anyAspects,
+                requiredMarks,
+                requiredLabels,
+                anyLabels,
+                copy
         );
     }
 
@@ -298,6 +284,28 @@ public final class PokemonMatcher implements Predicate<Pokemon> {
     @Override
     public boolean test(Pokemon pokemon) {
         return matches(pokemon);
+    }
+
+    private PokemonMatcher copy(
+            Boolean alpha,
+            Set<String> requiredAspects,
+            Set<String> anyAspects,
+            Set<ResourceLocation> requiredMarks,
+            Set<String> requiredLabels,
+            Set<String> anyLabels,
+            Set<PokemonSizeCategory> allowedSizes
+    ) {
+        return new PokemonMatcher(
+                propertyQuery,
+                properties,
+                alpha,
+                requiredAspects,
+                anyAspects,
+                requiredMarks,
+                requiredLabels,
+                anyLabels,
+                allowedSizes
+        );
     }
 
     private boolean matchesAnyAspect(Pokemon pokemon) {
