@@ -56,7 +56,7 @@ jobs:
           VERSION="$(grep '^mod_version=' gradle.properties | cut -d= -f2-)"
           FABRIC_JAR="fabric/build/libs/os-cobblemon-library-fabric-$VERSION.jar"
           NEOFORGE_JAR="neoforge/build/libs/os-cobblemon-library-neoforge-$VERSION.jar"
-          ICON="assets/os_cobblemon_library/icon.png"
+          ICON="icon.png"
 
           test -f "$FABRIC_JAR"
           test -f "$NEOFORGE_JAR"
@@ -65,11 +65,11 @@ jobs:
           jar tf "$NEOFORGE_JAR" | grep -Fxq "$ICON"
 
           unzip -p "$FABRIC_JAR" fabric.mod.json | grep -Fq '"authors": ["LevelsFR"]'
-          unzip -p "$FABRIC_JAR" fabric.mod.json | grep -Fq '"icon": "assets/os_cobblemon_library/icon.png"'
+          unzip -p "$FABRIC_JAR" fabric.mod.json | grep -Fq '"icon": "icon.png"'
           unzip -p "$FABRIC_JAR" fabric.mod.json | grep -Fq 'A lightweight shared Cobblemon API and compatibility library'
 
           unzip -p "$NEOFORGE_JAR" META-INF/neoforge.mods.toml | grep -Fq 'authors="LevelsFR"'
-          unzip -p "$NEOFORGE_JAR" META-INF/neoforge.mods.toml | grep -Fq 'logoFile="assets/os_cobblemon_library/icon.png"'
+          unzip -p "$NEOFORGE_JAR" META-INF/neoforge.mods.toml | grep -Fq 'logoFile="icon.png"'
           unzip -p "$NEOFORGE_JAR" META-INF/neoforge.mods.toml | grep -Fq 'A lightweight shared Cobblemon API and compatibility library'
 
       - name: Stage final release JARs
