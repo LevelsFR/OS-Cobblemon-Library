@@ -4,6 +4,16 @@ All notable public changes to OS Cobblemon Library are documented here.
 
 ## Unreleased
 
+## 1.0.1 - 2026-09-17
+
+### Added
+
+- Added the official OS Cobblemon Library logo to Fabric and NeoForge mod listings.
+
+### Changed
+
+- Updated the public mod description to better reflect the library's API and compatibility role.
+
 ## 1.0.0 - 2026-09-16
 
 ### Added
