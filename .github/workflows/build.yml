@@ -36,12 +36,18 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: os-cobblemon-library-fabric
-          path: fabric/build/libs/*-fabric-*.jar
+          path: |
+            fabric/build/libs/*-fabric-*.jar
+            !fabric/build/libs/*-dev-*.jar
+            !fabric/build/libs/*-sources.jar
           if-no-files-found: error
 
       - name: Upload NeoForge JAR
         uses: actions/upload-artifact@v4
         with:
           name: os-cobblemon-library-neoforge
-          path: neoforge/build/libs/*-neoforge-*.jar
+          path: |
+            neoforge/build/libs/*-neoforge-*.jar
+            !neoforge/build/libs/*-dev-*.jar
+            !neoforge/build/libs/*-sources.jar
           if-no-files-found: error
