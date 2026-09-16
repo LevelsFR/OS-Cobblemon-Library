@@ -1,3 +1,84 @@
+OS Cobblemon Library Proprietary API License
 Copyright (c) 2026 LevelsFR
-
 All rights reserved.
+
+This software is proprietary and is not distributed under an open-source license.
+
+1. Definitions
+
+"Library" means OS Cobblemon Library, including its source code, official binary
+releases, resources, documentation and associated files.
+
+"Public API" means the documented public Java API exposed by packages under
+com.ourstory.oscobblemon, excluding com.ourstory.oscobblemon.internal and any
+other API explicitly documented as internal or unsupported.
+
+"Independent Mod" means software developed separately from the Library that
+uses the Public API without incorporating copied Library source code or a
+modified version of the Library.
+
+2. Limited API-use permission
+
+Subject to this license, LevelsFR grants permission to:
+
+- inspect the publicly available source code for reference, compatibility,
+  debugging and integration purposes;
+- develop Independent Mods that compile against and use the Public API;
+- distribute Independent Mods in source or binary form, commercially or
+  non-commercially;
+- declare OS Cobblemon Library as a dependency and direct users to official
+  distribution channels for the Library.
+
+Use of the Public API does not require an Independent Mod to disclose, license
+or publish its own source code.
+
+3. Rights not granted
+
+Except where required by applicable law or necessarily granted by the hosting
+platform for repository viewing or forking, no permission is granted to:
+
+- copy Library source code into another project;
+- modify and redistribute the Library;
+- publish or distribute unofficial, patched, forked or rebranded builds of the
+  Library;
+- redistribute the Library itself, in source or binary form, outside official
+  distribution channels without prior written permission from LevelsFR;
+- sublicense, sell or license the Library itself;
+- remove or alter copyright, license, authorship or attribution notices;
+- use the OS Cobblemon Library name, logo or LevelsFR identity in a way that
+  implies endorsement, official status or authorship of a third-party project.
+
+Independent compatibility layers, integrations and mods that only call the
+Public API are permitted under Section 2.
+
+4. Official binaries
+
+Only binaries published by LevelsFR through official project distribution
+channels are considered official builds.
+
+Third-party projects may depend on those official binaries, but this license
+does not grant permission to republish, mirror or replace them with modified
+copies.
+
+5. Ownership
+
+The Library, its source code, compiled binaries, logo, resources and
+documentation remain the exclusive property of LevelsFR. No ownership rights
+are transferred by this license.
+
+6. Termination
+
+The permissions granted by this license terminate automatically if its terms
+are violated. Upon termination, distribution or use of unauthorized copies,
+modified builds or derivative Library code must cease.
+
+7. Disclaimer
+
+THE LIBRARY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+A PARTICULAR PURPOSE AND NON-INFRINGEMENT.
+
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, LEVELSFR SHALL NOT BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM THE USE OF THE LIBRARY.
+
+For permissions beyond this license, contact LevelsFR.
