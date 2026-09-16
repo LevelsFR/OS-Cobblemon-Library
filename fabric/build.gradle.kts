@@ -21,14 +21,14 @@ configurations {
 }
 
 dependencies {
-    minecraft("com.mojang:minecraft:${property("minecraft_version")}")
+    minecraft("com.mojang:minecraft:${project.property("minecraft_version")}")
     mappings(loom.officialMojangMappings())
 
-    modImplementation("net.fabricmc:fabric-loader:${property("fabric_loader_version")}")
-    modImplementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_api_version")}")
-    modImplementation("net.fabricmc:fabric-language-kotlin:${property("fabric_kotlin_version")}")
+    modImplementation("net.fabricmc:fabric-loader:${project.property("fabric_loader_version")}")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:${project.property("fabric_api_version")}")
+    modImplementation("net.fabricmc:fabric-language-kotlin:${project.property("fabric_kotlin_version")}")
 
-    modImplementation("com.cobblemon:fabric:${property("cobblemon_version")}") {
+    modImplementation("com.cobblemon:fabric:${project.property("cobblemon_version")}") {
         isTransitive = false
     }
 
@@ -48,13 +48,13 @@ dependencies {
 tasks.processResources {
     val props = mapOf(
         "version" to project.version,
-        "mod_id" to property("mod_id"),
-        "mod_name" to property("mod_name"),
-        "mod_description" to property("mod_description"),
-        "minecraft_version" to property("minecraft_version"),
-        "cobblemon_min_version" to property("cobblemon_min_version"),
-        "fabric_loader_version" to property("fabric_loader_version"),
-        "java_version" to property("java_version")
+        "mod_id" to project.property("mod_id"),
+        "mod_name" to project.property("mod_name"),
+        "mod_description" to project.property("mod_description"),
+        "minecraft_version" to project.property("minecraft_version"),
+        "cobblemon_min_version" to project.property("cobblemon_min_version"),
+        "fabric_loader_version" to project.property("fabric_loader_version"),
+        "java_version" to project.property("java_version")
     )
     inputs.properties(props)
     filesMatching("fabric.mod.json") {
@@ -64,12 +64,12 @@ tasks.processResources {
 
 tasks {
     jar {
-        archiveBaseName.set("${rootProject.property("archives_base_name")}-fabric")
+        archiveBaseName.set("${rootProject.project.property("archives_base_name")}-fabric")
         archiveClassifier.set("dev-slim")
     }
 
     shadowJar {
-        archiveBaseName.set("${rootProject.property("archives_base_name")}-fabric")
+        archiveBaseName.set("${rootProject.project.property("archives_base_name")}-fabric")
         archiveClassifier.set("dev-shadow")
         configurations = listOf(shadowCommon)
     }
@@ -77,7 +77,7 @@ tasks {
     remapJar {
         dependsOn(shadowJar)
         inputFile.set(shadowJar.flatMap { it.archiveFile })
-        archiveBaseName.set("${rootProject.property("archives_base_name")}-fabric")
+        archiveBaseName.set("${rootProject.project.property("archives_base_name")}-fabric")
         archiveVersion.set(project.version.toString())
         archiveClassifier.set("")
     }
