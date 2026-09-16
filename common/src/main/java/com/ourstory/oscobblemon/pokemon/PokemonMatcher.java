@@ -2,6 +2,7 @@ package com.ourstory.oscobblemon.pokemon;
 
 import com.cobblemon.mod.common.api.pokemon.PokemonProperties;
 import com.cobblemon.mod.common.pokemon.Pokemon;
+import com.cobblemon.mod.common.pokemon.PokemonSizeCategory;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Collection;
@@ -18,7 +19,7 @@ import java.util.function.Predicate;
  * <p>Use the native property string for species, form, level, shiny, gender,
  * nature, ability, type, IVs, EVs and registered custom properties. This class
  * only adds recurring constraints that are not already convenient in
- * {@code PokemonProperties}: Alpha state, aspects, marks and data labels.</p>
+ * {@code PokemonProperties}: Alpha state, aspects, marks, data labels and native size categories.</p>
  *
  * <p>Instances are immutable and safe to reuse.</p>
  */
@@ -31,6 +32,7 @@ public final class PokemonMatcher implements Predicate<Pokemon> {
     private final Set<ResourceLocation> requiredMarks;
     private final Set<String> requiredLabels;
     private final Set<String> anyLabels;
+    private final Set<PokemonSizeCategory> allowedSizes;
 
     private PokemonMatcher(
             String propertyQuery,
@@ -40,7 +42,8 @@ public final class PokemonMatcher implements Predicate<Pokemon> {
             Set<String> anyAspects,
             Set<ResourceLocation> requiredMarks,
             Set<String> requiredLabels,
-            Set<String> anyLabels
+            Set<String> anyLabels,
+            Set<PokemonSizeCategory> allowedSizes
     ) {
         this.propertyQuery = propertyQuery;
         this.properties = properties;
@@ -50,6 +53,7 @@ public final class PokemonMatcher implements Predicate<Pokemon> {
         this.requiredMarks = Set.copyOf(requiredMarks);
         this.requiredLabels = Set.copyOf(requiredLabels);
         this.anyLabels = Set.copyOf(anyLabels);
+        this.allowedSizes = Set.copyOf(allowedSizes);
     }
 
     /**
@@ -73,6 +77,7 @@ public final class PokemonMatcher implements Predicate<Pokemon> {
                 normalized,
                 properties,
                 null,
+                Set.of(),
                 Set.of(),
                 Set.of(),
                 Set.of(),
@@ -208,6 +213,35 @@ public final class PokemonMatcher implements Predicate<Pokemon> {
     }
 
     /**
+     * Requires one native Cobblemon size category.
+     */
+    public PokemonMatcher size(PokemonSizeCategory size) {
+        Objects.requireNonNull(size, "size");
+        return new PokemonMatcher(
+                propertyQuery, properties, alpha, requiredAspects, anyAspects,
+                requiredMarks, requiredLabels, anyLabels, Set.of(size)
+        );
+    }
+
+    /**
+     * Requires the Pokémon to use at least one of the supplied native size
+     * categories.
+     */
+    public PokemonMatcher anySize(Collection<PokemonSizeCategory> sizes) {
+        Objects.requireNonNull(sizes, "sizes");
+        LinkedHashSet<PokemonSizeCategory> copy = new LinkedHashSet<>();
+        for (PokemonSizeCategory size : sizes) {
+            if (size != null) {
+                copy.add(size);
+            }
+        }
+        return new PokemonMatcher(
+                propertyQuery, properties, alpha, requiredAspects, anyAspects,
+                requiredMarks, requiredLabels, anyLabels, copy
+        );
+    }
+
+    /**
      * Returns the original native Cobblemon property query.
      */
     public String propertyQuery() {
@@ -251,6 +285,10 @@ public final class PokemonMatcher implements Predicate<Pokemon> {
         }
 
         if (!anyLabels.isEmpty() && !PokemonLabels.hasAnyLabel(pokemon, anyLabels)) {
+            return false;
+        }
+
+        if (!allowedSizes.isEmpty() && !allowedSizes.contains(pokemon.getSizeCategory())) {
             return false;
         }
 
