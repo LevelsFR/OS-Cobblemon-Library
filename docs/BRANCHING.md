@@ -1,17 +1,17 @@
 # Branching Model
 
-OS Cobblemon Library follows a Minecraft compatibility-line model inspired by long-lived library projects such as FTB Library.
+OS Cobblemon Library uses separate compatibility lines for Minecraft versions.
 
 ## Current line
 
 - `1.21.1/dev`: active development
-- `1.21.1/main`: stable code for the Minecraft 1.21.1 line
+- `1.21.1/main`: stable code for Minecraft 1.21.1
 
-Feature branches should normally start from `1.21.1/dev` and merge back into it after CI passes.
+Feature work should normally start from `1.21.1/dev` and return to that branch after validation.
 
 ## Future Minecraft versions
 
-If Cobblemon moves to another Minecraft version, create a new compatibility line rather than filling one branch with version conditionals.
+When Cobblemon moves to a new Minecraft version, a new compatibility line can be created instead of filling one branch with version-specific conditionals.
 
 Example:
 
@@ -22,8 +22,10 @@ Example:
 1.22/main
 ```
 
-Cobblemon patch/minor updates on the same Minecraft version do not automatically require a new Git branch. Keep the same Minecraft branch while compatibility remains maintainable.
+Cobblemon updates on the same Minecraft version do not automatically require a new branch. The existing compatibility line can continue while support remains maintainable.
 
 ## Releases
 
-Library releases use their own semantic version such as `1.0.0`, `1.1.0` or `2.0.0`. The library version is independent of the Minecraft version.
+Library releases use semantic versioning such as `1.0.0`, `1.1.0` and `2.0.0`.
+
+The library version is independent of the Minecraft version.
