@@ -1,7 +1,7 @@
 /**
- * Party, PC and Pokémon lookup helpers.
+ * Shared Party, PC and player-owned Pokémon lookup helpers.
  *
- * <p>Keep storage access centralized so Cobblemon storage API changes can be
- * absorbed here instead of being repeated across every OS mod.</p>
+ * <p>The package centralizes recurring Cobblemon storage access while keeping
+ * store mutation and gameplay-specific rules in consuming mods.</p>
  */
 package com.ourstory.oscobblemon.storage;
