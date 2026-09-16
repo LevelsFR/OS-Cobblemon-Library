@@ -1,6 +1,7 @@
 /**
- * Shared Pokédex read helpers such as seen/caught state.
+ * Read-only Pokédex access and progression helpers.
  *
- * <p>UI, notifications and leaderboard-specific statistics do not belong here.</p>
+ * <p>The package keeps common species, form, shiny-state and progress queries
+ * behind a compact API while preserving Cobblemon's native Pokédex model.</p>
  */
 package com.ourstory.oscobblemon.pokedex;
