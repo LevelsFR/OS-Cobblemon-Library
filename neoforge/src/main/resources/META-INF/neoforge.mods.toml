@@ -1,11 +1,14 @@
 modLoader="javafml"
 loaderVersion="[4,)"
 license="All Rights Reserved"
+issueTrackerURL="https://github.com/LevelsFR/OS-Cobblemon-Library/issues"
 
 [[mods]]
 modId="${mod_id}"
 version="${version}"
 displayName="${mod_name}"
+displayURL="https://github.com/LevelsFR/OS-Cobblemon-Library"
+authors="LevelsFR"
 description='''${mod_description}'''
 
 [[dependencies.${mod_id}]]
