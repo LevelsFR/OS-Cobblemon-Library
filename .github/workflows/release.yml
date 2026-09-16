@@ -57,12 +57,19 @@ jobs:
           FABRIC_JAR="fabric/build/libs/os-cobblemon-library-fabric-$VERSION.jar"
           NEOFORGE_JAR="neoforge/build/libs/os-cobblemon-library-neoforge-$VERSION.jar"
           ICON="icon.png"
+          PACK_META="pack.mcmeta"
+          LICENSE_FILE="LICENSE"
 
           test -f "$FABRIC_JAR"
           test -f "$NEOFORGE_JAR"
 
-          jar tf "$FABRIC_JAR" | grep -Fxq "$ICON"
-          jar tf "$NEOFORGE_JAR" | grep -Fxq "$ICON"
+          for JAR in "$FABRIC_JAR" "$NEOFORGE_JAR"; do
+            jar tf "$JAR" | grep -Fxq "$ICON"
+            jar tf "$JAR" | grep -Fxq "$PACK_META"
+            jar tf "$JAR" | grep -Fxq "$LICENSE_FILE"
+            unzip -p "$JAR" "$PACK_META" | grep -Fq '"pack_format": 48'
+            unzip -p "$JAR" "$LICENSE_FILE" | grep -Fq 'Copyright (c) 2026 LevelsFR'
+          done
 
           unzip -p "$FABRIC_JAR" fabric.mod.json | grep -Fq '"authors": ["LevelsFR"]'
           unzip -p "$FABRIC_JAR" fabric.mod.json | grep -Fq '"icon": "icon.png"'
