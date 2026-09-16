@@ -11,6 +11,7 @@ All notable public changes to OS Cobblemon Library are documented here.
 ### Changed
 
 - Updated the public mod description to better reflect the library's API and compatibility role.
+- Normalized in-game metadata text and resource processing to avoid accented-character encoding issues on Windows builds.
 - Clarified the proprietary license so third-party mods may use the documented public API without source-disclosure requirements while the Library itself remains protected.
 
 ## 1.0.0 - 2026-09-16
