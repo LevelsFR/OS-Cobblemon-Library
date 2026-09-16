@@ -1,7 +1,7 @@
 /**
- * Stable wrappers around Cobblemon events used by multiple OS mods.
+ * Shared Cobblemon event subscriptions and lifecycle helpers.
  *
- * <p>Only wrap events when the wrapper reduces repeated integration code or
- * isolates a known compatibility boundary.</p>
+ * <p>The package covers event boundaries repeatedly used by mods without
+ * attempting to duplicate the complete Cobblemon event API.</p>
  */
 package com.ourstory.oscobblemon.event;

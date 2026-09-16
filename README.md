@@ -82,4 +82,4 @@ See [docs/BRANCHING.md](docs/BRANCHING.md) for the multi-version strategy.
 
 Keep additions focused, reusable and Cobblemon-specific. New helpers should represent a real shared need or isolate a meaningful compatibility boundary.
 
-See [docs/POKEMON.md](docs/POKEMON.md) and [docs/STORAGE.md](docs/STORAGE.md) for the current shared helper APIs.\n\nSee [docs/SCOPE.md](docs/SCOPE.md) and [docs/ROADMAP.md](docs/ROADMAP.md) for the current project direction.
+See [docs/POKEMON.md](docs/POKEMON.md), [docs/STORAGE.md](docs/STORAGE.md) and [docs/EVENTS.md](docs/EVENTS.md) for the current shared helper APIs.\n\nSee [docs/SCOPE.md](docs/SCOPE.md) and [docs/ROADMAP.md](docs/ROADMAP.md) for the current project direction.
