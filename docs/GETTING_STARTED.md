@@ -8,10 +8,10 @@ OS Cobblemon Library.
 For local development on the current development branch:
 
 ```text
-1.0.0-SNAPSHOT
+1.1.0-SNAPSHOT
 ```
 
-Stable releases use normal semantic versions such as `1.0.0`.
+The current stable release is `1.0.0`.
 
 ## 2. Publish a local development build
 
@@ -41,7 +41,7 @@ published artifacts.
 Compile common code against the common artifact:
 
 ```kotlin
-val osCobblemonLibraryVersion = "1.0.0-SNAPSHOT"
+val osCobblemonLibraryVersion = "1.1.0-SNAPSHOT"
 
 dependencies {
     compileOnly(
