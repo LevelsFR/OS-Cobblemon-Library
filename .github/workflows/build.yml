@@ -44,6 +44,7 @@ jobs:
           NEOFORGE_JAR="neoforge/build/libs/os-cobblemon-library-neoforge-$VERSION.jar"
           ICON="icon.png"
           PACK_META="pack.mcmeta"
+          PACK_ICON="pack.png"
           LICENSE_FILE="LICENSE"
 
           test -f "$FABRIC_JAR"
@@ -52,9 +53,11 @@ jobs:
           for JAR in "$FABRIC_JAR" "$NEOFORGE_JAR"; do
             jar tf "$JAR" | grep -Fxq "$ICON"
             jar tf "$JAR" | grep -Fxq "$PACK_META"
+            jar tf "$JAR" | grep -Fxq "$PACK_ICON"
             jar tf "$JAR" | grep -Fxq "$LICENSE_FILE"
             unzip -p "$JAR" "$PACK_META" | grep -Fq '"pack_format": 48'
-            unzip -p "$JAR" "$LICENSE_FILE" | grep -Fq 'Copyright (c) 2026 LevelsFR'
+            unzip -p "$JAR" "$LICENSE_FILE" | grep -Fq 'OS Cobblemon Library Proprietary API License'
+            unzip -p "$JAR" "$LICENSE_FILE" | grep -Fq 'Use of the Public API does not require an Independent Mod to disclose'
           done
 
           unzip -p "$FABRIC_JAR" fabric.mod.json | grep -Fq '"authors": ["LevelsFR"]'
