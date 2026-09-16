@@ -3,8 +3,8 @@ package com.ourstory.oscobblemon;
 /**
  * Shared entry point for OS Cobblemon Library.
  *
- * <p>The library must stay focused on reusable Cobblemon integration used by
- * Our Story mods. Loader-specific code belongs in the Fabric or NeoForge modules.</p>
+ * <p>The library stays focused on reusable Cobblemon integration. Loader-specific
+ * code belongs in the Fabric or NeoForge modules.</p>
  */
 public final class OSCobblemonLibrary {
     public static final String MOD_ID = "os_cobblemon_library";

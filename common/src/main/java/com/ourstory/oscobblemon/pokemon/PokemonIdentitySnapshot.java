@@ -4,11 +4,10 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * Loader-neutral normalized identity data for a Pokémon.
+ * Immutable normalized identity data for a Cobblemon Pokémon.
  *
- * <p>This record deliberately stores simple Java values so consuming mods can
- * compare or persist identity information without coupling that data model to
- * Cobblemon implementation classes.</p>
+ * <p>The species ID is namespace-aware, for example {@code cobblemon:pikachu}.
+ * The standard form is represented by an empty {@code formId}.</p>
  */
 public record PokemonIdentitySnapshot(
         UUID uuid,
@@ -20,6 +19,13 @@ public record PokemonIdentitySnapshot(
     public PokemonIdentitySnapshot {
         Objects.requireNonNull(uuid, "uuid");
         Objects.requireNonNull(speciesId, "speciesId");
-        formId = formId == null ? "" : formId;
+        formId = formId == null ? PokemonIdentity.STANDARD_FORM_ID : formId;
+    }
+
+    /**
+     * Returns whether this snapshot represents the species' standard form.
+     */
+    public boolean standardForm() {
+        return formId.isEmpty();
     }
 }
