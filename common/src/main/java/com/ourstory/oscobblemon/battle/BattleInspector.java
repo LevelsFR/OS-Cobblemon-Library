@@ -9,6 +9,7 @@ import com.cobblemon.mod.common.battles.pokemon.BattlePokemon;
 import com.cobblemon.mod.common.pokemon.Pokemon;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
@@ -53,7 +54,7 @@ public final class BattleInspector {
         return kind(battle) == BattleKind.TRAINER;
     }
 
-    public static boolean isPvp(PokemonBattle battle) {
+    public static boolean isPvP(PokemonBattle battle) {
         return kind(battle) == BattleKind.PVP;
     }
 
@@ -220,6 +221,6 @@ public final class BattleInspector {
                 result.add(playerId);
             }
         }
-        return Set.copyOf(result);
+        return Collections.unmodifiableSet(result);
     }
 }
