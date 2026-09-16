@@ -1,7 +1,7 @@
 /**
- * Battle classification, participant and result helpers.
+ * Shared Cobblemon battle inspection helpers.
  *
- * <p>Business rules such as XP formulas, trainer progression or Team Rocket
- * behavior must remain in their owning mods.</p>
+ * <p>The package focuses on classification and participant lookup while hiding
+ * unstable internal battle wrappers where practical.</p>
  */
 package com.ourstory.oscobblemon.battle;
