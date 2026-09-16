@@ -44,3 +44,26 @@ at the time of the call. They still contain the live `Pokemon` objects.
 
 These helpers do not add asynchronous storage access or caching. Use them under
 the same threading rules as Cobblemon's storage API.
+
+## Matcher and predicate queries
+
+Storage helpers accept Java `Predicate<Pokemon>` values, so they work directly
+with `PokemonMatcher`:
+
+```java
+PokemonMatcher matcher =
+        PokemonMatcher.fromProperties("species=pikachu shiny=true")
+                .alpha(true);
+
+Optional<Pokemon> first =
+        PokemonStorage.findFirstOwned(player, matcher);
+
+List<Pokemon> all =
+        PokemonStorage.findAllOwned(player, matcher);
+
+boolean hasMatch =
+        PokemonStorage.anyOwned(player, matcher);
+```
+
+Party-only variants preserve party slot order. Owned queries check or return the
+party first and the PC second.
