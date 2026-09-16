@@ -130,4 +130,13 @@ See [docs/SCOPE.md](docs/SCOPE.md), [docs/API_STABILITY.md](docs/API_STABILITY.m
 
 ## License
 
-OS Cobblemon Library is currently distributed as **All Rights Reserved**.
+OS Cobblemon Library is proprietary and distributed under the
+[OS Cobblemon Library Proprietary API License](LICENSE).
+
+You may build and distribute your own independent mods against the documented
+public API. Using the API does **not** require you to publish your mod's source
+code.
+
+The Library itself remains **All Rights Reserved**. Redistribution, modified
+builds, rebranding and source-code reuse are not permitted unless LevelsFR
+grants separate written permission.
