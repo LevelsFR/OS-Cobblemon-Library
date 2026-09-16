@@ -11,6 +11,15 @@ corresponding non-snapshot semantic version.
 From the library repository:
 
 ```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\publish-local.ps1
+```
+
+The script reads the active version from `gradle.properties`, publishes all
+three artifacts and prints their Maven coordinates.
+
+The equivalent direct Gradle task is:
+
+```powershell
 .\gradlew.bat publishAllToMavenLocal
 ```
 
