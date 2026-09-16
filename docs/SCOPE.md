@@ -1,26 +1,29 @@
 # Scope
 
-## Belongs in OS Cobblemon Library
+OS Cobblemon Library is focused on reusable Cobblemon integration shared across multiple mods.
 
-- Shared Pokémon identity and property access
-- Shared party / PC access and Pokémon lookup
-- Shared Cobblemon event integration
-- Shared battle inspection and classification
-- Shared Pokédex reads
-- Small compatibility adapters that reduce repeated migration work
+## In scope
 
-## Does not belong here
+- Pokémon identity and reusable property access
+- Species, forms, aspects and marks
+- Party and PC access
+- Pokémon lookup helpers
+- Cobblemon event integration
+- Battle inspection and classification
+- Pokédex queries
+- Small compatibility adapters that isolate Cobblemon API changes
 
-- XP Overhaul formulas or cap policy
-- QoL Suite chain rules, PC organizer logic or user features
-- Homestead stations, workers or job behavior
-- Rustling Spots spawn gameplay
-- Team Rocket encounter rules
-- Leaderboard scoring or holograms
-- PokéBadges progression
-- Generic Minecraft config frameworks
+## Out of scope
+
+- Gameplay rules specific to a single mod
+- Progression systems
+- Custom balancing formulas
+- Mod-specific user interfaces
+- Mod-specific spawning systems
+- Leaderboard scoring
+- Generic Minecraft configuration frameworks
 - Generic networking frameworks
-- Generic permission helpers
-- Generic registry helpers
+- Generic permission systems
+- Generic registry utilities
 
-The library should make OS mods easier to build without becoming a dependency dumping ground.
+The goal is to keep the library small, predictable and useful without turning it into a general-purpose dependency bundle.
