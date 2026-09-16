@@ -51,6 +51,13 @@ Then build the full project:
 .\gradlew.bat build
 ```
 
+If Windows locks an Architectury transform JAR during a parallel build, use the
+safe rebuild helper:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\rebuild-windows.ps1
+```
+
 Individual loader builds are also available:
 
 ```powershell
@@ -82,4 +89,8 @@ See [docs/BRANCHING.md](docs/BRANCHING.md) for the multi-version strategy.
 
 Keep additions focused, reusable and Cobblemon-specific. New helpers should represent a real shared need or isolate a meaningful compatibility boundary.
 
-See [docs/POKEMON.md](docs/POKEMON.md), [docs/POKEMON_MATCHER.md](docs/POKEMON_MATCHER.md), [docs/POKEMON_CREATION.md](docs/POKEMON_CREATION.md), [docs/STORAGE.md](docs/STORAGE.md), [docs/EVENTS.md](docs/EVENTS.md), [docs/BATTLE.md](docs/BATTLE.md) and [docs/POKEDEX.md](docs/POKEDEX.md) for the current shared helper APIs.\n\nFor local development consumption, see [docs/LOCAL_MAVEN.md](docs/LOCAL_MAVEN.md).\n\nSee [docs/SCOPE.md](docs/SCOPE.md) and [docs/ROADMAP.md](docs/ROADMAP.md) for the current project direction.
+See [docs/POKEMON.md](docs/POKEMON.md), [docs/POKEMON_MATCHER.md](docs/POKEMON_MATCHER.md), [docs/POKEMON_CREATION.md](docs/POKEMON_CREATION.md), [docs/STORAGE.md](docs/STORAGE.md), [docs/EVENTS.md](docs/EVENTS.md), [docs/BATTLE.md](docs/BATTLE.md) and [docs/POKEDEX.md](docs/POKEDEX.md) for the current shared helper APIs.
+
+For local development consumption, see [docs/LOCAL_MAVEN.md](docs/LOCAL_MAVEN.md).
+
+See [docs/SCOPE.md](docs/SCOPE.md) and [docs/ROADMAP.md](docs/ROADMAP.md) for the current project direction.
