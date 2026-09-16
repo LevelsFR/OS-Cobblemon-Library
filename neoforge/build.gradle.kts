@@ -2,6 +2,7 @@ plugins {
     id("dev.architectury.loom")
     id("architectury-plugin")
     id("com.github.johnrengelman.shadow")
+    `maven-publish`
 }
 
 architectury {
@@ -76,5 +77,16 @@ tasks {
         archiveBaseName.set("${rootProject.project.property("archives_base_name")}-neoforge")
         archiveVersion.set(project.version.toString())
         archiveClassifier.set("")
+    }
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            groupId = rootProject.property("maven_group").toString()
+            artifactId = "${rootProject.property("archives_base_name")}-neoforge"
+            version = project.version.toString()
+            artifact(tasks.named("remapJar"))
+        }
     }
 }
