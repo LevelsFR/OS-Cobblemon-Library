@@ -1,6 +1,8 @@
 package com.ourstory.oscobblemon.battle;
 
 import com.cobblemon.mod.common.api.battles.model.PokemonBattle;
+import com.cobblemon.mod.common.api.events.battles.BattleFaintedEvent;
+import com.cobblemon.mod.common.api.events.battles.BattleVictoryEvent;
 import com.cobblemon.mod.common.api.battles.model.actor.ActorType;
 import com.cobblemon.mod.common.api.battles.model.actor.BattleActor;
 import com.cobblemon.mod.common.battles.pokemon.BattlePokemon;
@@ -102,13 +104,7 @@ public final class BattleInspector {
     public static Set<UUID> playerIds(PokemonBattle battle) {
         Objects.requireNonNull(battle, "battle");
 
-        LinkedHashSet<UUID> result = new LinkedHashSet<>();
-        for (BattleActor actor : battle.getActors()) {
-            for (UUID playerId : actor.getPlayerUUIDs()) {
-                result.add(playerId);
-            }
-        }
-        return Set.copyOf(result);
+        return playerIds(battle.getActors());
     }
 
     /**
@@ -117,6 +113,78 @@ public final class BattleInspector {
     public static boolean containsPlayer(PokemonBattle battle, UUID playerId) {
         Objects.requireNonNull(playerId, "playerId");
         return playerIds(battle).contains(playerId);
+    }
+
+    /**
+     * Returns the normal Pokémon instance that fainted in a Cobblemon battle
+     * event, hiding the internal BattlePokemon wrapper.
+     */
+    public static Pokemon faintedPokemon(BattleFaintedEvent event) {
+        Objects.requireNonNull(event, "event");
+        return event.getKilled().getEffectedPokemon();
+    }
+
+    /**
+     * Returns an immutable snapshot of victory-event winners.
+     */
+    public static List<BattleActor> winners(BattleVictoryEvent event) {
+        Objects.requireNonNull(event, "event");
+        return List.copyOf(event.getWinners());
+    }
+
+    /**
+     * Returns an immutable snapshot of victory-event losers.
+     */
+    public static List<BattleActor> losers(BattleVictoryEvent event) {
+        Objects.requireNonNull(event, "event");
+        return List.copyOf(event.getLosers());
+    }
+
+    /**
+     * Returns player UUIDs among the winning actors.
+     */
+    public static Set<UUID> winningPlayerIds(BattleVictoryEvent event) {
+        Objects.requireNonNull(event, "event");
+        return playerIds(event.getWinners());
+    }
+
+    /**
+     * Returns player UUIDs among the losing actors.
+     */
+    public static Set<UUID> losingPlayerIds(BattleVictoryEvent event) {
+        Objects.requireNonNull(event, "event");
+        return playerIds(event.getLosers());
+    }
+
+    /**
+     * Returns whether a player is among the winning actors.
+     */
+    public static boolean didPlayerWin(BattleVictoryEvent event, UUID playerId) {
+        Objects.requireNonNull(playerId, "playerId");
+        return winningPlayerIds(event).contains(playerId);
+    }
+
+    /**
+     * Returns whether a player is among the losing actors.
+     */
+    public static boolean didPlayerLose(BattleVictoryEvent event, UUID playerId) {
+        Objects.requireNonNull(playerId, "playerId");
+        return losingPlayerIds(event).contains(playerId);
+    }
+
+    /**
+     * Returns all normal Pokémon represented by a collection of battle actors.
+     */
+    public static List<Pokemon> pokemon(Iterable<BattleActor> actors) {
+        Objects.requireNonNull(actors, "actors");
+
+        List<Pokemon> result = new ArrayList<>();
+        for (BattleActor actor : actors) {
+            for (BattlePokemon battlePokemon : actor.getPokemonList()) {
+                result.add(battlePokemon.getEffectedPokemon());
+            }
+        }
+        return List.copyOf(result);
     }
 
     /**
@@ -142,13 +210,16 @@ public final class BattleInspector {
      */
     public static List<Pokemon> pokemon(PokemonBattle battle, ActorType type) {
         Objects.requireNonNull(type, "type");
+        return pokemon(actors(battle, type));
+    }
 
-        List<Pokemon> result = new ArrayList<>();
-        for (BattleActor actor : actors(battle, type)) {
-            for (BattlePokemon battlePokemon : actor.getPokemonList()) {
-                result.add(battlePokemon.getEffectedPokemon());
+    private static Set<UUID> playerIds(Iterable<BattleActor> actors) {
+        LinkedHashSet<UUID> result = new LinkedHashSet<>();
+        for (BattleActor actor : actors) {
+            for (UUID playerId : actor.getPlayerUUIDs()) {
+                result.add(playerId);
             }
         }
-        return List.copyOf(result);
+        return Set.copyOf(result);
     }
 }
