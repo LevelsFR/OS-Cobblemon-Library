@@ -32,6 +32,9 @@ jobs:
       - name: Build
         run: gradle clean build --stacktrace
 
+      - name: Verify Maven publication
+        run: gradle publishAllToMavenLocal --stacktrace
+
       - name: Upload Fabric JAR
         uses: actions/upload-artifact@v4
         with:
