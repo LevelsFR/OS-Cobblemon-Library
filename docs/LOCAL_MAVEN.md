@@ -3,6 +3,9 @@
 OS Cobblemon Library can be published to the local Maven repository for use by
 other development projects on the same machine.
 
+Development branches publish snapshot versions. Stable release branches use the
+corresponding non-snapshot semantic version.
+
 ## Publish locally
 
 From the library repository:
@@ -14,9 +17,9 @@ From the library repository:
 This publishes three artifacts:
 
 ```text
-com.ourstory:os-cobblemon-library-common:1.0.0
-com.ourstory:os-cobblemon-library-fabric:1.0.0
-com.ourstory:os-cobblemon-library-neoforge:1.0.0
+com.ourstory:os-cobblemon-library-common:1.0.0-SNAPSHOT
+com.ourstory:os-cobblemon-library-fabric:1.0.0-SNAPSHOT
+com.ourstory:os-cobblemon-library-neoforge:1.0.0-SNAPSHOT
 ```
 
 The artifacts are stored in the standard Maven Local repository.
@@ -35,7 +38,7 @@ The shared/common module can compile against the common artifact:
 
 ```kotlin
 dependencies {
-    compileOnly("com.ourstory:os-cobblemon-library-common:1.0.0")
+    compileOnly("com.ourstory:os-cobblemon-library-common:1.0.0-SNAPSHOT")
 }
 ```
 
@@ -45,7 +48,7 @@ Fabric:
 
 ```kotlin
 dependencies {
-    modImplementation("com.ourstory:os-cobblemon-library-fabric:1.0.0")
+    modImplementation("com.ourstory:os-cobblemon-library-fabric:1.0.0-SNAPSHOT")
 }
 ```
 
@@ -53,7 +56,7 @@ NeoForge:
 
 ```kotlin
 dependencies {
-    modImplementation("com.ourstory:os-cobblemon-library-neoforge:1.0.0")
+    modImplementation("com.ourstory:os-cobblemon-library-neoforge:1.0.0-SNAPSHOT")
 }
 ```
 
