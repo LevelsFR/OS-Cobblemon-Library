@@ -1,8 +1,14 @@
+<p align="center">
+  <img src="common/src/main/resources/assets/os_cobblemon_library/icon.png" alt="OS Cobblemon Library logo" width="180">
+</p>
+
 # OS Cobblemon Library
 
-A lightweight shared library for Cobblemon mod development.
+A lightweight shared Cobblemon API and compatibility library for Fabric and NeoForge.
 
-OS Cobblemon Library provides reusable Cobblemon-specific utilities and compatibility helpers so mods can share a consistent integration layer across Fabric and NeoForge.
+**Author:** LevelsFR
+
+OS Cobblemon Library provides reusable helpers for Pokémon, entities, storage, events, battles, Pokédex data and compatibility boundaries so Cobblemon mods can share a consistent integration layer across Fabric and NeoForge.
 
 ## Supported environment
 
