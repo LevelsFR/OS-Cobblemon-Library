@@ -50,3 +50,34 @@ Cobblemon currently stores battle participants in an internal `BattlePokemon`
 wrapper. The library keeps that wrapper behind `BattleInspector` and exposes
 normal `Pokemon` objects instead, giving consuming mods a smaller migration
 surface when battle internals change.
+
+## Battle events
+
+The inspector also unwraps common event payloads so feature code does not need
+to depend directly on Cobblemon's internal `BattlePokemon` wrapper.
+
+Fainted Pokémon:
+
+```java
+Pokemon defeated = BattleInspector.faintedPokemon(event);
+```
+
+Victory participants:
+
+```java
+Set<UUID> winners = BattleInspector.winningPlayerIds(event);
+Set<UUID> losers = BattleInspector.losingPlayerIds(event);
+
+boolean won = BattleInspector.didPlayerWin(event, playerId);
+```
+
+Normal `Pokemon` instances can also be extracted from any battle-actor
+collection:
+
+```java
+List<Pokemon> defeatedSide =
+        BattleInspector.pokemon(event.getLosers());
+```
+
+This is intended for KO chains, progression, rewards, statistics and similar
+features while keeping Cobblemon battle internals behind the library.
