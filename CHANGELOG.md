@@ -2,6 +2,8 @@
 
 All notable public changes to OS Cobblemon Library are documented here.
 
+## Unreleased
+
 ## 1.0.0 - 2026-09-16
 
 ### Added
