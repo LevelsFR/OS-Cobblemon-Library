@@ -10,6 +10,7 @@ The supported public API consists of documented classes outside the
 Public packages currently include:
 
 - `com.ourstory.oscobblemon.pokemon`
+- `com.ourstory.oscobblemon.entity`
 - `com.ourstory.oscobblemon.storage`
 - `com.ourstory.oscobblemon.event`
 - `com.ourstory.oscobblemon.battle`
@@ -57,10 +58,10 @@ major library version unless they also require a breaking API change.
 
 ## Development snapshots
 
-Development branches use versions such as:
+The current development branch uses:
 
 ```text
-1.0.0-SNAPSHOT
+1.1.0-SNAPSHOT
 ```
 
 Snapshot artifacts are intended for development and may change before the
