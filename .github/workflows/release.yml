@@ -26,6 +26,27 @@ jobs:
         with:
           gradle-version: "8.14.3"
 
+      - name: Validate release version
+        shell: bash
+        run: |
+          VERSION="$(grep '^mod_version=' gradle.properties | cut -d= -f2-)"
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+
+          if [[ -z "$VERSION" ]]; then
+            echo "mod_version was not found in gradle.properties."
+            exit 1
+          fi
+
+          if [[ "$VERSION" == *"-SNAPSHOT" ]]; then
+            echo "Refusing to release snapshot version: $VERSION"
+            exit 1
+          fi
+
+          if [[ "$VERSION" != "$TAG_VERSION" ]]; then
+            echo "Tag version $TAG_VERSION does not match mod_version $VERSION."
+            exit 1
+          fi
+
       - name: Build release JARs
         run: gradle clean build --stacktrace
 
