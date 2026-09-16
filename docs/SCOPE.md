@@ -6,6 +6,8 @@ OS Cobblemon Library is focused on reusable Cobblemon integration shared across 
 
 - Pokémon identity and reusable property access
 - Species, forms, aspects and marks
+- Native Pokémon types, size categories and scale inspection
+- Read-only `PokemonEntity` to `Pokemon` bridge helpers
 - Party and PC access
 - Pokémon lookup helpers
 - Cobblemon event integration
@@ -20,6 +22,7 @@ OS Cobblemon Library is focused on reusable Cobblemon integration shared across 
 - Custom balancing formulas
 - Mod-specific user interfaces
 - Mod-specific spawning systems
+- Entity AI, movement, navigation or despawn systems
 - Leaderboard scoring
 - Generic Minecraft configuration frameworks
 - Generic networking frameworks
