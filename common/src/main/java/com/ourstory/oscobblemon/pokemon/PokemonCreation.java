@@ -184,7 +184,7 @@ public final class PokemonCreation {
                 entity.getXRot()
         );
         entity.getEntityData().set(
-                PokemonEntity.SPAWN_DIRECTION,
+                PokemonEntity.getSPAWN_DIRECTION(),
                 entity.getRandom().nextFloat() * 360.0F
         );
 
