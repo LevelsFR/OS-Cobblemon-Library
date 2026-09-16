@@ -255,6 +255,66 @@ public final class PokemonStorage {
     }
 
     /**
+     * Finds the first PC Pokémon matching the supplied predicate.
+     */
+    public static Optional<Pokemon> findFirstInPC(
+            ServerPlayer player,
+            Predicate<Pokemon> predicate
+    ) {
+        Objects.requireNonNull(player, "player");
+        return findFirstInPC(pc(player), predicate);
+    }
+
+    /**
+     * Finds the first Pokémon in a PC store matching the supplied predicate.
+     */
+    public static Optional<Pokemon> findFirstInPC(
+            PCStore pc,
+            Predicate<Pokemon> predicate
+    ) {
+        Objects.requireNonNull(pc, "pc");
+        Objects.requireNonNull(predicate, "predicate");
+
+        for (Pokemon pokemon : pc) {
+            if (predicate.test(pokemon)) {
+                return Optional.of(pokemon);
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    /**
+     * Returns all PC Pokémon matching the supplied predicate in store order.
+     */
+    public static List<Pokemon> findAllInPC(
+            ServerPlayer player,
+            Predicate<Pokemon> predicate
+    ) {
+        Objects.requireNonNull(player, "player");
+        return findAllInPC(pc(player), predicate);
+    }
+
+    /**
+     * Returns all Pokémon in a PC store matching the supplied predicate.
+     */
+    public static List<Pokemon> findAllInPC(
+            PCStore pc,
+            Predicate<Pokemon> predicate
+    ) {
+        Objects.requireNonNull(pc, "pc");
+        Objects.requireNonNull(predicate, "predicate");
+
+        List<Pokemon> result = new ArrayList<>();
+        for (Pokemon pokemon : pc) {
+            if (predicate.test(pokemon)) {
+                result.add(pokemon);
+            }
+        }
+        return List.copyOf(result);
+    }
+
+    /**
      * Finds the first owned Pokémon matching the supplied predicate, checking
      * the party before the PC.
      */
@@ -266,17 +326,7 @@ public final class PokemonStorage {
         Objects.requireNonNull(predicate, "predicate");
 
         Optional<Pokemon> partyMatch = findFirstInParty(player, predicate);
-        if (partyMatch.isPresent()) {
-            return partyMatch;
-        }
-
-        for (Pokemon pokemon : pc(player)) {
-            if (predicate.test(pokemon)) {
-                return Optional.of(pokemon);
-            }
-        }
-
-        return Optional.empty();
+        return partyMatch.isPresent() ? partyMatch : findFirstInPC(player, predicate);
     }
 
     /**
@@ -297,6 +347,58 @@ public final class PokemonStorage {
             }
         }
         return List.copyOf(result);
+    }
+
+    /**
+     * Counts party Pokémon matching the supplied predicate.
+     */
+    public static int countInParty(
+            ServerPlayer player,
+            Predicate<Pokemon> predicate
+    ) {
+        Objects.requireNonNull(player, "player");
+        Objects.requireNonNull(predicate, "predicate");
+
+        int count = 0;
+        PlayerPartyStore party = party(player);
+        for (int slot = 0; slot < party.size(); slot++) {
+            Pokemon pokemon = party.get(slot);
+            if (pokemon != null && predicate.test(pokemon)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Counts PC Pokémon matching the supplied predicate.
+     */
+    public static int countInPC(
+            ServerPlayer player,
+            Predicate<Pokemon> predicate
+    ) {
+        Objects.requireNonNull(player, "player");
+        Objects.requireNonNull(predicate, "predicate");
+
+        int count = 0;
+        for (Pokemon pokemon : pc(player)) {
+            if (predicate.test(pokemon)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * Counts all owned Pokémon matching the supplied predicate.
+     */
+    public static int countOwned(
+            ServerPlayer player,
+            Predicate<Pokemon> predicate
+    ) {
+        Objects.requireNonNull(player, "player");
+        Objects.requireNonNull(predicate, "predicate");
+        return countInParty(player, predicate) + countInPC(player, predicate);
     }
 
     /**
