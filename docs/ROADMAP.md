@@ -1,39 +1,50 @@
-# Initial Roadmap
+# Roadmap
 
 ## 1.0 foundation
 
-- Multi-loader repository structure
-- Java 21 / Minecraft 1.21.1
+- Multi-loader project structure
+- Java 21 and Minecraft 1.21.1
 - Fabric and NeoForge builds
-- Cobblemon 1.8.1 development dependency
-- CI builds and GitHub release workflow
-- Scope and agent rules
+- Cobblemon 1.8.1+ compatibility baseline
+- Automated build and release workflows
+- Clear project scope and versioning model
 
-## Next implementation slice
+## Initial library modules
 
-Implement only helpers proven by existing OS mods:
+### Pokémon
 
-1. Pokémon identity
-   - normalized species ID
-   - form ID
-   - shiny
-   - alpha
-   - aspects / marks
-2. Party and storage
-   - player party access
-   - PC access
-   - UUID lookup
-   - party slot lookup
-3. Event bridge
-   - capture
-   - battle victory / faint
-   - hatch
-   - trade / release where multiple consumers exist
-4. Battle helpers
-   - wild / trainer / PvP classification
-   - participants
-   - defeated Pokémon extraction
-5. Pokédex
-   - seen / caught status
+- Normalized species identifiers
+- Form identifiers
+- Shiny state
+- Alpha detection
+- Aspects and marks
+- Reusable display-name helpers
 
-Do not migrate existing released mods just to consume the library. Use the library first in a new Cobblemon project, then migrate older mods during meaningful major updates when there is a real maintenance benefit.
+### Storage
+
+- Player party access
+- PC access
+- Pokémon UUID lookup
+- Party slot lookup
+
+### Events
+
+- Capture events
+- Battle victory and faint events
+- Hatch events
+- Trade and release events where reusable handling is justified
+
+### Battles
+
+- Wild, trainer and PvP classification
+- Participant inspection
+- Reusable defeated-Pokémon extraction
+
+### Pokédex
+
+- Seen status
+- Caught status
+
+## Later
+
+Additional modules should be added only when they represent repeated Cobblemon-specific integration or a clear compatibility boundary.
