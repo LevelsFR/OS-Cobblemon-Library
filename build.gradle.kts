@@ -24,14 +24,16 @@ allprojects {
         maven("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/")
     }
 
+    val javaVersion = property("java_version").toString().toInt()
+
     java {
-        toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+        toolchain.languageVersion.set(JavaLanguageVersion.of(javaVersion))
         withSourcesJar()
     }
 
     tasks.withType<JavaCompile>().configureEach {
         options.encoding = "UTF-8"
-        options.release.set(21)
+        options.release.set(javaVersion)
     }
 }
 

@@ -4,6 +4,7 @@
   "version": "${version}",
   "name": "${mod_name}",
   "description": "${mod_description}",
+  "authors": ["LevelsFR"],
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -14,9 +15,9 @@
     "fabricloader": ">=${fabric_loader_version}",
     "fabric-api": "*",
     "fabric-language-kotlin": "*",
-    "minecraft": "~${minecraft_version}",
+    "minecraft": "${minecraft_version}",
     "java": ">=${java_version}",
-    "cobblemon": ">=${cobblemon_min_version}"
+    "cobblemon": ">=${cobblemon_min_version} <${cobblemon_max_version}"
   },
   "license": "All Rights Reserved",
   "contact": {

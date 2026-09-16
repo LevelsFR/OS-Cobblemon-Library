@@ -8,7 +8,7 @@ OS Cobblemon Library provides reusable Cobblemon-specific utilities and compatib
 
 - Minecraft 1.21.1
 - Java 21
-- Cobblemon 1.8.1+
+- Cobblemon 1.8.x (1.8.1 minimum)
 - Fabric
 - NeoForge
 
@@ -89,7 +89,9 @@ See [docs/BRANCHING.md](docs/BRANCHING.md) for the multi-version strategy.
 
 For integration in another mod, see [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md).
 
-For a compact list of the supported public classes, see [docs/API_OVERVIEW.md](docs/API_OVERVIEW.md).\n\nCommon implementation examples are collected in [docs/PATTERNS.md](docs/PATTERNS.md).
+For a compact list of the supported public classes, see [docs/API_OVERVIEW.md](docs/API_OVERVIEW.md).
+
+Common implementation examples are collected in [docs/PATTERNS.md](docs/PATTERNS.md).
 
 ## Development
 

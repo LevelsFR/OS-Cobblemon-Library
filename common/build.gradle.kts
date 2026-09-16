@@ -23,7 +23,7 @@ dependencies {
 
     // Cobblemon's public API is implemented in Kotlin. Keep the stdlib on the
     // common compile classpath without bundling it into the library JAR.
-    compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.2.20")
+    compileOnly("org.jetbrains.kotlin:kotlin-stdlib:${property("kotlin_version")}")
 }
 
 publishing {

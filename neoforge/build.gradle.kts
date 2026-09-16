@@ -50,6 +50,8 @@ tasks.processResources {
         "mod_description" to project.property("mod_description"),
         "minecraft_version" to project.property("minecraft_version"),
         "cobblemon_min_version" to project.property("cobblemon_min_version"),
+        "cobblemon_max_version" to project.property("cobblemon_max_version"),
+        "neoforge_min_version" to project.property("neoforge_min_version"),
         "java_version" to project.property("java_version")
     )
     inputs.properties(props)
@@ -60,13 +62,13 @@ tasks.processResources {
 
 tasks {
     jar {
-        archiveBaseName.set("${rootProject.project.property("archives_base_name")}-neoforge")
+        archiveBaseName.set("${rootProject.property("archives_base_name")}-neoforge")
         archiveClassifier.set("dev-slim")
     }
 
     shadowJar {
         exclude("fabric.mod.json")
-        archiveBaseName.set("${rootProject.project.property("archives_base_name")}-neoforge")
+        archiveBaseName.set("${rootProject.property("archives_base_name")}-neoforge")
         archiveClassifier.set("dev-shadow")
         configurations = listOf(shadowCommon)
     }
@@ -74,7 +76,7 @@ tasks {
     remapJar {
         dependsOn(shadowJar)
         inputFile.set(shadowJar.flatMap { it.archiveFile })
-        archiveBaseName.set("${rootProject.project.property("archives_base_name")}-neoforge")
+        archiveBaseName.set("${rootProject.property("archives_base_name")}-neoforge")
         archiveVersion.set(project.version.toString())
         archiveClassifier.set("")
     }
