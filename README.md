@@ -79,11 +79,17 @@ Dependency versions are centralized in `gradle.properties`.
 The current Minecraft compatibility line uses:
 
 ```text
-1.21.1/dev
-1.21.1/main
+1.21.1/dev   development snapshots
+1.21.1/main  stable releases
 ```
 
 See [docs/BRANCHING.md](docs/BRANCHING.md) for the multi-version strategy.
+
+## Getting started
+
+For integration in another mod, see [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md).
+
+For a compact list of the supported public classes, see [docs/API_OVERVIEW.md](docs/API_OVERVIEW.md).
 
 ## Development
 
@@ -93,4 +99,4 @@ See [docs/POKEMON.md](docs/POKEMON.md), [docs/POKEMON_MATCHER.md](docs/POKEMON_M
 
 For local development consumption, see [docs/LOCAL_MAVEN.md](docs/LOCAL_MAVEN.md).
 
-See [docs/SCOPE.md](docs/SCOPE.md) and [docs/ROADMAP.md](docs/ROADMAP.md) for the current project direction.
+See [docs/SCOPE.md](docs/SCOPE.md), [docs/API_STABILITY.md](docs/API_STABILITY.md) and [docs/ROADMAP.md](docs/ROADMAP.md) for the current project direction and compatibility policy.
