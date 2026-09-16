@@ -6,6 +6,8 @@ other development projects on the same machine.
 Development branches publish snapshot versions. Stable release branches use the
 corresponding non-snapshot semantic version.
 
+The current development version is `1.1.0-SNAPSHOT`.
+
 ## Publish locally
 
 From the library repository:
@@ -23,12 +25,12 @@ The equivalent direct Gradle task is:
 .\gradlew.bat publishAllToMavenLocal
 ```
 
-This publishes three artifacts:
+On the current development branch, this publishes:
 
 ```text
-com.ourstory:os-cobblemon-library-common:1.0.0-SNAPSHOT
-com.ourstory:os-cobblemon-library-fabric:1.0.0-SNAPSHOT
-com.ourstory:os-cobblemon-library-neoforge:1.0.0-SNAPSHOT
+com.ourstory:os-cobblemon-library-common:1.1.0-SNAPSHOT
+com.ourstory:os-cobblemon-library-fabric:1.1.0-SNAPSHOT
+com.ourstory:os-cobblemon-library-neoforge:1.1.0-SNAPSHOT
 ```
 
 The artifacts are stored in the standard Maven Local repository.
@@ -46,8 +48,12 @@ repositories {
 The shared/common module can compile against the common artifact:
 
 ```kotlin
+val osCobblemonLibraryVersion = "1.1.0-SNAPSHOT"
+
 dependencies {
-    compileOnly("com.ourstory:os-cobblemon-library-common:1.0.0-SNAPSHOT")
+    compileOnly(
+        "com.ourstory:os-cobblemon-library-common:$osCobblemonLibraryVersion"
+    )
 }
 ```
 
@@ -57,7 +63,9 @@ Fabric:
 
 ```kotlin
 dependencies {
-    modImplementation("com.ourstory:os-cobblemon-library-fabric:1.0.0-SNAPSHOT")
+    modImplementation(
+        "com.ourstory:os-cobblemon-library-fabric:$osCobblemonLibraryVersion"
+    )
 }
 ```
 
@@ -65,7 +73,9 @@ NeoForge:
 
 ```kotlin
 dependencies {
-    modImplementation("com.ourstory:os-cobblemon-library-neoforge:1.0.0-SNAPSHOT")
+    modImplementation(
+        "com.ourstory:os-cobblemon-library-neoforge:$osCobblemonLibraryVersion"
+    )
 }
 ```
 

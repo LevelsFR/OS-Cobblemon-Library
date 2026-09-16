@@ -21,10 +21,19 @@
 - Data-driven labels
 - Current-form elemental types
 - Native size-category matching
+- Native size translation keys and safe scale access
 - Reusable Pokémon matcher built on `PokemonProperties`
 - Command-free Pokémon creation and spawning
 - Natural and Hyper Trained IV helpers
 - Common, Hidden and forced ability classification
+
+### Entities
+
+- Read-only `PokemonEntity` to `Pokemon` bridge
+- Stable Pokémon UUID and identity access from entities
+- Owner UUID inspection
+- Battle, busy and evolution state inspection
+- Entity matching through `Predicate<Pokemon>`
 
 ### Storage
 

@@ -85,6 +85,37 @@ Current-form type inspection and matching.
 Generic access to data-driven Cobblemon form labels without hard-coding category
 semantics.
 
+### `PokemonSize`
+
+Native size helpers for:
+
+- `PokemonSizeCategory` access and matching
+- Cobblemon size-category translation keys
+- safe positive scale modifiers
+- safe positive effective scale values
+- `PokemonEntity` overloads
+
+Invalid, non-finite or non-positive scale values fall back to `1.0F`.
+
+## Entities
+
+### `PokemonEntities`
+
+Read-only bridge helpers for recurring `PokemonEntity` integrations.
+
+Includes:
+
+- underlying `Pokemon` access
+- stable Pokémon UUID access
+- immutable identity snapshots
+- owner UUID inspection
+- battle, busy and evolution state inspection
+- alive/present checks
+- direct `Predicate<Pokemon>` and `PokemonMatcher` matching
+
+The entity API intentionally does not wrap movement, AI, navigation, despawning
+or persistence behavior.
+
 ## Storage
 
 ### `PokemonStorage`
