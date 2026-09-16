@@ -36,8 +36,7 @@ Set<UUID> players = BattleInspector.playerIds(battle);
 boolean participating = BattleInspector.containsPlayer(battle, playerId);
 ```
 
-Duplicate UUIDs are removed while preserving deterministic iteration before the
-immutable result is created.
+Duplicate UUIDs are removed while preserving first-seen battle order.
 
 ## Pokémon
 
