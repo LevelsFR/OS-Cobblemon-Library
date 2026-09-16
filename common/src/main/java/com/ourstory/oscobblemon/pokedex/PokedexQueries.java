@@ -64,28 +64,28 @@ public final class PokedexQueries {
      * Returns true once the species has been encountered in the Pokédex.
      */
     public static boolean hasSeen(ServerPlayer player, ResourceLocation speciesId) {
-        return progress(player, speciesId) != PokedexEntryProgress.NONE;
+        return progress(player, speciesId) != PokedexEntryProgress.UNREGISTERED;
     }
 
     /**
      * Returns true once this Pokémon's species has been encountered in the Pokédex.
      */
     public static boolean hasSeen(ServerPlayer player, Pokemon pokemon) {
-        return progress(player, pokemon) != PokedexEntryProgress.NONE;
+        return progress(player, pokemon) != PokedexEntryProgress.UNREGISTERED;
     }
 
     /**
      * Returns true once the species has been caught.
      */
     public static boolean hasCaught(ServerPlayer player, ResourceLocation speciesId) {
-        return progress(player, speciesId) == PokedexEntryProgress.CAUGHT;
+        return progress(player, speciesId) == PokedexEntryProgress.OWNED;
     }
 
     /**
      * Returns true once this Pokémon's species has been caught.
      */
     public static boolean hasCaught(ServerPlayer player, Pokemon pokemon) {
-        return progress(player, pokemon) == PokedexEntryProgress.CAUGHT;
+        return progress(player, pokemon) == PokedexEntryProgress.OWNED;
     }
 
     /**
@@ -101,11 +101,11 @@ public final class PokedexQueries {
 
         SpeciesDexRecord speciesRecord = manager(player).getSpeciesRecord(speciesId);
         if (speciesRecord == null) {
-            return PokedexEntryProgress.NONE;
+            return PokedexEntryProgress.UNREGISTERED;
         }
 
         FormDexRecord formRecord = speciesRecord.getFormRecord(formName);
-        return formRecord == null ? PokedexEntryProgress.NONE : formRecord.getKnowledge();
+        return formRecord == null ? PokedexEntryProgress.UNREGISTERED : formRecord.getKnowledge();
     }
 
     /**
@@ -128,14 +128,14 @@ public final class PokedexQueries {
             ResourceLocation speciesId,
             String formName
     ) {
-        return formProgress(player, speciesId, formName) != PokedexEntryProgress.NONE;
+        return formProgress(player, speciesId, formName) != PokedexEntryProgress.UNREGISTERED;
     }
 
     /**
      * Returns true once this Pokémon's current form has been encountered.
      */
     public static boolean hasSeenForm(ServerPlayer player, Pokemon pokemon) {
-        return formProgress(player, pokemon) != PokedexEntryProgress.NONE;
+        return formProgress(player, pokemon) != PokedexEntryProgress.UNREGISTERED;
     }
 
     /**
@@ -146,14 +146,14 @@ public final class PokedexQueries {
             ResourceLocation speciesId,
             String formName
     ) {
-        return formProgress(player, speciesId, formName) == PokedexEntryProgress.CAUGHT;
+        return formProgress(player, speciesId, formName) == PokedexEntryProgress.OWNED;
     }
 
     /**
      * Returns true once this Pokémon's current form has been caught.
      */
     public static boolean hasCaughtForm(ServerPlayer player, Pokemon pokemon) {
-        return formProgress(player, pokemon) == PokedexEntryProgress.CAUGHT;
+        return formProgress(player, pokemon) == PokedexEntryProgress.OWNED;
     }
 
     /**
