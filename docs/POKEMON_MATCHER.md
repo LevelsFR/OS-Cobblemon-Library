@@ -70,3 +70,19 @@ List<Pokemon> filtered = pokemon.stream()
         .filter(matcher)
         .toList();
 ```
+
+## Labels
+
+Cobblemon data labels can be added without hard-coding category semantics:
+
+```java
+PokemonMatcher matcher =
+        PokemonMatcher.any()
+                .label("legendary");
+
+PokemonMatcher special =
+        PokemonMatcher.any()
+                .anyLabel(List.of("legendary", "mythical"));
+```
+
+The checks use the current form's effective labels through `PokemonLabels`.

@@ -95,3 +95,15 @@ PokemonCreation.spawn(level, position, properties);
 
 This keeps the full Cobblemon API available instead of replacing it with a
 second builder system.
+
+## Spawn semantics
+
+The direct spawn helper follows the important behavior of Cobblemon's own
+`/pokespawn` command:
+
+- positions outside Minecraft's spawnable world bounds are rejected
+- the entity's Cobblemon spawn direction is initialized
+- the entity is inserted with `ServerLevel#addFreshEntity`
+
+The helper returns `Optional.empty()` when the position is invalid or the
+server level refuses the entity.

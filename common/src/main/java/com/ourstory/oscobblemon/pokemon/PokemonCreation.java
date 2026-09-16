@@ -171,8 +171,22 @@ public final class PokemonCreation {
             Vec3 position,
             PokemonEntity entity
     ) {
-        float yaw = level.getRandom().nextFloat() * 360.0F;
-        entity.moveTo(position.x, position.y, position.z, yaw, 0.0F);
+        BlockPos blockPos = BlockPos.containing(position);
+        if (!Level.isInSpawnableBounds(blockPos)) {
+            return Optional.empty();
+        }
+
+        entity.moveTo(
+                position.x,
+                position.y,
+                position.z,
+                entity.getYRot(),
+                entity.getXRot()
+        );
+        entity.getEntityData().set(
+                PokemonEntity.SPAWN_DIRECTION,
+                entity.getRandom().nextFloat() * 360.0F
+        );
 
         if (!level.addFreshEntity(entity)) {
             return Optional.empty();
