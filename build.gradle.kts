@@ -34,3 +34,13 @@ allprojects {
         options.release.set(21)
     }
 }
+
+tasks.register("publishAllToMavenLocal") {
+    group = "publishing"
+    description = "Publishes common, Fabric and NeoForge artifacts to Maven Local."
+    dependsOn(
+        ":common:publishToMavenLocal",
+        ":fabric:publishToMavenLocal",
+        ":neoforge:publishToMavenLocal"
+    )
+}
