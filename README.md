@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="icon.png" alt="OS Cobblemon Library logo" width="180">
+  <img src="fabric/src/main/resources/icon.png" alt="OS Cobblemon Library logo" width="180">
 </p>
 
 # OS Cobblemon Library
