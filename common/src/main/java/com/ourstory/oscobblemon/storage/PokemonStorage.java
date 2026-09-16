@@ -13,6 +13,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 /**
  * Shared access and lookup helpers for player-owned Cobblemon storage.
@@ -201,6 +202,111 @@ public final class PokemonStorage {
         }
 
         return List.copyOf(result);
+    }
+
+    /**
+     * Finds the first party Pokémon matching the supplied predicate.
+     */
+    public static Optional<Pokemon> findFirstInParty(
+            ServerPlayer player,
+            Predicate<Pokemon> predicate
+    ) {
+        Objects.requireNonNull(player, "player");
+        return findFirstInParty(party(player), predicate);
+    }
+
+    /**
+     * Finds the first Pokémon in a party store matching the supplied predicate.
+     */
+    public static Optional<Pokemon> findFirstInParty(
+            PlayerPartyStore party,
+            Predicate<Pokemon> predicate
+    ) {
+        Objects.requireNonNull(party, "party");
+        Objects.requireNonNull(predicate, "predicate");
+
+        for (int slot = 0; slot < party.size(); slot++) {
+            Pokemon pokemon = party.get(slot);
+            if (pokemon != null && predicate.test(pokemon)) {
+                return Optional.of(pokemon);
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    /**
+     * Returns all party Pokémon matching the supplied predicate in party order.
+     */
+    public static List<Pokemon> findAllInParty(
+            ServerPlayer player,
+            Predicate<Pokemon> predicate
+    ) {
+        Objects.requireNonNull(player, "player");
+        Objects.requireNonNull(predicate, "predicate");
+
+        List<Pokemon> result = new ArrayList<>();
+        for (Pokemon pokemon : partySnapshot(player)) {
+            if (predicate.test(pokemon)) {
+                result.add(pokemon);
+            }
+        }
+        return List.copyOf(result);
+    }
+
+    /**
+     * Finds the first owned Pokémon matching the supplied predicate, checking
+     * the party before the PC.
+     */
+    public static Optional<Pokemon> findFirstOwned(
+            ServerPlayer player,
+            Predicate<Pokemon> predicate
+    ) {
+        Objects.requireNonNull(player, "player");
+        Objects.requireNonNull(predicate, "predicate");
+
+        Optional<Pokemon> partyMatch = findFirstInParty(player, predicate);
+        if (partyMatch.isPresent()) {
+            return partyMatch;
+        }
+
+        for (Pokemon pokemon : pc(player)) {
+            if (predicate.test(pokemon)) {
+                return Optional.of(pokemon);
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    /**
+     * Returns all owned Pokémon matching the supplied predicate, with party
+     * matches first followed by PC matches.
+     */
+    public static List<Pokemon> findAllOwned(
+            ServerPlayer player,
+            Predicate<Pokemon> predicate
+    ) {
+        Objects.requireNonNull(player, "player");
+        Objects.requireNonNull(predicate, "predicate");
+
+        List<Pokemon> result = new ArrayList<>();
+        for (Pokemon pokemon : ownedSnapshot(player)) {
+            if (predicate.test(pokemon)) {
+                result.add(pokemon);
+            }
+        }
+        return List.copyOf(result);
+    }
+
+    /**
+     * Returns whether at least one owned Pokémon matches the supplied predicate.
+     */
+    public static boolean anyOwned(
+            ServerPlayer player,
+            Predicate<Pokemon> predicate
+    ) {
+        return findFirstOwned(player, predicate).isPresent();
     }
 
     /**
