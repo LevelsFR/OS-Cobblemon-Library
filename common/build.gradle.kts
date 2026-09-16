@@ -1,6 +1,7 @@
 plugins {
     id("dev.architectury.loom")
     id("architectury-plugin")
+    `maven-publish`
 }
 
 architectury {
@@ -23,4 +24,15 @@ dependencies {
     // Cobblemon's public API is implemented in Kotlin. Keep the stdlib on the
     // common compile classpath without bundling it into the library JAR.
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.2.20")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            groupId = rootProject.property("maven_group").toString()
+            artifactId = "${rootProject.property("archives_base_name")}-common"
+            version = project.version.toString()
+            from(components["java"])
+        }
+    }
 }
