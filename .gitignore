@@ -1,0 +1,15 @@
+.gradle/
+.gradle-bootstrap/
+build/
+**/build/
+run/
+**/run/
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+classes/
+.DS_Store
+Thumbs.db
+*.log
