@@ -20,3 +20,4 @@ All notable public changes to OS Cobblemon Library are documented here.
 - Development builds now use a `-SNAPSHOT` version.
 - Runtime metadata now targets Minecraft 1.21.1 and Cobblemon 1.8.x explicitly.
 - CI builds and publishing now use the committed Gradle wrapper.
+- Architectury build plugins are pinned to reproducible versions.

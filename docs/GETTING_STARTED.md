@@ -70,7 +70,15 @@ dependencies {
 ```
 
 The consuming Fabric mod should also declare `os_cobblemon_library` as a
-required dependency in its `fabric.mod.json`.
+required dependency in its `fabric.mod.json`:
+
+```json
+"depends": {
+  "os_cobblemon_library": ">=1.0.0"
+}
+```
+
+Keep the rest of the consuming mod's existing dependencies alongside it.
 
 ## 6. NeoForge module
 
@@ -85,7 +93,18 @@ dependencies {
 ```
 
 The consuming NeoForge mod should also declare `os_cobblemon_library` as a
-required dependency in its mod metadata.
+required dependency in its mod metadata:
+
+```toml
+[[dependencies.your_mod_id]]
+modId="os_cobblemon_library"
+type="required"
+versionRange="[1.0.0,)"
+ordering="AFTER"
+side="BOTH"
+```
+
+Replace `your_mod_id` with the consuming mod's real mod ID.
 
 ## 7. Example use
 

@@ -39,17 +39,21 @@ The library intentionally avoids gameplay systems that belong inside individual 
 
 ## Building
 
-On Windows, bootstrap the Gradle wrapper once:
+The Gradle wrapper is committed to the repository.
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\bootstrap-gradle.ps1
-```
-
-Then build the full project:
+Windows:
 
 ```powershell
 .\gradlew.bat build
 ```
+
+Linux / macOS:
+
+```bash
+./gradlew build
+```
+
+The bootstrap script is kept only for wrapper regeneration or recovery.
 
 If Windows locks an Architectury transform JAR during a parallel build, use the
 safe rebuild helper:
@@ -83,7 +87,7 @@ The current Minecraft compatibility line uses:
 1.21.1/main  stable releases
 ```
 
-See [docs/BRANCHING.md](docs/BRANCHING.md) for the multi-version strategy.
+See [docs/BRANCHING.md](docs/BRANCHING.md) for the multi-version strategy and [docs/RELEASING.md](docs/RELEASING.md) for the release process.
 
 ## Getting started
 

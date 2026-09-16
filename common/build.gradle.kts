@@ -21,9 +21,9 @@ dependencies {
         isTransitive = false
     }
 
-    // Cobblemon's public API is implemented in Kotlin. Keep the stdlib on the
-    // common compile classpath without bundling it into the library JAR.
-    compileOnly("org.jetbrains.kotlin:kotlin-stdlib:${property("kotlin_version")}")
+    // Cobblemon's public API is implemented in Kotlin. Expose the stdlib to
+    // consumers' compile classpaths without bundling it into this library JAR.
+    api("org.jetbrains.kotlin:kotlin-stdlib:${property("kotlin_version")}")
 }
 
 publishing {
