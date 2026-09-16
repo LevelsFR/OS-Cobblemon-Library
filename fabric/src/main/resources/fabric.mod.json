@@ -17,5 +17,11 @@
     "minecraft": "~${minecraft_version}",
     "java": ">=${java_version}",
     "cobblemon": ">=${cobblemon_min_version}"
+  },
+  "license": "All Rights Reserved",
+  "contact": {
+    "homepage": "https://github.com/LevelsFR/OS-Cobblemon-Library",
+    "sources": "https://github.com/LevelsFR/OS-Cobblemon-Library",
+    "issues": "https://github.com/LevelsFR/OS-Cobblemon-Library/issues"
   }
 }
