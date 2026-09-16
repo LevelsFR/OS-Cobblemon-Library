@@ -1,10 +1,10 @@
 # OS Cobblemon Library
 
-Shared Cobblemon development library for Our Story mods.
+A lightweight shared library for Cobblemon mod development.
 
-The project centralizes repeated Cobblemon integration so OS mods can share stable helpers instead of reimplementing Pokémon identity, storage, events, battles and Pokédex access in every project.
+OS Cobblemon Library provides reusable Cobblemon-specific utilities and compatibility helpers so mods can share a consistent integration layer across Fabric and NeoForge.
 
-## Target
+## Supported environment
 
 - Minecraft 1.21.1
 - Java 21
@@ -12,72 +12,74 @@ The project centralizes repeated Cobblemon integration so OS mods can share stab
 - Fabric
 - NeoForge
 
-## Structure
+## Project structure
 
 ```text
 OS-Cobblemon-Library/
 ├── common/       Shared Cobblemon logic
-├── fabric/       Fabric entrypoint and loader integration
-├── neoforge/     NeoForge entrypoint and loader integration
-├── docs/         Scope, roadmap and branch policy
-├── .github/      CI and release workflows
-└── AGENTS.md     Rules for Codex and coding agents
+├── fabric/       Fabric integration
+├── neoforge/     NeoForge integration
+├── docs/         Scope, roadmap and versioning notes
+└── .github/      Build and release workflows
 ```
 
-## First build on Windows
+Shared functionality belongs in `common` whenever possible. Loader modules should contain only platform-specific wiring or unavoidable loader differences.
 
-Run:
+## Library areas
 
-```bat
-FIRST_BUILD_WINDOWS.bat
+The initial library is organized around a small set of Cobblemon-focused domains:
+
+- `pokemon`: species, forms, aspects, marks and reusable Pokémon property access
+- `storage`: party, PC and Pokémon lookup helpers
+- `event`: reusable Cobblemon event integration
+- `battle`: battle inspection and classification helpers
+- `pokedex`: reusable Pokédex queries
+
+The library intentionally avoids gameplay systems that belong inside individual mods.
+
+## Building
+
+On Windows, bootstrap the Gradle wrapper once:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\bootstrap-gradle.ps1
 ```
 
-The script downloads Gradle 8.14.3, verifies its SHA-256 checksum, generates the Gradle wrapper and builds all three modules.
+Then build the full project:
 
-After the first run, normal commands are available:
-
-```bat
-gradlew.bat build
-gradlew.bat :fabric:build
-gradlew.bat :neoforge:build
+```powershell
+.\gradlew.bat build
 ```
 
-Final loader JARs are created under:
+Individual loader builds are also available:
+
+```powershell
+.\gradlew.bat :fabric:build
+.\gradlew.bat :neoforge:build
+```
+
+Built JARs are written to:
 
 ```text
 fabric/build/libs/
 neoforge/build/libs/
 ```
 
-## Development rule
+## Versioning
 
-Put code in `common` unless it truly depends on Fabric or NeoForge.
+Dependency versions are centralized in `gradle.properties`.
 
-The initial shared domains are:
-
-- `pokemon`
-- `storage`
-- `event`
-- `battle`
-- `pokedex`
-
-Read `AGENTS.md` and `docs/SCOPE.md` before adding shared functionality.
-
-## Git branches
-
-Current compatibility line:
+The current Minecraft compatibility line uses:
 
 ```text
 1.21.1/dev
 1.21.1/main
 ```
 
-See `docs/BRANCHING.md` for the future multi-version model.
+See [docs/BRANCHING.md](docs/BRANCHING.md) for the multi-version strategy.
 
-## Version updates
+## Development
 
-Dependency versions are intentionally centralized in `gradle.properties`. When Cobblemon updates on Minecraft 1.21.1, start by changing `cobblemon_version` and running both loader builds.
+Keep additions focused, reusable and Cobblemon-specific. New helpers should represent a real shared need or isolate a meaningful compatibility boundary.
 
-## License
-
-The project metadata currently marks the mod as All Rights Reserved. Decide the repository source license before public release and add a matching `LICENSE` file.
+See [docs/SCOPE.md](docs/SCOPE.md) and [docs/ROADMAP.md](docs/ROADMAP.md) for the current project direction.
