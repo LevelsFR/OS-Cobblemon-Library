@@ -24,12 +24,7 @@ public final class PokemonSpeciesResolver {
      * Resolves a species ID, defaulting bare IDs to the Cobblemon namespace.
      */
     public static Optional<Species> resolve(String rawId) {
-        ResourceLocation id = parseId(rawId);
-        if (id == null) {
-            return Optional.empty();
-        }
-
-        return Optional.ofNullable(PokemonSpecies.INSTANCE.getByIdentifier(id));
+        return parseId(rawId).flatMap(PokemonSpeciesResolver::resolve);
     }
 
     /**
@@ -67,20 +62,20 @@ public final class PokemonSpeciesResolver {
     /**
      * Parses a resource identifier without querying the species registry.
      */
-    public static ResourceLocation parseId(String rawId) {
+    public static Optional<ResourceLocation> parseId(String rawId) {
         if (rawId == null) {
-            return null;
+            return Optional.empty();
         }
 
         String normalized = rawId.trim().toLowerCase(Locale.ROOT);
         if (normalized.isEmpty()) {
-            return null;
+            return Optional.empty();
         }
 
-        if (normalized.indexOf(':') >= 0) {
-            return ResourceLocation.tryParse(normalized);
-        }
+        String id = normalized.indexOf(':') >= 0
+                ? normalized
+                : Cobblemon.MODID + ":" + normalized;
 
-        return ResourceLocation.tryParse(Cobblemon.MODID + ":" + normalized);
+        return Optional.ofNullable(ResourceLocation.tryParse(id));
     }
 }
