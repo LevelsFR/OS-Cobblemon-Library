@@ -21,6 +21,13 @@ Use `require` when an invalid configured species should fail immediately:
 Species species = PokemonSpeciesResolver.require(configuredId);
 ```
 
+For syntax-only resource ID parsing without a registry lookup:
+
+```java
+Optional<ResourceLocation> id =
+        PokemonSpeciesResolver.parseId(configuredId);
+```
+
 This removes repeated manual namespace stripping and rebuilding.
 
 ## Native property parsing
