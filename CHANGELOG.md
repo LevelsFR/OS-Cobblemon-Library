@@ -7,8 +7,10 @@ All notable public changes to OS Cobblemon Library are documented here.
 ### Added
 
 - Multi-loader Fabric and NeoForge project structure.
-- Pokémon identity, matching, species resolution and creation helpers.
-- IV, ability, type, label and native size helpers.
+- Pokémon identity, matching, species resolution and command-free creation helpers.
+- IV, ability, type and data-driven label helpers.
+- Native Pokémon size-category, translation-key and safe scale helpers.
+- Read-only `PokemonEntity` bridge helpers for Pokémon access, ownership and Cobblemon entity state.
 - Party and PC storage queries, matching and counts.
 - Cobblemon event subscription and lifecycle helpers.
 - Battle classification and event inspection helpers.
