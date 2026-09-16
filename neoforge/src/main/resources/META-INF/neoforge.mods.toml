@@ -9,7 +9,8 @@ version="${version}"
 displayName="${mod_name}"
 displayURL="https://github.com/LevelsFR/OS-Cobblemon-Library"
 authors="LevelsFR"
-logoFile="assets/os_cobblemon_library/icon.png"
+logoFile="icon.png"
+logoBlur=false
 description='''${mod_description}'''
 
 [[dependencies.${mod_id}]]
