@@ -47,7 +47,30 @@ PokemonMatcher matcher = PokemonMatcher
         .anyLabel(List.of("legendary", "mythical"));
 ```
 
-The matcher can then be reused with streams or storage helpers.
+The matcher can then be reused with streams, storage helpers or Pokémon
+entities.
+
+## Bridge a Pokémon entity
+
+```java
+Pokemon pokemon = PokemonEntities.pokemon(entity);
+Optional<UUID> owner = PokemonEntities.ownerId(entity);
+
+boolean matches = PokemonEntities.matches(entity, matcher);
+```
+
+Use the entity bridge for Cobblemon-specific state. Keep movement, AI,
+navigation and despawn behavior inside the consuming mod.
+
+## Read native size safely
+
+```java
+PokemonSizeCategory category = PokemonSize.category(pokemon);
+float effectiveScale = PokemonSize.effectiveScale(pokemon);
+```
+
+The scale helpers normalize invalid, non-finite or non-positive values to
+`1.0F`.
 
 ## Query player-owned Pokémon
 
