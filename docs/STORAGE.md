@@ -67,3 +67,17 @@ boolean hasMatch =
 
 Party-only variants preserve party slot order. Owned queries check or return the
 party first and the PC second.
+
+## Counting matches
+
+For progression checks, quests or unlock conditions, count without creating an
+intermediate list:
+
+```java
+int partyCount = PokemonStorage.countInParty(player, matcher);
+int pcCount = PokemonStorage.countInPC(player, matcher);
+int total = PokemonStorage.countOwned(player, matcher);
+```
+
+Predicate lookups are available consistently for Party, PC and combined owned
+storage.
