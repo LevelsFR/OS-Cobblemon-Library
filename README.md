@@ -33,9 +33,9 @@ Shared functionality belongs in `common` whenever possible. Loader modules shoul
 
 ## Library areas
 
-The v1 library is organized around a small set of Cobblemon-focused domains:
+The v1.1 library is organized around a small set of Cobblemon-focused domains:
 
-- `pokemon`: species, forms, aspects, marks, types, native size data and reusable Pokémon property access
+- `pokemon`: species, forms, aspects, marks, types, native size data, persistent Pokémon data and reusable Pokémon property access
 - `entity`: read-only `PokemonEntity` bridge helpers for identity, ownership and Cobblemon entity state
 - `storage`: party, PC and Pokémon lookup helpers
 - `event`: reusable Cobblemon event integration
@@ -122,7 +122,7 @@ Common implementation examples are collected in [docs/PATTERNS.md](docs/PATTERNS
 
 Keep additions focused, reusable and Cobblemon-specific. New helpers should represent a real shared need or isolate a meaningful compatibility boundary.
 
-See [docs/POKEMON.md](docs/POKEMON.md), [docs/POKEMON_MATCHER.md](docs/POKEMON_MATCHER.md), [docs/POKEMON_CREATION.md](docs/POKEMON_CREATION.md), [docs/POKEMON_IVS.md](docs/POKEMON_IVS.md), [docs/POKEMON_ABILITIES.md](docs/POKEMON_ABILITIES.md), [docs/POKEMON_TYPES.md](docs/POKEMON_TYPES.md), [docs/POKEMON_LABELS.md](docs/POKEMON_LABELS.md), [docs/POKEMON_SIZE.md](docs/POKEMON_SIZE.md), [docs/POKEMON_ENTITIES.md](docs/POKEMON_ENTITIES.md), [docs/STORAGE.md](docs/STORAGE.md), [docs/EVENTS.md](docs/EVENTS.md), [docs/BATTLE.md](docs/BATTLE.md) and [docs/POKEDEX.md](docs/POKEDEX.md) for the current shared helper APIs.
+See [docs/POKEMON.md](docs/POKEMON.md), [docs/POKEMON_MATCHER.md](docs/POKEMON_MATCHER.md), [docs/POKEMON_CREATION.md](docs/POKEMON_CREATION.md), [docs/POKEMON_DATA.md](docs/POKEMON_DATA.md), [docs/POKEMON_IVS.md](docs/POKEMON_IVS.md), [docs/POKEMON_ABILITIES.md](docs/POKEMON_ABILITIES.md), [docs/POKEMON_TYPES.md](docs/POKEMON_TYPES.md), [docs/POKEMON_LABELS.md](docs/POKEMON_LABELS.md), [docs/POKEMON_SIZE.md](docs/POKEMON_SIZE.md), [docs/POKEMON_ENTITIES.md](docs/POKEMON_ENTITIES.md), [docs/STORAGE.md](docs/STORAGE.md), [docs/EVENTS.md](docs/EVENTS.md), [docs/BATTLE.md](docs/BATTLE.md) and [docs/POKEDEX.md](docs/POKEDEX.md) for the current shared helper APIs.
 
 For local development consumption, see [docs/LOCAL_MAVEN.md](docs/LOCAL_MAVEN.md).
 
