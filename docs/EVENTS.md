@@ -21,9 +21,32 @@ ObservableSubscription<BattleVictoryEvent> victory =
         });
 ```
 
-Current convenience hooks cover recurring areas such as capture, battles,
-Pokédex updates, hatching, trade, release, nickname changes, level-up and
-experience gain.
+Current convenience hooks cover recurring areas such as capture and capture
+calculation, evolution, battle start and gimmicks, send/recall, healing,
+Pokémon entity persistence, Pokémon spawning, Pokédex updates, hatching,
+trade, release, nickname changes, level-up and experience gain.
+
+Pre hooks expose Cobblemon's cancelable event object. Post hooks expose the
+resulting event payload. Mutable Cobblemon payloads such as capture rate,
+capture result, healing amount and event NBT remain available to the handler.
+
+```java
+ObservableSubscription<PokemonSentEvent.Pre> send =
+        CobblemonEventHooks.onPokemonSentPre(event -> {
+            if (shouldBlock(event.getPokemon())) {
+                event.cancel();
+            }
+        });
+
+ObservableSubscription<PokemonEntitySaveEvent> save =
+        CobblemonEventHooks.onPokemonEntitySave(event -> {
+            event.getNbt().putBoolean("examplemod:marked", true);
+        });
+```
+
+The persistence and spawn hooks stay in the common module and do not import
+client-only GUI types. Client-only GUI events are intentionally left to direct
+Cobblemon access in the client module.
 
 ## Subscription lifecycle
 
