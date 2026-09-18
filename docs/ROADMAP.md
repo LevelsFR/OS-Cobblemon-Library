@@ -70,6 +70,22 @@
 - Known aspects and shiny states
 - Global and per-dex counts and percentages
 
+## 1.1 integration boundaries
+
+- Namespaced persistent Pokémon data with defensive reads and change
+  notification
+- Capture-rate and calculated-capture hooks
+- Accepted and completed evolution hooks
+- Battle start and battle gimmick hooks
+- Pokémon send, recall, healing and faint hooks
+- Pokémon aspect and Pokédex pre/post hooks
+- Pokémon entity save/load/save-to-world hooks
+- Cobblemon Pokémon spawn hook
+
+The additions remain Java-friendly subscriptions around Cobblemon's public
+events. They do not introduce a second persistence format, spawn system or
+battle abstraction.
+
 ## Later
 
 Additional helpers should be added only when they represent repeated
