@@ -52,6 +52,27 @@ Use it when a mod needs to:
 - create a `PokemonEntity`
 - spawn a Pokémon directly into a server level
 
+### `PokemonData`
+
+Namespaced persistent data for a Pokémon.
+
+- reads return a defensive copy
+- updates replace the section and call Cobblemon's change notification
+- removal also notifies Cobblemon
+
+Use a key owned by the consuming mod, for example `examplemod:quest_state`:
+
+```java
+PokemonData.update(pokemon, "examplemod:quest_state", data -> {
+    data.putBoolean("completed", true);
+    data.putInt("attempts", data.getInt("attempts") + 1);
+});
+
+boolean completed = PokemonData.read(pokemon, "examplemod:quest_state")
+        .map(data -> data.getBoolean("completed"))
+        .orElse(false);
+```
+
 ### `PokemonIVs`
 
 Natural and effective IV inspection.
@@ -138,6 +159,16 @@ Queries accept any `Predicate<Pokemon>`, including `PokemonMatcher`.
 ### `CobblemonEventHooks`
 
 Java-friendly subscriptions for frequently reused Cobblemon events.
+
+The v1.1 hooks cover:
+
+- capture rate, calculated capture and completed capture
+- accepted and completed evolution
+- battle start, victory, faint, flee and gimmick instructions
+- Pokémon send, recall, healing and fainting
+- Pokémon aspects and Pokédex pre/post changes
+- Pokémon entity save/load/save-to-world and Cobblemon Pokémon spawning
+- hatching, trade, release, nickname, level-up and experience changes
 
 The class intentionally does not mirror every event in `CobblemonEvents`.
 

@@ -2,6 +2,14 @@
 
 All notable public changes to OS Cobblemon Library are documented here.
 
+## 1.1.0 - 2026-09-18
+
+### Added
+
+- Added namespaced persistent Pokémon data helpers with defensive reads and automatic Cobblemon change notification.
+- Added Java-friendly hooks for capture calculation, evolution, battle start and gimmicks, send/recall, healing, Pokémon fainting, entity persistence, Pokémon spawning, aspects and Pokédex pre/post changes.
+- Added v1.1 API and integration documentation.
+
 ## 1.0.1 - 2026-09-17
 
 ### Added
