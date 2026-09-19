@@ -2,7 +2,7 @@ name: Deploy wiki to GitHub Pages
 
 on:
   push:
-    branches: ["wiki-pages"]
+    branches: ["1.21.1/main"]
     paths:
       - "site/**"
       - ".github/workflows/pages.yml"
