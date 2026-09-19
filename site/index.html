@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="OS Cobblemon Library documentation for Fabric and NeoForge Cobblemon mod development.">
+  <title>OS Cobblemon Library Documentation</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu-button" id="menuButton" type="button" aria-label="Open navigation">☰</button>
+
+    <a class="brand" href="#overview" data-tab-link="overview">
+      <span class="brand-mark">OSCL</span>
+      <span class="brand-copy">
+        <strong>OS Cobblemon Library</strong>
+        <small>v1.1 Documentation</small>
+      </span>
+    </a>
+
+    <div class="search-wrap">
+      <span class="search-icon" aria-hidden="true"></span>
+      <input id="wikiSearch" type="search" placeholder="Search the documentation..." autocomplete="off">
+      <kbd>Ctrl K</kbd>
+      <div class="search-results" id="searchResults" hidden></div>
+    </div>
+
+    <a class="community-badge bisecthosting-badge" href="https://www.bisecthosting.com/OurStory" target="_blank" rel="noopener noreferrer sponsored" aria-label="Save 25% on BisectHosting servers with code OurStory">
+      <span class="community-icon bisecthosting-icon" aria-hidden="true">BH</span>
+      <span class="community-copy">
+        <strong>25% OFF Servers</strong>
+        <small>BisectHosting <span class="community-divider">•</span> Code <b>OurStory</b></small>
+      </span>
+    </a>
+
+    <a class="community-badge discord-badge" id="discordBadge" href="https://discord.gg/kb8NSTF45n" target="_blank" rel="noopener noreferrer" aria-label="Join the Our Story Network Discord">
+      <svg class="community-icon discord-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M19.54 5.34A16.3 16.3 0 0 0 15.44 4l-.5 1.02a15.1 15.1 0 0 0-5.86 0L8.56 4a16.5 16.5 0 0 0-4.1 1.35C1.87 9.2 1.17 12.96 1.52 16.67a16.7 16.7 0 0 0 5.03 2.55l1.23-1.68c-.67-.25-1.3-.56-1.9-.93l.46-.36c3.67 1.69 7.65 1.69 11.28 0l.47.36c-.6.37-1.24.69-1.9.94l1.22 1.67a16.6 16.6 0 0 0 5.04-2.55c.42-4.3-.72-8.03-2.91-11.33ZM8.5 14.44c-1.1 0-2-1.01-2-2.25s.88-2.26 2-2.26c1.12 0 2.02 1.02 2 2.26 0 1.24-.88 2.25-2 2.25Zm7 0c-1.1 0-2-1.01-2-2.25s.88-2.26 2-2.26c1.12 0 2.02 1.02 2 2.26 0 1.24-.88 2.25-2 2.25Z"/>
+      </svg>
+      <span class="community-copy">
+        <strong>Discord</strong>
+        <small id="discordStats"><span class="status-dot"></span>Join the server</small>
+      </span>
+    </a>
+
+    <a class="community-badge curseforge-badge" id="curseforgeBadge" href="https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library" target="_blank" rel="noopener noreferrer" aria-label="View OS Cobblemon Library on CurseForge">
+      <span class="community-icon curseforge-icon" aria-hidden="true">CF</span>
+      <span class="community-copy">
+        <strong>CurseForge</strong>
+        <small id="curseforgeStats">OS Cobblemon Library</small>
+      </span>
+    </a>
+
+    <a class="community-badge github-badge" href="https://github.com/LevelsFR/OS-Cobblemon-Library" target="_blank" rel="noopener noreferrer" aria-label="View OS Cobblemon Library on GitHub">
+      <span class="community-icon github-icon" aria-hidden="true">GH</span>
+      <span class="community-copy">
+        <strong>GitHub</strong>
+        <small>Source & API</small>
+      </span>
+    </a>
+
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">
+      <span class="theme-icon theme-icon-sun">☀</span>
+      <span class="theme-icon theme-icon-moon">☾</span>
+    </button>
+  </header>
+
+  <div class="layout">
+    <aside id="sidebar">
+      <div class="sidebar-title">Documentation</div>
+      <nav class="sidebar-navigation" aria-label="Documentation sections">
+        <a href="#overview" data-tab-link="overview" class="active">👋 Overview</a>
+        <a href="#installation" data-tab-link="installation">📦 Installation</a>
+        <a href="#api" data-tab-link="api">🧩 API reference</a>
+        <a href="#patterns" data-tab-link="patterns">💻 Common patterns</a>
+        <a href="#compatibility" data-tab-link="compatibility">🛡️ Compatibility</a>
+        <a href="#changelog" data-tab-link="changelog">📋 Changelog</a>
+      </nav>
+
+      <div class="sidebar-section">
+        <div class="sidebar-title">Links</div>
+        <a class="sidebar-link" href="https://www.bisecthosting.com/OurStory" target="_blank" rel="noopener noreferrer sponsored">🤝 BisectHosting Partner</a>
+        <a class="sidebar-link" href="https://discord.gg/kb8NSTF45n" target="_blank" rel="noopener noreferrer">💬 Discord</a>
+        <a class="sidebar-link" href="https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library" target="_blank" rel="noopener noreferrer">🧡 CurseForge</a>
+        <a class="sidebar-link" href="https://github.com/LevelsFR/OS-Cobblemon-Library" target="_blank" rel="noopener noreferrer">💻 GitHub</a>
+        <a class="sidebar-link" href="https://www.patreon.com/c/OurStoryCollection" target="_blank" rel="noopener noreferrer">❤️ Patreon</a>
+      </div>
+
+      <div class="sidebar-footer">
+        <strong>OS Cobblemon Library</strong>
+        <span>Documentation for v1.1.0</span>
+      </div>
+    </aside>
+
+    <main>
+      <div class="tabs" role="tablist" aria-label="Documentation tabs">
+        <button class="tab active" type="button" data-tab="overview">Overview</button>
+        <button class="tab" type="button" data-tab="installation">Installation</button>
+        <button class="tab" type="button" data-tab="api">API</button>
+        <button class="tab" type="button" data-tab="patterns">Patterns</button>
+        <button class="tab" type="button" data-tab="compatibility">Compatibility</button>
+        <button class="tab" type="button" data-tab="changelog">Changelog</button>
+      </div>
+
+      <article>
+        <section class="tab-panel active" id="overview" data-panel="overview">
+          <div class="page-heading">
+            <span class="page-kicker">OS Cobblemon Library v1.1</span>
+            <h1>OS Cobblemon Library</h1>
+            <p class="page-description">
+              A lightweight shared Cobblemon API and compatibility library for Fabric and NeoForge.
+            </p>
+          </div>
+
+          <div class="hint hint-info">
+            <strong>This is a dependency library.</strong>
+            <p>OS Cobblemon Library does not add standalone gameplay content. Players install it when another mod declares it as a required dependency.</p>
+          </div>
+
+          <h2>What does the library do?</h2>
+          <p>
+            OS Cobblemon Library centralizes reusable Cobblemon integrations so multiple mods can share the same implementation instead of duplicating loader-specific or Cobblemon-specific code.
+          </p>
+          <p>
+            Its public API focuses on Pokémon identity, creation, storage, events, battles, Pokédex data and small compatibility boundaries that are useful across multiple projects.
+          </p>
+
+          <h2>Supported environment</h2>
+          <table>
+            <thead><tr><th>Component</th><th>Supported line</th></tr></thead>
+            <tbody>
+              <tr><td>Minecraft</td><td>1.21.1</td></tr>
+              <tr><td>Java</td><td>21</td></tr>
+              <tr><td>Cobblemon</td><td>1.8.1 up to, but not including, 1.9.0</td></tr>
+              <tr><td>Loaders</td><td>Fabric and NeoForge</td></tr>
+              <tr><td>Current library release</td><td>1.1.0</td></tr>
+            </tbody>
+          </table>
+
+          <h2>Library areas</h2>
+          <ul>
+            <li><code>pokemon</code> for identity, species, creation, IVs, abilities, types, labels, size and persistent Pokémon data.</li>
+            <li><code>entity</code> for read-only <code>PokemonEntity</code> bridge helpers.</li>
+            <li><code>storage</code> for Party and PC access, matching, lookup and counts.</li>
+            <li><code>event</code> for Java-friendly Cobblemon event subscriptions and lifecycle management.</li>
+            <li><code>battle</code> for battle classification, actor inspection and event helpers.</li>
+            <li><code>pokedex</code> for species, form, variation and completion queries.</li>
+          </ul>
+
+          <h2>Design goals</h2>
+          <ol class="process-list">
+            <li><strong>Reuse</strong><span>Keep repeated Cobblemon integrations in one shared API.</span></li>
+            <li><strong>Stability</strong><span>Expose small documented helpers instead of leaking internal Cobblemon implementation details.</span></li>
+            <li><strong>Multiloader</strong><span>Keep shared behavior in common code and loader wiring in Fabric or NeoForge modules.</span></li>
+            <li><strong>Scope</strong><span>Avoid gameplay systems, balancing rules and generic frameworks that belong in consuming mods.</span></li>
+          </ol>
+
+          <div class="hint hint-success">
+            <strong>Public API boundary</strong>
+            <p>Documented classes outside <code>com.ourstory.oscobblemon.internal</code> form the supported public API.</p>
+          </div>
+        </section>
+
+        <section class="tab-panel" id="installation" data-panel="installation">
+          <div class="page-heading">
+            <span class="page-kicker">Players & developers</span>
+            <h1>Installation</h1>
+            <p class="page-description">Install the correct loader build for gameplay, or consume the documented API from another Cobblemon mod.</p>
+          </div>
+
+          <h2>For players</h2>
+          <p>Download the OS Cobblemon Library JAR matching your loader and place it in the normal <code>mods</code> folder when another mod requires it.</p>
+
+          <table>
+            <thead><tr><th>Requirement</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Minecraft</td><td>1.21.1</td></tr>
+              <tr><td>Cobblemon</td><td>1.8.1 to &lt;1.9.0</td></tr>
+              <tr><td>Java</td><td>21</td></tr>
+              <tr><td>Loaders</td><td>Fabric or NeoForge</td></tr>
+            </tbody>
+          </table>
+
+          <div class="hint hint-warning">
+            <strong>Match the loader.</strong>
+            <p>Use the Fabric build on Fabric and the NeoForge build on NeoForge. The library is required on the sides declared by the consuming mod.</p>
+          </div>
+
+          <h2>Build from source</h2>
+          <p>The Gradle wrapper is committed to the repository.</p>
+          <pre><code># Windows
+.\gradlew.bat build
+
+# Linux / macOS
+./gradlew build</code></pre>
+
+          <p>Individual loader builds are also available:</p>
+          <pre><code>.\gradlew.bat :fabric:build
+.\gradlew.bat :neoforge:build</code></pre>
+
+          <h2>Publish to Maven Local</h2>
+          <p>For local development against another project:</p>
+          <pre><code>powershell -ExecutionPolicy Bypass -File .\scripts\publish-local.ps1</code></pre>
+          <p>The script reads the active version from <code>gradle.properties</code> and publishes the common, Fabric and NeoForge artifacts to Maven Local.</p>
+
+          <h2>Gradle dependency pattern</h2>
+          <pre><code>repositories {
+    mavenLocal()
+}
+
+val osCobblemonLibraryVersion = "1.1.0"
+
+dependencies {
+    compileOnly(
+        "com.ourstory:os-cobblemon-library-common:$osCobblemonLibraryVersion"
+    )
+}</code></pre>
+
+          <p>Fabric runtime module:</p>
+          <pre><code>dependencies {
+    modImplementation(
+        "com.ourstory:os-cobblemon-library-fabric:$osCobblemonLibraryVersion"
+    )
+}</code></pre>
+
+          <p>NeoForge runtime module:</p>
+          <pre><code>dependencies {
+    modImplementation(
+        "com.ourstory:os-cobblemon-library-neoforge:$osCobblemonLibraryVersion"
+    )
+}</code></pre>
+
+          <h2>Loader metadata</h2>
+          <p>Consuming mods should also declare OS Cobblemon Library as a required dependency.</p>
+          <pre><code>// Fabric fabric.mod.json
+"depends": {
+  "os_cobblemon_library": ">=1.0.0"
+}</code></pre>
+
+          <pre><code># NeoForge neoforge.mods.toml
+[[dependencies.your_mod_id]]
+modId="os_cobblemon_library"
+type="required"
+versionRange="[1.0.0,)"
+ordering="AFTER"
+side="BOTH"</code></pre>
+
+          <div class="hint hint-info">
+            <strong>Dependency version choice</strong>
+            <p>Set the minimum version required by the API features your mod actually uses.</p>
+          </div>
+        </section>
+
+        <section class="tab-panel" id="api" data-panel="api">
+          <div class="page-heading">
+            <span class="page-kicker">Supported public surface</span>
+            <h1>API reference</h1>
+            <p class="page-description">The main public classes exposed by OS Cobblemon Library v1.1.</p>
+          </div>
+
+          <h2>Pokémon</h2>
+          <h3><code>PokemonIdentity</code></h3>
+          <p>Canonical species and form identity, aspects, marks, Alpha compatibility and immutable identity snapshots.</p>
+
+          <h3><code>PokemonMatcher</code></h3>
+          <p>Immutable reusable matcher built on Cobblemon's native <code>PokemonProperties</code>. It also supports Alpha, aspects, marks, labels and native size categories.</p>
+
+          <h3><code>PokemonSpeciesResolver</code></h3>
+          <p>Namespace-aware species lookup. Bare IDs default to the Cobblemon namespace while addon namespaces remain intact.</p>
+
+          <h3><code>PokemonCreation</code></h3>
+          <p>Command-free Pokémon parsing, creation, entity creation and server-level spawning through Cobblemon's native property API.</p>
+
+          <h3><code>PokemonData</code></h3>
+          <p>Namespaced persistent Pokémon data with defensive reads and proper Cobblemon change notification on updates or removal.</p>
+
+          <h3><code>PokemonIVs</code></h3>
+          <p>Natural and effective IV inspection, Hyper Training awareness, totals, perfect IV counts and minimum guaranteed perfect natural IVs.</p>
+
+          <h3><code>PokemonAbilities</code></h3>
+          <p>Classifies active abilities as common, hidden, forced or unknown using Cobblemon ability-pool data.</p>
+
+          <h3><code>PokemonTypes</code></h3>
+          <p>Current-form type inspection and matching.</p>
+
+          <h3><code>PokemonLabels</code></h3>
+          <p>Generic access to data-driven Cobblemon form labels without hard-coding category semantics.</p>
+
+          <h3><code>PokemonSize</code></h3>
+          <p>Native size category helpers, translation keys and safe positive scale values for Pokémon and Pokémon entities.</p>
+
+          <h2>Entities</h2>
+          <h3><code>PokemonEntities</code></h3>
+          <p>Read-only bridge helpers for Pokémon access, UUID identity, ownership, battle state, busy/evolution state, presence checks and matcher integration.</p>
+
+          <h2>Storage</h2>
+          <h3><code>PokemonStorage</code></h3>
+          <p>Shared Party and PC access, UUID lookup, party slots, immutable membership snapshots, predicate queries and counts.</p>
+
+          <h2>Events</h2>
+          <h3><code>CobblemonEventHooks</code></h3>
+          <p>Java-friendly subscriptions for repeated Cobblemon event use cases including capture, evolution, battles, sending, recalling, healing, fainting, spawning, persistence, Pokédex updates, hatching, trade, release, nickname, level-up and experience changes.</p>
+
+          <h3><code>EventSubscriptionGroup</code></h3>
+          <p>Tracks multiple subscriptions and unsubscribes them together for reloadable or optional systems.</p>
+
+          <h2>Battles</h2>
+          <h3><code>BattleInspector</code></h3>
+          <p>Read-only helpers for wild, trainer and PvP classification, actor filtering, player UUIDs, Pokémon extraction, faint events and victory participants.</p>
+
+          <h3><code>BattleKind</code></h3>
+          <p>High-level classification: <code>WILD</code>, <code>TRAINER</code>, <code>PVP</code> or <code>OTHER</code>.</p>
+
+          <h2>Pokédex</h2>
+          <h3><code>PokedexQueries</code></h3>
+          <p>Read-only helpers for seen/caught species, forms, aspects, shiny knowledge, counts and completion percentages.</p>
+
+          <div class="hint hint-warning">
+            <strong>Do not use internal packages.</strong>
+            <p>Anything under <code>com.ourstory.oscobblemon.internal</code> can change or disappear without notice.</p>
+          </div>
+        </section>
+
+        <section class="tab-panel" id="patterns" data-panel="patterns">
+          <div class="page-heading">
+            <span class="page-kicker">Practical examples</span>
+            <h1>Common patterns</h1>
+            <p class="page-description">Preferred patterns for recurring Cobblemon integrations.</p>
+          </div>
+
+          <h2>Resolve species IDs</h2>
+          <pre><code>Species species =
+        PokemonSpeciesResolver.require(configuredSpecies);</code></pre>
+          <p>Bare IDs default to the Cobblemon namespace while explicit addon namespaces are preserved.</p>
+
+          <h2>Spawn without commands</h2>
+          <pre><code>PokemonCreation.spawnSpecies(
+        level,
+        position,
+        configuredSpecies,
+        rolledLevel,
+        shiny
+);</code></pre>
+
+          <p>Complex properties can be passed directly:</p>
+          <pre><code>PokemonCreation.spawn(
+        level,
+        position,
+        "species=pikachu level=25 shiny=true"
+);</code></pre>
+
+          <h2>Build a reusable matcher</h2>
+          <pre><code>PokemonMatcher matcher = PokemonMatcher
+        .fromProperties("type=fire level=50")
+        .alpha(false)
+        .anyLabel(List.of("legendary", "mythical"));</code></pre>
+
+          <h2>Query player-owned Pokémon</h2>
+          <pre><code>Optional&lt;Pokemon&gt; first =
+        PokemonStorage.findFirstOwned(player, matcher);
+
+List&lt;Pokemon&gt; all =
+        PokemonStorage.findAllOwned(player, matcher);
+
+int count =
+        PokemonStorage.countOwned(player, matcher);</code></pre>
+
+          <h2>Persistent Pokémon data</h2>
+          <pre><code>PokemonData.update(pokemon, "examplemod:quest_state", data -&gt; {
+    data.putBoolean("completed", true);
+    data.putInt("attempts", data.getInt("attempts") + 1);
+});
+
+boolean completed = PokemonData.read(pokemon, "examplemod:quest_state")
+        .map(data -&gt; data.getBoolean("completed"))
+        .orElse(false);</code></pre>
+
+          <h2>Type-based compatibility</h2>
+          <pre><code>boolean compatible = PokemonTypes.hasAnyType(
+        pokemon,
+        List.of("grass", "bug", "flying")
+);</code></pre>
+
+          <h2>Lifecycle-safe event subscriptions</h2>
+          <pre><code>EventSubscriptionGroup subscriptions =
+        new EventSubscriptionGroup();
+
+subscriptions.track(
+        CobblemonEventHooks.onCapture(this::handleCapture)
+);
+
+subscriptions.track(
+        CobblemonEventHooks.onBattleVictory(this::handleVictory)
+);
+
+// Feature shutdown or reload:
+subscriptions.close();</code></pre>
+
+          <h2>Battle progression</h2>
+          <pre><code>Pokemon defeated =
+        BattleInspector.faintedPokemon(event);
+
+if (BattleInspector.isWild(event.getBattle())) {
+    // Wild battle progression.
+}
+
+boolean won =
+        BattleInspector.didPlayerWin(event, player.getUUID());</code></pre>
+
+          <h2>Pokédex-aware behavior</h2>
+          <pre><code>if (PokedexQueries.hasSeen(player, pokemon)) {
+    // Species has been encountered.
+}
+
+if (PokedexQueries.hasCaughtForm(player, pokemon)) {
+    // Current form has been caught.
+}</code></pre>
+
+          <div class="hint hint-success">
+            <strong>Keep the compatibility boundary clean.</strong>
+            <p>When the same Cobblemon integration appears in multiple mods, prefer a focused library helper over copying the same implementation into every project.</p>
+          </div>
+        </section>
+
+        <section class="tab-panel" id="compatibility" data-panel="compatibility">
+          <div class="page-heading">
+            <span class="page-kicker">Scope, stability & licensing</span>
+            <h1>Compatibility</h1>
+            <p class="page-description">What the library supports, what it intentionally avoids, and which API guarantees consumers can rely on.</p>
+          </div>
+
+          <h2>Current compatibility line</h2>
+          <table>
+            <thead><tr><th>Area</th><th>Current target</th></tr></thead>
+            <tbody>
+              <tr><td>Minecraft</td><td>1.21.1</td></tr>
+              <tr><td>Cobblemon</td><td>1.8.1 to &lt;1.9.0</td></tr>
+              <tr><td>Fabric Loader</td><td>0.17.2</td></tr>
+              <tr><td>Fabric API</td><td>0.116.6+1.21.1</td></tr>
+              <tr><td>NeoForge</td><td>21.1.182 minimum</td></tr>
+              <tr><td>Java</td><td>21</td></tr>
+            </tbody>
+          </table>
+
+          <h2>In scope</h2>
+          <ul>
+            <li>Pokémon identity and reusable property access.</li>
+            <li>Species, forms, aspects, marks, types and size data.</li>
+            <li>Read-only Pokémon entity bridge helpers.</li>
+            <li>Party and PC access and lookups.</li>
+            <li>Cobblemon event integration.</li>
+            <li>Battle inspection and classification.</li>
+            <li>Pokédex queries.</li>
+            <li>Small adapters that isolate meaningful Cobblemon API changes.</li>
+          </ul>
+
+          <h2>Out of scope</h2>
+          <ul>
+            <li>Gameplay rules or progression systems specific to one mod.</li>
+            <li>Custom balancing formulas.</li>
+            <li>Mod-specific user interfaces or spawning systems.</li>
+            <li>Entity AI, movement, navigation or despawn systems.</li>
+            <li>Leaderboards and scoring systems.</li>
+            <li>Generic networking, permission, registry or configuration frameworks.</li>
+          </ul>
+
+          <h2>API stability</h2>
+          <p>OS Cobblemon Library follows semantic versioning for its documented public API.</p>
+          <table>
+            <thead><tr><th>Release type</th><th>Expected API behavior</th></tr></thead>
+            <tbody>
+              <tr><td>Patch</td><td>Bug fixes, docs and compatibility changes that preserve the public API.</td></tr>
+              <tr><td>Minor</td><td>New helpers, overloads or integration areas while preserving existing public API source compatibility.</td></tr>
+              <tr><td>Major</td><td>Breaking changes to the supported public API.</td></tr>
+            </tbody>
+          </table>
+
+          <h2>Internal API</h2>
+          <pre><code>com.ourstory.oscobblemon.internal</code></pre>
+          <p>This package is not supported for consuming mods and may change without notice.</p>
+
+          <h2>License</h2>
+          <div class="hint hint-info">
+            <strong>Public API use is allowed.</strong>
+            <p>Independent mods may build and distribute against the documented public API without publishing their own source code. The OS Cobblemon Library implementation itself remains All Rights Reserved under its proprietary API license.</p>
+          </div>
+          <p>Redistribution, modified builds, rebranding and source-code reuse of the Library itself require separate permission from LevelsFR.</p>
+        </section>
+
+        <section class="tab-panel" id="changelog" data-panel="changelog">
+          <div class="page-heading">
+            <span class="page-kicker">Release history</span>
+            <h1>Changelog</h1>
+            <p class="page-description">Public release history for OS Cobblemon Library.</p>
+          </div>
+
+          <h2>1.1.0 - 2026-09-18</h2>
+          <h3>Added</h3>
+          <ul>
+            <li>Persistent Pokémon data for storing custom mod data safely.</li>
+            <li>Reusable Cobblemon event hooks for captures, evolutions, battles, gimmicks, healing, fainting, sending, recalling, spawning and Pokédex updates.</li>
+          </ul>
+
+          <h2>1.0.1 - 2026-09-17</h2>
+          <h3>Added</h3>
+          <ul>
+            <li>Official OS Cobblemon Library logo in Fabric and NeoForge mod listings.</li>
+          </ul>
+          <h3>Changed</h3>
+          <ul>
+            <li>Updated the public mod description to better reflect the API and compatibility role.</li>
+            <li>Normalized in-game metadata text and resource processing to avoid accented-character encoding issues on Windows builds.</li>
+            <li>Clarified the proprietary license so third-party mods may use the documented public API without source-disclosure requirements while the Library itself remains protected.</li>
+          </ul>
+
+          <h2>1.0.0 - 2026-09-16</h2>
+          <h3>Added</h3>
+          <ul>
+            <li>Multi-loader Fabric and NeoForge project structure.</li>
+            <li>Pokémon identity, matching, species resolution and command-free creation helpers.</li>
+            <li>IV, ability, type and data-driven label helpers.</li>
+            <li>Native Pokémon size-category, translation-key and safe scale helpers.</li>
+            <li>Read-only <code>PokemonEntity</code> bridge helpers for Pokémon access, ownership and Cobblemon entity state.</li>
+            <li>Party and PC storage queries, matching and counts.</li>
+            <li>Cobblemon event subscription and lifecycle helpers.</li>
+            <li>Battle classification and event inspection helpers.</li>
+            <li>Pokédex species, form, variation and completion queries.</li>
+            <li>Local Maven development publishing.</li>
+            <li>Public integration, API stability and release documentation.</li>
+          </ul>
+          <h3>Changed</h3>
+          <ul>
+            <li>Runtime metadata explicitly targets Minecraft 1.21.1 and Cobblemon 1.8.x.</li>
+            <li>CI builds and Maven publication use the committed Gradle wrapper.</li>
+            <li>Architectury build plugins are pinned to reproducible versions.</li>
+            <li>Public API boundaries are documented and internal packages are excluded from the supported API.</li>
+          </ul>
+        </section>
+      </article>
+    </main>
+  </div>
+</body>
+</html>
