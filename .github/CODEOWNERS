@@ -1,0 +1,13 @@
+# OS Cobblemon Library ownership rules
+# Every change in this repository requires review by LevelsFR.
+
+* @LevelsFR
+
+# Critical repository and release infrastructure
+/.github/ @LevelsFR
+/gradle.properties @LevelsFR
+/settings.gradle @LevelsFR
+/build.gradle @LevelsFR
+/gradle/ @LevelsFR
+/LICENSE @LevelsFR
+/site/ @LevelsFR
