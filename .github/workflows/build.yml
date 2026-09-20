@@ -23,7 +23,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Protect wiki ownership
+      - name: Protect repository infrastructure
         if: github.event_name == 'pull_request' && github.actor != 'LevelsFR'
         shell: bash
         env:
