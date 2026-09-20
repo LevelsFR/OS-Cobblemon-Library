@@ -1,0 +1,9 @@
+# OS Cobblemon Library ownership rules
+
+# Public wiki and deployment configuration
+/site/ @LevelsFR
+/.github/workflows/pages.yml @LevelsFR
+
+# Protection rules themselves
+/.github/workflows/build.yml @LevelsFR
+/.github/CODEOWNERS @LevelsFR
