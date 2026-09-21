@@ -11,7 +11,7 @@ For local development on the current development branch:
 1.1.0-SNAPSHOT
 ```
 
-The current stable release is `1.0.1`.
+The current stable release is `1.1.0`.
 
 ## 2. Publish a local development build
 
