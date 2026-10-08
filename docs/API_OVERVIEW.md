@@ -59,6 +59,8 @@ Namespaced persistent data for a Pokémon.
 - reads return a defensive copy
 - updates replace the section and call Cobblemon's change notification
 - removal also notifies Cobblemon
+- codec-backed reads use defaults for missing sections and report invalid data
+  through `DataResult`
 
 Use a key owned by the consuming mod, for example `examplemod:quest_state`:
 
@@ -84,6 +86,12 @@ Includes:
 - perfect IV counts
 - IV totals
 - minimum guaranteed perfect natural IVs
+
+### `PokemonSnapshot` and `PokemonBalls`
+
+`PokemonSnapshot` copies commonly displayed identity, aspect, name, caught-ball,
+level, HP and persistent-status values. `PokemonBalls` resolves Cobblemon ball
+IDs and translated item names from ball definitions or item stacks.
 
 ### `PokemonAbilities`
 
@@ -149,10 +157,17 @@ Includes:
 - UUID lookup
 - party slot lookup
 - immutable membership snapshots
+- slot-preserving value snapshots
+- store-change subscriptions
 - predicate queries
 - predicate counts
 
 Queries accept any `Predicate<Pokemon>`, including `PokemonMatcher`.
+
+### `ClientPokemonStorage`
+
+Client-only lookup and immutable membership snapshots for Cobblemon's local
+party.
 
 ## Events
 
@@ -205,7 +220,7 @@ High-level battle classification:
 
 ## Pokédex
 
-### `PokedexQueries`
+### `PokedexQueries` and `ClientPokedexQueries`
 
 Read-only Pokédex helpers for:
 
@@ -215,6 +230,11 @@ Read-only Pokédex helpers for:
 - shiny-state knowledge
 - global counts and percentages
 - individual Pokédex counts and percentages
+- immutable snapshots of species, known aspects, registered form progress and
+  shiny states
+
+`ClientPokedexQueries` reads the Pokédex synchronized to the local player and
+is client-only.
 
 ## Internal package
 

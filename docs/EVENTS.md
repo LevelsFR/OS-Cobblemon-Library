@@ -21,6 +21,10 @@ ObservableSubscription<BattleVictoryEvent> victory =
         });
 ```
 
+The capture payload already contains the caught Pokémon, player and thrown
+Poké Ball entity. Read the ball definition with
+`event.getPokeBallEntity().getPokeBall()`; no second capture event is needed.
+
 Current convenience hooks cover recurring areas such as capture and capture
 calculation, evolution, battle start and gimmicks, send/recall, healing,
 Pokémon entity persistence, Pokémon spawning, Pokédex updates, hatching,
@@ -47,6 +51,11 @@ ObservableSubscription<PokemonEntitySaveEvent> save =
 The persistence and spawn hooks stay in the common module and do not import
 client-only GUI types. Client-only GUI events are intentionally left to direct
 Cobblemon access in the client module.
+
+Pokédex pre/post and gain/release hooks wrap Cobblemon's native server events.
+For a broader server cache signal, subscribe to the store observable described
+in [storage cache guidance](STORAGE.md#change-notifications-and-cache-lifetime).
+Client packet updates do not use these server event hooks.
 
 ## Subscription lifecycle
 

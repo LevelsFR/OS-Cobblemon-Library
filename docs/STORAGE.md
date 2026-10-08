@@ -40,6 +40,53 @@ List<Pokemon> owned = PokemonStorage.ownedSnapshot(player);
 The returned lists are immutable snapshots of the store membership and ordering
 at the time of the call. They still contain the live `Pokemon` objects.
 
+Use the slot-preserving variant when the index must continue to match the party
+slot. Its list has one entry per slot; empty positions are `Optional.empty()` and
+occupied positions contain copied `PokemonSnapshot` values:
+
+```java
+List<Optional<PokemonSnapshot>> slots = PokemonStorage.partySlotsSnapshot(player);
+```
+
+## Client party
+
+Client-only code can read Cobblemon's synchronized local party without casting
+or accessing its mutable slot list directly:
+
+```java
+Optional<Pokemon> pokemon = ClientPokemonStorage.findInParty(pokemonId);
+List<Pokemon> party = ClientPokemonStorage.partySnapshot();
+List<Optional<PokemonSnapshot>> slots = ClientPokemonStorage.partySlotsSnapshot();
+```
+
+Overloads accept a `ClientParty` when the caller already has a store. The
+returned list is an immutable membership snapshot containing live `Pokemon`
+objects; use `PokemonSnapshot.from(pokemon)` when a cache should retain copied
+display values instead. `partySlotsSnapshot` preserves every slot and returns
+copied values. These helpers are client-only and must not be called from
+dedicated-server code.
+
+## Change notifications and cache lifetime
+
+Storage reads are synchronous and do not cache. Server `PokemonStore` instances
+expose a change observable; subscribe through the library when a store may
+change outside the current call path:
+
+```java
+ObservableSubscription<Unit> changes = PokemonStorage.onPokemonStorageChanged(
+        party, changedStore -> invalidateSnapshot(changedStore.getUuid()));
+```
+
+It emits for save-worthy changes to the store or its Pokémon. The callback
+receives the store, so its concrete type identifies Party versus PC, but
+Cobblemon does not include the changed Pokémon UUID. Compare a previous and
+fresh snapshot when a consumer needs to identify membership changes. Remember
+to unsubscribe when the cache or feature is discarded.
+
+Client `ClientParty` updates use packet handlers and expose no matching
+observable. Cobblemon's gain and release events remain useful signals but are
+not a complete client-side invalidation API.
+
 ## Threading
 
 These helpers do not add asynchronous storage access or caching. Use them under

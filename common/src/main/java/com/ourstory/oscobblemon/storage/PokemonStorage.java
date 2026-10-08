@@ -3,7 +3,11 @@ package com.ourstory.oscobblemon.storage;
 import com.cobblemon.mod.common.Cobblemon;
 import com.cobblemon.mod.common.api.storage.party.PlayerPartyStore;
 import com.cobblemon.mod.common.api.storage.pc.PCStore;
+import com.cobblemon.mod.common.api.storage.PokemonStore;
+import com.cobblemon.mod.common.api.reactive.ObservableSubscription;
 import com.cobblemon.mod.common.pokemon.Pokemon;
+import com.ourstory.oscobblemon.pokemon.PokemonSnapshot;
+import kotlin.Unit;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -13,6 +17,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.UUID;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
@@ -26,6 +31,22 @@ import java.util.function.Predicate;
  */
 public final class PokemonStorage {
     private PokemonStorage() {
+    }
+
+    /**
+     * Subscribes to save-worthy changes in a Cobblemon store or one of its
+     * Pokémon. The callback receives the changed store so callers can refresh
+     * their own snapshots.
+     *
+     * <p>Cobblemon's observable does not identify which Pokémon changed.</p>
+     */
+    public static ObservableSubscription<Unit> onPokemonStorageChanged(
+            PokemonStore<?> store,
+            Consumer<PokemonStore<?>> handler
+    ) {
+        Objects.requireNonNull(store, "store");
+        Objects.requireNonNull(handler, "handler");
+        return store.getAnyChangeObservable().subscribe(ignored -> handler.accept(store));
     }
 
     /**
@@ -181,6 +202,30 @@ public final class PokemonStorage {
             if (pokemon != null) {
                 result.add(pokemon);
             }
+        }
+
+        return List.copyOf(result);
+    }
+
+    /**
+     * Returns a value snapshot of every party slot, preserving empty slots and
+     * their indexes.
+     */
+    public static List<Optional<PokemonSnapshot>> partySlotsSnapshot(ServerPlayer player) {
+        Objects.requireNonNull(player, "player");
+        return partySlotsSnapshot(party(player));
+    }
+
+    /**
+     * Returns a value snapshot of every party slot, preserving empty slots and
+     * their indexes.
+     */
+    public static List<Optional<PokemonSnapshot>> partySlotsSnapshot(PlayerPartyStore party) {
+        Objects.requireNonNull(party, "party");
+
+        List<Optional<PokemonSnapshot>> result = new ArrayList<>(party.size());
+        for (int slot = 0; slot < party.size(); slot++) {
+            result.add(Optional.ofNullable(party.get(slot)).map(PokemonSnapshot::from));
         }
 
         return List.copyOf(result);
