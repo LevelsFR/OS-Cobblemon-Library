@@ -2,6 +2,15 @@
 
 All notable public changes to OS Cobblemon Library are documented here.
 
+## 1.2.0 - 2026-10-08
+
+### Added
+
+- Added client-side Pokédex snapshots and client party lookup.
+- Added immutable Pokémon display and condition snapshots, slot-preserving party snapshots, and Cobblemon Poké Ball ID/name helpers.
+- Added a server Party/PC store-change subscription.
+- Added codec-backed persistent Pokémon data reads with defaults and explicit decode errors.
+
 ## 1.1.0 - 2026-09-18
 
 ### Added

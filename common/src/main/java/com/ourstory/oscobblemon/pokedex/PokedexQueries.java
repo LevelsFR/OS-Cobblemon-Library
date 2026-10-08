@@ -3,6 +3,7 @@ package com.ourstory.oscobblemon.pokedex;
 import com.cobblemon.mod.common.Cobblemon;
 import com.cobblemon.mod.common.api.pokedex.CaughtCount;
 import com.cobblemon.mod.common.api.pokedex.CaughtPercent;
+import com.cobblemon.mod.common.api.pokedex.AbstractPokedexManager;
 import com.cobblemon.mod.common.api.pokedex.FormDexRecord;
 import com.cobblemon.mod.common.api.pokedex.PokedexEntryProgress;
 import com.cobblemon.mod.common.api.pokedex.PokedexManager;
@@ -10,10 +11,15 @@ import com.cobblemon.mod.common.api.pokedex.SeenCount;
 import com.cobblemon.mod.common.api.pokedex.SeenPercent;
 import com.cobblemon.mod.common.api.pokedex.SpeciesDexRecord;
 import com.cobblemon.mod.common.pokemon.Pokemon;
+import com.cobblemon.mod.common.pokemon.FormData;
+import com.cobblemon.mod.common.pokemon.Species;
+import com.cobblemon.mod.common.api.pokemon.PokemonSpecies;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Objects;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -26,6 +32,50 @@ import java.util.UUID;
  */
 public final class PokedexQueries {
     private PokedexQueries() {
+    }
+
+    /**
+     * Copies the manager's known species and forms into immutable Java values.
+     * Form records are enumerated from Cobblemon's currently registered species data.
+     */
+    public static PokedexSnapshot snapshot(AbstractPokedexManager manager) {
+        Objects.requireNonNull(manager, "manager");
+
+        Map<ResourceLocation, PokedexSnapshot.SpeciesEntry> entries = new LinkedHashMap<>();
+        for (Map.Entry<ResourceLocation, SpeciesDexRecord> entry : manager.getSpeciesRecords().entrySet()) {
+            ResourceLocation speciesId = entry.getKey();
+            SpeciesDexRecord speciesRecord = entry.getValue();
+            Map<String, PokedexSnapshot.FormEntry> forms = new LinkedHashMap<>();
+
+            Species species = PokemonSpecies.INSTANCE.getByIdentifier(speciesId);
+            if (species != null) {
+                addFormSnapshot(speciesRecord, species.getStandardForm(), forms);
+                for (FormData form : species.getForms()) {
+                    addFormSnapshot(speciesRecord, form, forms);
+                }
+            }
+
+            entries.put(speciesId, new PokedexSnapshot.SpeciesEntry(
+                    manager.getKnowledgeForSpecies(speciesId),
+                    speciesRecord.getAspects(),
+                    forms
+            ));
+        }
+        return new PokedexSnapshot(entries);
+    }
+
+    private static void addFormSnapshot(
+            SpeciesDexRecord speciesRecord,
+            FormData form,
+            Map<String, PokedexSnapshot.FormEntry> forms
+    ) {
+        FormDexRecord formRecord = speciesRecord.getFormRecord(form.getName());
+        if (formRecord != null) {
+            forms.putIfAbsent(form.getName(), new PokedexSnapshot.FormEntry(
+                    formRecord.getKnowledge(),
+                    formRecord.getSeenShinyStates()
+            ));
+        }
     }
 
     /**

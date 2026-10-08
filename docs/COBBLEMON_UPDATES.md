@@ -137,6 +137,19 @@ PokedexQueries
 Pay particular attention to enum renames. For example, Cobblemon 1.8 uses
 `UNREGISTERED`, `SEEN` and `OWNED` for Pokédex progress.
 
+Client Pokédex and party data are separate read paths from the server stores.
+The library's client helpers target `ClientPokedexManager` and `ClientParty`;
+keep those classes in client-only call paths. In the 1.8.1 source, incremental
+Pokédex packets update the client manager directly and do not expose a public
+client update observable. Server `PokemonStore` exposes
+`getAnyChangeObservable()`, which signals save-worthy store and Pokémon
+changes; it does not include the changed Pokémon UUID. `ClientParty` has no
+matching observable, so do not infer client invalidation from server gain or
+release events.
+
+Poké Ball IDs come from Cobblemon's `PokeBall.name`; item display names come
+from the ball item's translated name component. Keep rendering in consumers.
+
 ### IVs and abilities
 
 Check:
@@ -152,6 +165,13 @@ Relevant classes:
 PokemonIVs
 PokemonAbilities
 ```
+
+### Persistent Pokémon data
+
+When changing the Cobblemon version, re-check `Pokemon.persistentData` and
+`Pokemon.onChange(...)`. Codec-backed values use Minecraft `DynamicOps<Tag>`;
+registry-aware codecs need registry-aware operations rather than the default
+`NbtOps`.
 
 ## 4. Re-run local Maven publishing
 

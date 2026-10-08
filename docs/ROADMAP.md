@@ -86,6 +86,19 @@ The additions remain Java-friendly subscriptions around Cobblemon's public
 events. They do not introduce a second persistence format, spawn system or
 battle abstraction.
 
+## 1.2 client reads and display data
+
+- Client Pokédex snapshots for synchronized species, aspects, forms and shiny states
+- Client party lookup, membership snapshots and slot-preserving value snapshots
+- Immutable Pokémon display and condition snapshots with Cobblemon Poké Ball resolution
+- Codec-backed namespaced Pokémon data
+- Documented snapshot freshness and cache invalidation boundaries
+
+Cobblemon 1.8.1 exposes a server store-change observable, but it does not
+identify the changed Pokémon. The client Pokédex and party do not expose update
+callbacks. More specific notifications remain deferred until the upstream API
+supplies those signals.
+
 ## Later
 
 Additional helpers should be added only when they represent repeated

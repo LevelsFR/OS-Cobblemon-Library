@@ -69,3 +69,7 @@ The snapshot contains:
 - Alpha state
 
 The snapshot intentionally does not include gameplay-specific state.
+
+For user interface data that also needs aspects, a translated display name and
+the caught Poké Ball ID, use [`PokemonSnapshot`](POKEMON_SNAPSHOTS.md). The
+Pokémon object itself is not retained.
