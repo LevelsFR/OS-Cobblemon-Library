@@ -16,7 +16,7 @@
       <span class="brand-mark">OSCL</span>
       <span class="brand-copy">
         <strong>OS Cobblemon Library</strong>
-        <small>v1.1 Documentation</small>
+        <small>v1.2 Documentation</small>
       </span>
     </a>
 
@@ -90,7 +90,7 @@
 
       <div class="sidebar-footer">
         <strong>OS Cobblemon Library</strong>
-        <span>Documentation for v1.1.0</span>
+        <span>Documentation for v1.2.0</span>
       </div>
     </aside>
 
@@ -107,7 +107,7 @@
       <article>
         <section class="tab-panel active" id="overview" data-panel="overview">
           <div class="page-heading">
-            <span class="page-kicker">OS Cobblemon Library v1.1</span>
+            <span class="page-kicker">OS Cobblemon Library v1.2</span>
             <h1>OS Cobblemon Library</h1>
             <p class="page-description">
               A lightweight shared Cobblemon API and compatibility library for Fabric and NeoForge.
@@ -135,18 +135,18 @@
               <tr><td>Java</td><td>21</td></tr>
               <tr><td>Cobblemon</td><td>1.8.1 up to, but not including, 1.9.0</td></tr>
               <tr><td>Loaders</td><td>Fabric and NeoForge</td></tr>
-              <tr><td>Current library release</td><td>1.1.0</td></tr>
+              <tr><td>Current library release</td><td>1.2.0</td></tr>
             </tbody>
           </table>
 
           <h2>Library areas</h2>
           <ul>
-            <li><code>pokemon</code> for identity, species, creation, IVs, abilities, types, labels, size and persistent Pokémon data.</li>
+            <li><code>pokemon</code> for identity, species, creation, IVs, abilities, types, labels, size, persistent data and display snapshots.</li>
             <li><code>entity</code> for read-only <code>PokemonEntity</code> bridge helpers.</li>
-            <li><code>storage</code> for Party and PC access, matching, lookup and counts.</li>
+            <li><code>storage</code> for server Party/PC access, client party reads, slot-preserving snapshots, matching and counts.</li>
             <li><code>event</code> for Java-friendly Cobblemon event subscriptions and lifecycle management.</li>
             <li><code>battle</code> for battle classification, actor inspection and event helpers.</li>
-            <li><code>pokedex</code> for species, form, variation and completion queries.</li>
+            <li><code>pokedex</code> for server and client species, form, variation and completion queries with immutable snapshots.</li>
           </ul>
 
           <h2>Design goals</h2>
@@ -210,7 +210,7 @@
     mavenLocal()
 }
 
-val osCobblemonLibraryVersion = "1.1.0"
+val osCobblemonLibraryVersion = "1.2.0"
 
 dependencies {
     compileOnly(
@@ -257,7 +257,7 @@ side="BOTH"</code></pre>
           <div class="page-heading">
             <span class="page-kicker">Supported public surface</span>
             <h1>API reference</h1>
-            <p class="page-description">The main public classes exposed by OS Cobblemon Library v1.1.</p>
+            <p class="page-description">The main public classes exposed by OS Cobblemon Library v1.2.</p>
           </div>
 
           <h2>Pokémon</h2>
@@ -274,7 +274,10 @@ side="BOTH"</code></pre>
           <p>Command-free Pokémon parsing, creation, entity creation and server-level spawning through Cobblemon's native property API.</p>
 
           <h3><code>PokemonData</code></h3>
-          <p>Namespaced persistent Pokémon data with defensive reads and proper Cobblemon change notification on updates or removal.</p>
+          <p>Namespaced persistent Pokémon data with defensive reads, typed codec access, explicit decode errors and Cobblemon change notification.</p>
+
+          <h3><code>PokemonSnapshot</code> and <code>PokemonBalls</code></h3>
+          <p>Copied Pokémon identity, display and condition values, plus canonical Cobblemon Poké Ball IDs and translated item names.</p>
 
           <h3><code>PokemonIVs</code></h3>
           <p>Natural and effective IV inspection, Hyper Training awareness, totals, perfect IV counts and minimum guaranteed perfect natural IVs.</p>
@@ -297,7 +300,10 @@ side="BOTH"</code></pre>
 
           <h2>Storage</h2>
           <h3><code>PokemonStorage</code></h3>
-          <p>Shared Party and PC access, UUID lookup, party slots, immutable membership snapshots, predicate queries and counts.</p>
+          <p>Server Party and PC access, UUID lookup, membership queries, predicate counts and slot-preserving value snapshots.</p>
+
+          <h3><code>ClientPokemonStorage</code></h3>
+          <p>Client-only party lookup and snapshots, including immutable values that retain empty slots and slot indexes.</p>
 
           <h2>Events</h2>
           <h3><code>CobblemonEventHooks</code></h3>
@@ -316,6 +322,9 @@ side="BOTH"</code></pre>
           <h2>Pokédex</h2>
           <h3><code>PokedexQueries</code></h3>
           <p>Read-only helpers for seen/caught species, forms, aspects, shiny knowledge, counts and completion percentages.</p>
+
+          <h3><code>ClientPokedexQueries</code> and <code>PokedexSnapshot</code></h3>
+          <p>Read-only client Pokédex access and immutable snapshots of synchronized species, aspects, forms and shiny states.</p>
 
           <div class="hint hint-warning">
             <strong>Do not use internal packages.</strong>
@@ -495,6 +504,15 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
             <h1>Changelog</h1>
             <p class="page-description">Public release history for OS Cobblemon Library.</p>
           </div>
+
+          <h2>1.2.0 - 2026-10-08</h2>
+          <h3>Added</h3>
+          <ul>
+            <li>Client-side Pokédex snapshots and client party lookup.</li>
+            <li>Immutable Pokémon display and condition snapshots, slot-preserving party snapshots, and Cobblemon Poké Ball ID/name helpers.</li>
+            <li>Server Party/PC store-change subscriptions.</li>
+            <li>Codec-backed persistent Pokémon data reads with defaults and explicit decode errors.</li>
+          </ul>
 
           <h2>1.1.0 - 2026-09-18</h2>
           <h3>Added</h3>
