@@ -5,6 +5,23 @@ one place.
 
 When Cobblemon updates, validate the library before migrating consuming mods.
 
+## Cobblemon 1.8.2
+
+Cobblemon 1.8.2 adds the public `BATTLE_ENDED` event and its
+`BattleEndedEvent` payload. It covers every conclusion, including capture,
+forfeit, fleeing and stopping without a winner. Use this event for general
+battle completion; `BATTLE_VICTORY` remains useful when only wins matter.
+
+The event's battle winner and loser lists are populated for victory, capture
+and forfeit results. `BattleInspector` now exposes immutable actor snapshots
+and player UUID queries for those outcomes. The library also provides a fossil
+revival hook; Cobblemon 1.8.2 fixes the event ordering that could previously
+leave the revived Pokémon without its entity link.
+
+Other 1.8.2 additions such as evolution-tree display metadata, the `negate`
+evolution requirement and extra Molang struct fields are native datapack or
+Molang features. They do not require another Java-facing library adapter.
+
 ## 1. Update dependency versions
 
 Start with `gradle.properties`:
@@ -139,7 +156,7 @@ Pay particular attention to enum renames. For example, Cobblemon 1.8 uses
 
 Client Pokédex and party data are separate read paths from the server stores.
 The library's client helpers target `ClientPokedexManager` and `ClientParty`;
-keep those classes in client-only call paths. In the 1.8.1 source, incremental
+keep those classes in client-only call paths. In the 1.8.2 source, incremental
 Pokédex packets update the client manager directly and do not expose a public
 client update observable. Server `PokemonStore` exposes
 `getAnyChangeObservable()`, which signals save-worthy store and Pokémon

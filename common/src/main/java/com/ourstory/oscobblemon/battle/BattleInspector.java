@@ -1,6 +1,7 @@
 package com.ourstory.oscobblemon.battle;
 
 import com.cobblemon.mod.common.api.battles.model.PokemonBattle;
+import com.cobblemon.mod.common.api.events.battles.BattleEndedEvent;
 import com.cobblemon.mod.common.api.events.battles.BattleFaintedEvent;
 import com.cobblemon.mod.common.api.events.battles.BattleVictoryEvent;
 import com.cobblemon.mod.common.api.battles.model.actor.ActorType;
@@ -134,11 +135,29 @@ public final class BattleInspector {
     }
 
     /**
+     * Returns an immutable snapshot of battle-end winners. The list is empty
+     * when the battle ended without a winner.
+     */
+    public static List<BattleActor> winners(BattleEndedEvent event) {
+        Objects.requireNonNull(event, "event");
+        return List.copyOf(event.getBattle().getWinners());
+    }
+
+    /**
      * Returns an immutable snapshot of victory-event losers.
      */
     public static List<BattleActor> losers(BattleVictoryEvent event) {
         Objects.requireNonNull(event, "event");
         return List.copyOf(event.getLosers());
+    }
+
+    /**
+     * Returns an immutable snapshot of battle-end losers. The list is empty
+     * when the battle ended without a winner.
+     */
+    public static List<BattleActor> losers(BattleEndedEvent event) {
+        Objects.requireNonNull(event, "event");
+        return List.copyOf(event.getBattle().getLosers());
     }
 
     /**
@@ -150,11 +169,29 @@ public final class BattleInspector {
     }
 
     /**
+     * Returns player UUIDs among battle-end winners, including capture and
+     * forfeit outcomes.
+     */
+    public static Set<UUID> winningPlayerIds(BattleEndedEvent event) {
+        Objects.requireNonNull(event, "event");
+        return playerIds(winners(event));
+    }
+
+    /**
      * Returns player UUIDs among the losing actors.
      */
     public static Set<UUID> losingPlayerIds(BattleVictoryEvent event) {
         Objects.requireNonNull(event, "event");
         return playerIds(event.getLosers());
+    }
+
+    /**
+     * Returns player UUIDs among battle-end losers, including capture and
+     * forfeit outcomes.
+     */
+    public static Set<UUID> losingPlayerIds(BattleEndedEvent event) {
+        Objects.requireNonNull(event, "event");
+        return playerIds(losers(event));
     }
 
     /**
@@ -165,10 +202,20 @@ public final class BattleInspector {
         return winningPlayerIds(event).contains(playerId);
     }
 
+    public static boolean didPlayerWin(BattleEndedEvent event, UUID playerId) {
+        Objects.requireNonNull(playerId, "playerId");
+        return winningPlayerIds(event).contains(playerId);
+    }
+
     /**
      * Returns whether a player is among the losing actors.
      */
     public static boolean didPlayerLose(BattleVictoryEvent event, UUID playerId) {
+        Objects.requireNonNull(playerId, "playerId");
+        return losingPlayerIds(event).contains(playerId);
+    }
+
+    public static boolean didPlayerLose(BattleEndedEvent event, UUID playerId) {
         Objects.requireNonNull(playerId, "playerId");
         return losingPlayerIds(event).contains(playerId);
     }

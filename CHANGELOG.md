@@ -2,6 +2,16 @@
 
 All notable public changes to OS Cobblemon Library are documented here.
 
+## 1.3.0 - 2026-10-11
+
+### Added
+
+- Added Cobblemon 1.8.2 compatibility.
+- Added battle-ended hooks for all outcomes and winner/loser inspection for
+  completed battles.
+- Added a fossil-revival event hook.
+- Added pre/post hooks for Pokémon held-item and cosmetic-item swaps.
+
 ## 1.2.0 - 2026-10-08
 
 ### Added

@@ -5,7 +5,7 @@
 - Multi-loader project structure
 - Java 21 and Minecraft 1.21.1
 - Fabric and NeoForge builds
-- Cobblemon 1.8.x compatibility line, starting at 1.8.1
+- Cobblemon 1.8.x compatibility line, starting at 1.8.2
 - Automated build, Maven publication verification and release workflows
 - Clear public API scope and semantic versioning model
 
@@ -94,10 +94,18 @@ battle abstraction.
 - Codec-backed namespaced Pokémon data
 - Documented snapshot freshness and cache invalidation boundaries
 
-Cobblemon 1.8.1 exposes a server store-change observable, but it does not
+Cobblemon 1.8.2 exposes a server store-change observable, but it does not
 identify the changed Pokémon. The client Pokédex and party do not expose update
 callbacks. More specific notifications remain deferred until the upstream API
 supplies those signals.
+
+## 1.3 battle, lifecycle and item events
+
+- Battle-end subscriptions for all outcomes, including capture, forfeit, flee
+  and stop
+- Winner and loser snapshots from completed battles
+- Fossil-revival subscriptions
+- Held-item and cosmetic-item swap subscriptions
 
 ## Later
 
