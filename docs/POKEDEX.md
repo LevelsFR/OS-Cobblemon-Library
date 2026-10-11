@@ -77,7 +77,7 @@ records for unavailable species definitions cannot be expanded into names.
 All maps and sets in the snapshot are immutable copies. The snapshot represents
 the data at the time of the call, so request a fresh one after updates.
 
-`ClientPokedexQueries` is client-only. Cobblemon 1.8.1 does not expose a public
+`ClientPokedexQueries` is client-only. Cobblemon 1.8.2 does not expose a public
 client-side callback for full or incremental Pokédex packet updates, so the
 library does not provide an update listener. The manager may be empty before
 Cobblemon finishes synchronizing the player's data.
