@@ -2,6 +2,7 @@ package com.ourstory.oscobblemon.event;
 
 import com.cobblemon.mod.common.api.Priority;
 import com.cobblemon.mod.common.api.events.CobblemonEvents;
+import com.cobblemon.mod.common.api.events.battles.BattleEndedEvent;
 import com.cobblemon.mod.common.api.events.battles.BattleFaintedEvent;
 import com.cobblemon.mod.common.api.events.battles.BattleFledEvent;
 import com.cobblemon.mod.common.api.events.battles.BattleStartedEvent;
@@ -14,6 +15,8 @@ import com.cobblemon.mod.common.api.events.entity.PokemonEntitySaveEvent;
 import com.cobblemon.mod.common.api.events.entity.PokemonEntitySaveToWorldEvent;
 import com.cobblemon.mod.common.api.events.entity.SpawnEvent;
 import com.cobblemon.mod.common.api.events.pokemon.ExperienceGainedEvent;
+import com.cobblemon.mod.common.api.events.pokemon.FossilRevivedEvent;
+import com.cobblemon.mod.common.api.events.pokemon.HeldItemEvent;
 import com.cobblemon.mod.common.api.events.pokemon.HatchEggEvent;
 import com.cobblemon.mod.common.api.events.pokemon.LevelUpEvent;
 import com.cobblemon.mod.common.api.events.pokemon.PokemonAspectsChangedEvent;
@@ -126,6 +129,23 @@ public final class CobblemonEventHooks {
             Consumer<BattleVictoryEvent> handler
     ) {
         return subscribe(CobblemonEvents.BATTLE_VICTORY, priority, handler);
+    }
+
+    /**
+     * Subscribes to every battle conclusion, including captures, forfeits,
+     * fleeing and stops without a winner.
+     */
+    public static ObservableSubscription<BattleEndedEvent> onBattleEnded(
+            Consumer<BattleEndedEvent> handler
+    ) {
+        return onBattleEnded(Priority.NORMAL, handler);
+    }
+
+    public static ObservableSubscription<BattleEndedEvent> onBattleEnded(
+            Priority priority,
+            Consumer<BattleEndedEvent> handler
+    ) {
+        return subscribe(CobblemonEvents.BATTLE_ENDED, priority, handler);
     }
 
     public static ObservableSubscription<BattleFaintedEvent> onBattleFainted(
@@ -282,6 +302,75 @@ public final class CobblemonEventHooks {
             Consumer<HatchEggEvent.Post> handler
     ) {
         return subscribe(CobblemonEvents.HATCH_EGG_POST, priority, handler);
+    }
+
+    public static ObservableSubscription<FossilRevivedEvent> onFossilRevived(
+            Consumer<FossilRevivedEvent> handler
+    ) {
+        return onFossilRevived(Priority.NORMAL, handler);
+    }
+
+    public static ObservableSubscription<FossilRevivedEvent> onFossilRevived(
+            Priority priority,
+            Consumer<FossilRevivedEvent> handler
+    ) {
+        return subscribe(CobblemonEvents.FOSSIL_REVIVED, priority, handler);
+    }
+
+    /** Subscribes before a Pokémon's held item is swapped; the operation may be canceled. */
+    public static ObservableSubscription<HeldItemEvent.Pre> onHeldItemPre(
+            Consumer<HeldItemEvent.Pre> handler
+    ) {
+        return onHeldItemPre(Priority.NORMAL, handler);
+    }
+
+    public static ObservableSubscription<HeldItemEvent.Pre> onHeldItemPre(
+            Priority priority,
+            Consumer<HeldItemEvent.Pre> handler
+    ) {
+        return subscribe(CobblemonEvents.HELD_ITEM_PRE, priority, handler);
+    }
+
+    /** Subscribes after a Pokémon's held item is swapped; the event contains copies of the stacks. */
+    public static ObservableSubscription<HeldItemEvent.Post> onHeldItemPost(
+            Consumer<HeldItemEvent.Post> handler
+    ) {
+        return onHeldItemPost(Priority.NORMAL, handler);
+    }
+
+    public static ObservableSubscription<HeldItemEvent.Post> onHeldItemPost(
+            Priority priority,
+            Consumer<HeldItemEvent.Post> handler
+    ) {
+        return subscribe(CobblemonEvents.HELD_ITEM_POST, priority, handler);
+    }
+
+    /** Subscribes before a Pokémon's cosmetic item is swapped; the operation may be canceled. */
+    public static ObservableSubscription<HeldItemEvent.Pre> onCosmeticItemPre(
+            Consumer<HeldItemEvent.Pre> handler
+    ) {
+        return onCosmeticItemPre(Priority.NORMAL, handler);
+    }
+
+    public static ObservableSubscription<HeldItemEvent.Pre> onCosmeticItemPre(
+            Priority priority,
+            Consumer<HeldItemEvent.Pre> handler
+    ) {
+        return subscribe(CobblemonEvents.COSMETIC_ITEM_PRE, priority, handler);
+    }
+
+    /** Subscribes after a Pokémon's cosmetic item is swapped; the event contains copies of the stacks. */
+    public static ObservableSubscription<HeldItemEvent.Post> onCosmeticItemPost(
+            Consumer<HeldItemEvent.Post> handler
+    ) {
+        return onCosmeticItemPost(Priority.NORMAL, handler);
+    }
+
+    public static ObservableSubscription<HeldItemEvent.Post> onCosmeticItemPost(
+            Priority priority,
+            Consumer<HeldItemEvent.Post> handler
+    ) {
+        return subscribe(CobblemonEvents.COSMETIC_ITEM_POST, priority, handler);
     }
 
     public static ObservableSubscription<TradeEvent.Post> onTrade(

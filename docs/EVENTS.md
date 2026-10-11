@@ -28,7 +28,43 @@ Poké Ball entity. Read the ball definition with
 Current convenience hooks cover recurring areas such as capture and capture
 calculation, evolution, battle start and gimmicks, send/recall, healing,
 Pokémon entity persistence, Pokémon spawning, Pokédex updates, hatching,
-trade, release, nickname changes, level-up and experience gain.
+fossil revival, held and cosmetic item swaps, trade, release, nickname changes,
+level-up and experience gain.
+
+Held-item and cosmetic-item hooks each have pre and post forms. A pre handler
+can cancel or adjust the receiving/returning stacks and decrement flag. A post
+handler observes copies of the received and returned stacks; editing those
+copies does not change the completed swap.
+
+```java
+ObservableSubscription<HeldItemEvent.Pre> heldItem =
+        CobblemonEventHooks.onHeldItemPre(event -> {
+            if (shouldBlock(event.getPokemon(), event.getReceiving())) {
+                event.cancel();
+            }
+        });
+
+ObservableSubscription<HeldItemEvent.Post> cosmeticItem =
+        CobblemonEventHooks.onCosmeticItemPost(event -> {
+            recordCosmeticSwap(event.getPokemon(), event.getReceived(), event.getReturned());
+        });
+```
+
+`onBattleEnded` covers every battle conclusion. Use the result to distinguish
+victory, capture, forfeit, fleeing and stops without a winner:
+
+```java
+ObservableSubscription<BattleEndedEvent> ended =
+        CobblemonEventHooks.onBattleEnded(event -> {
+            if (event.getResult() == BattleEndResult.CAPTURE) {
+                // Handle a wild Pokémon capture ending the battle.
+            }
+        });
+```
+
+Cobblemon only populates the battle's winner and loser lists for victory,
+capture and forfeit results. `BattleInspector` provides immutable snapshots
+and player UUID queries for those outcomes.
 
 Pre hooks expose Cobblemon's cancelable event object. Post hooks expose the
 resulting event payload. Mutable Cobblemon payloads such as capture rate,

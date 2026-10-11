@@ -70,6 +70,19 @@ Set<UUID> losers = BattleInspector.losingPlayerIds(event);
 boolean won = BattleInspector.didPlayerWin(event, playerId);
 ```
 
+Cobblemon 1.8.2 also provides `BattleEndedEvent`, which fires for every battle
+conclusion. Its `BattleEndResult` distinguishes `VICTORY`, `CAPTURE`,
+`FORFEIT`, `FLED` and `STOPPED`. Winner and loser snapshots are available for
+victory, capture and forfeit results:
+
+```java
+List<BattleActor> winners = BattleInspector.winners(endedEvent);
+Set<UUID> winningPlayers = BattleInspector.winningPlayerIds(endedEvent);
+boolean didWin = BattleInspector.didPlayerWin(endedEvent, playerId);
+```
+
+Fleeing and stopped battles have no winner or loser actors.
+
 Normal `Pokemon` instances can also be extracted from any battle-actor
 collection:
 

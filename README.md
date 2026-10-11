@@ -14,7 +14,7 @@ OS Cobblemon Library provides reusable helpers for Pokémon, entities, storage, 
 
 - Minecraft 1.21.1
 - Java 21
-- Cobblemon 1.8.x (1.8.1 minimum)
+- Cobblemon 1.8.x (1.8.2 minimum)
 - Fabric
 - NeoForge
 
@@ -33,7 +33,7 @@ Shared functionality belongs in `common` whenever possible. Loader modules shoul
 
 ## Library areas
 
-The v1.2 library is organized around a small set of Cobblemon-focused domains:
+The library is organized around a small set of Cobblemon-focused domains:
 
 - `pokemon`: species, forms, aspects, marks, types, native size data, persistent Pokémon data, display snapshots and Poké Ball helpers
 - `entity`: read-only `PokemonEntity` bridge helpers for identity, ownership and Cobblemon entity state
@@ -55,7 +55,7 @@ Requirements for the current compatibility line:
 
 - Minecraft 1.21.1
 - Java 21
-- Cobblemon 1.8.1 up to, but not including, 1.9.0
+- Cobblemon 1.8.2 up to, but not including, 1.9.0
 - Fabric or NeoForge
 
 ## Building

@@ -175,15 +175,16 @@ party.
 
 Java-friendly subscriptions for frequently reused Cobblemon events.
 
-The v1.1 hooks cover:
+Convenience hooks cover:
 
 - capture rate, calculated capture and completed capture
 - accepted and completed evolution
-- battle start, victory, faint, flee and gimmick instructions
+- battle start, victory, end, faint, flee and gimmick instructions
 - Pokémon send, recall, healing and fainting
 - Pokémon aspects and Pokédex pre/post changes
+- Pokémon held-item and cosmetic-item swaps (pre/post)
 - Pokémon entity save/load/save-to-world and Cobblemon Pokémon spawning
-- hatching, trade, release, nickname, level-up and experience changes
+- hatching, fossil revival, trade, release, nickname, level-up and experience changes
 
 The class intentionally does not mirror every event in `CobblemonEvents`.
 
@@ -206,6 +207,7 @@ Read-only battle helpers for:
 - underlying Pokémon
 - fainted Pokémon events
 - victory winners and losers
+- battle-end outcomes, including captures and forfeits
 
 The library hides `BattlePokemon` from common consumer use where practical.
 

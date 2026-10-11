@@ -61,7 +61,7 @@ major library version unless they also require a breaking API change.
 The current development branch uses:
 
 ```text
-1.2.1-SNAPSHOT
+1.3.0-SNAPSHOT
 ```
 
 Snapshot artifacts are intended for development and may change before the
