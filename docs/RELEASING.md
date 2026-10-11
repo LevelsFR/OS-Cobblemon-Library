@@ -66,7 +66,7 @@ Only the final Fabric and NeoForge JARs are attached to the GitHub release.
 After release, return `1.21.1/dev` to the next snapshot version, for example:
 
 ```properties
-mod_version=1.3.0-SNAPSHOT
+mod_version=1.3.1-SNAPSHOT
 ```
 
 Do not overwrite an already published stable version with new development
