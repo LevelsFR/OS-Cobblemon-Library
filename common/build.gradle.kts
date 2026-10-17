@@ -13,6 +13,8 @@ loom {
 }
 
 dependencies {
+    compileOnly("net.fabricmc:sponge-mixin:0.15.4+mixin.0.8.7")
+
     minecraft("com.mojang:minecraft:${property("minecraft_version")}")
     mappings(loom.officialMojangMappings())
 

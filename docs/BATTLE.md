@@ -50,6 +50,25 @@ wrapper. The library keeps that wrapper behind `BattleInspector` and exposes
 normal `Pokemon` objects instead, giving consuming mods a smaller migration
 surface when battle internals change.
 
+## Initial battle weather
+
+`BattleWeatherInitializer` lets a `BattleStartedEvent.Pre` subscriber set one
+initial Showdown field weather before player entry and startup abilities run:
+
+```java
+if (BattleWeatherInitializer.isAvailable()) {
+    boolean queued = BattleWeatherInitializer.setInitialWeather(
+            event, InitialBattleWeather.RAIN);
+}
+```
+
+The initializer is available only with Cobblemon `1.8.2+1.21.1`, where the
+version-specific bridge is verified. It returns `false` on other versions or
+when the runtime bridge did not install. The ambient condition is applied once
+as a source-less field baseline; the simulator remains authoritative after
+startup, and the library does not reapply ambient weather after moves or
+abilities change it.
+
 ## Battle events
 
 The inspector also unwraps common event payloads so feature code does not need

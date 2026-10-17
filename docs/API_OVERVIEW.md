@@ -220,6 +220,13 @@ High-level battle classification:
 - `PVP`
 - `OTHER`
 
+### Initial battle weather
+
+`BattleWeatherInitializer` accepts a `BattleStartedEvent.Pre` event and an
+`InitialBattleWeather` value. It is available on the verified Cobblemon
+`1.8.2+1.21.1` runtime and reports whether the hook is ready through
+`isAvailable()`. Unsupported runtime versions fail closed.
+
 ## Pokédex
 
 ### `PokedexQueries` and `ClientPokedexQueries`

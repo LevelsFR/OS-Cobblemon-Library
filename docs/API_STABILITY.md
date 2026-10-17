@@ -58,11 +58,6 @@ major library version unless they also require a breaking API change.
 
 ## Development snapshots
 
-The current development branch uses:
-
-```text
-1.3.1-SNAPSHOT
-```
-
-Snapshot artifacts are intended for development and may change before the
-corresponding stable release.
+The current development checkout contains the 1.3.1 release candidate.
+Its artifacts may change until the candidate is promoted to the stable branch
+and released.

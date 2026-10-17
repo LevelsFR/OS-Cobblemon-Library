@@ -2,7 +2,13 @@
 
 All notable public changes to OS Cobblemon Library are documented here.
 
-## 1.3.1 - Unreleased
+## 1.3.1 - Release candidate (2026-10-17)
+
+### Added
+
+- Added a public pre-battle weather initializer for Cobblemon 1.8.2.
+- Added a version-gated Showdown bridge that applies the baseline before player
+  entry and startup abilities.
 
 ## 1.3.0 - 2026-10-11
 

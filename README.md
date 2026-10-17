@@ -39,7 +39,7 @@ The library is organized around a small set of Cobblemon-focused domains:
 - `entity`: read-only `PokemonEntity` bridge helpers for identity, ownership and Cobblemon entity state
 - `storage`: server Party/PC helpers and client party reads
 - `event`: reusable Cobblemon event integration
-- `battle`: battle inspection and classification helpers
+- `battle`: battle inspection, classification and version-gated initial-weather integration
 - `pokedex`: reusable server and client Pokédex queries with immutable snapshots
 
 The library intentionally avoids gameplay systems that belong inside individual mods.

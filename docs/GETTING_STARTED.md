@@ -5,13 +5,14 @@ OS Cobblemon Library.
 
 ## 1. Choose a library version
 
-For local development on the current development branch:
+For this 1.3.1 release-candidate checkout:
 
 ```text
-1.3.1-SNAPSHOT
+1.3.1
 ```
 
-The current stable release is `1.3.0`.
+The latest public stable release remains `1.3.0`; this local 1.3.1 candidate
+is not a public release.
 
 ## 2. Publish a local development build
 
@@ -41,7 +42,7 @@ published artifacts.
 Compile common code against the common artifact:
 
 ```kotlin
-val osCobblemonLibraryVersion = "1.3.1-SNAPSHOT"
+val osCobblemonLibraryVersion = "1.3.1"
 
 dependencies {
     compileOnly(

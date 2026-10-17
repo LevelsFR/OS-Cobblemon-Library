@@ -6,8 +6,9 @@ other development projects on the same machine.
 Development branches publish snapshot versions. Stable release branches use the
 corresponding non-snapshot semantic version.
 
-The current stable release is `1.3.0`. The development branch continues at
-`1.3.1-SNAPSHOT`.
+The current stable release remains `1.3.0`. The current development checkout
+contains the `1.3.1` release candidate, so its Maven coordinates have no
+`-SNAPSHOT` suffix. Do not treat a local publication as a public release.
 
 ## Publish locally
 
@@ -26,12 +27,12 @@ The equivalent direct Gradle task is:
 .\gradlew.bat publishAllToMavenLocal
 ```
 
-On the current development branch, this publishes:
+In this 1.3.1 release-candidate checkout, this publishes:
 
 ```text
-com.ourstory:os-cobblemon-library-common:1.3.1-SNAPSHOT
-com.ourstory:os-cobblemon-library-fabric:1.3.1-SNAPSHOT
-com.ourstory:os-cobblemon-library-neoforge:1.3.1-SNAPSHOT
+com.ourstory:os-cobblemon-library-common:1.3.1
+com.ourstory:os-cobblemon-library-fabric:1.3.1
+com.ourstory:os-cobblemon-library-neoforge:1.3.1
 ```
 
 The artifacts are stored in the standard Maven Local repository.
@@ -49,7 +50,7 @@ repositories {
 The shared/common module can compile against the common artifact:
 
 ```kotlin
-val osCobblemonLibraryVersion = "1.3.1-SNAPSHOT"
+val osCobblemonLibraryVersion = "1.3.1"
 
 dependencies {
     compileOnly(
