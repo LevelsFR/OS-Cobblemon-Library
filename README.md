@@ -140,3 +140,11 @@ code.
 The Library itself remains **All Rights Reserved**. Redistribution, modified
 builds, rebranding and source-code reuse are not permitted unless LevelsFR
 grants separate written permission.
+
+## Project guide and verified downloads
+
+[Complete project guide](docs/PROJECT_GUIDE.md) — features, dependency metadata, commands, configuration, source map and build instructions.
+
+- [Source repository](https://github.com/LevelsFR/OS-Cobblemon-Library/tree/1.21.1/dev) (public).
+- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) — published project verified under LevelsFR.
+- Modrinth: no matching project found in the public LevelsFR project list checked on 2026-10-21.

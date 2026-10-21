@@ -1,6 +1,6 @@
 package com.ourstory.oscobblemon.internal;
 
-/** Runtime state for the Cobblemon-version-specific Showdown bridge. */
+/** Runtime state for the Cobblemon-version-specific Showdown weather bridge. */
 public final class BattleWeatherHookStatus {
     private static volatile boolean supportedVersion;
     private static volatile boolean bootPatchInstalled;

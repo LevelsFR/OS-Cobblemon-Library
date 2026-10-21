@@ -2,6 +2,22 @@
 
 All notable public changes to OS Cobblemon Library are documented here.
 
+## 1.4.0 - Ambient battle weather updates (2026-10-19)
+
+### Added
+
+- Added `BattleWeatherController.queueAmbientWeather` and `AmbientBattleWeather`
+  for version-gated weather updates in an active Cobblemon 1.8.2 battle.
+- Ambient weather changes now produce normal Showdown weather records and are
+  ignored while a move- or ability-controlled battle weather is active.
+- Initial ambient weather is marked separately so it can be updated or cleared
+  as the sampled world weather changes.
+
+### Compatibility
+
+- The active-battle bridge is verified only for Cobblemon
+  `1.8.2+1.21.1`; other versions fail closed.
+
 ## 1.3.1 - Release candidate (2026-10-17)
 
 ### Added

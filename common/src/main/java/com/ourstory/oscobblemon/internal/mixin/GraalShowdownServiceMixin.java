@@ -24,21 +24,59 @@ public abstract class GraalShowdownServiceMixin {
               if (!BattleStream || !BattleStream.prototype ||
                   typeof BattleStream.prototype._writeLine !== 'function') return false;
               const prototype = BattleStream.prototype;
-              if (prototype.__osclInitialWeatherInstalled) return true;
+              if (prototype.__osclAmbientWeatherInstalled) return true;
               const originalWriteLine = prototype._writeLine;
               prototype._writeLine = function(type, message) {
                 if (type !== 'osclweather') {
                   return originalWriteLine.call(this, type, message);
                 }
                 const battle = this.battle;
-                if (!battle || battle.started || !battle.field || battle.field.weather) return;
+                if (!battle || battle.ended || !battle.field) return;
                 const weatherId = String(message || '').trim().toLowerCase();
+                const field = battle.field;
+
+                if (!battle.started) {
+                  if (field.weather) return;
+                  const initialCondition = battle.dex.conditions.get(weatherId);
+                  if (!initialCondition || initialCondition.effectType !== 'Weather') return;
+                  const previousWeather = field.weather;
+                  const previousState = field.weatherState;
+                  const state = {id: initialCondition.id, duration: 0, osclAmbient: true};
+                  field.weather = initialCondition.id;
+                  field.weatherState = state;
+                  try {
+                    if (!battle.singleEvent('FieldStart', initialCondition, state, field, null, battle.effect)) {
+                      field.weather = previousWeather;
+                      field.weatherState = previousState;
+                      return;
+                    }
+                    battle.eachEvent('WeatherChange');
+                  } catch (error) {
+                    field.weather = previousWeather;
+                    field.weatherState = previousState;
+                  }
+                  return;
+                }
+
+                if (!field.weatherState || (field.weather && !field.weatherState.osclAmbient)) return;
+                if (weatherId === 'none') {
+                  if (!field.weather) return;
+                  field.clearWeather();
+                  return;
+                }
+
                 const condition = battle.dex.conditions.get(weatherId);
                 if (!condition || condition.effectType !== 'Weather') return;
-                const field = battle.field;
+                if (field.weather === condition.id && field.weatherState.osclAmbient) return;
                 const previousWeather = field.weather;
                 const previousState = field.weatherState;
-                const state = {id: condition.id, duration: 0};
+                if (previousWeather) {
+                  const previousCondition = field.getWeather();
+                  if (previousCondition) {
+                    battle.singleEvent('FieldEnd', previousCondition, previousState, field);
+                  }
+                }
+                const state = {id: condition.id, duration: 0, osclAmbient: true};
                 field.weather = condition.id;
                 field.weatherState = state;
                 try {
@@ -47,13 +85,13 @@ public abstract class GraalShowdownServiceMixin {
                     field.weatherState = previousState;
                     return;
                   }
-                  battle.eachEvent('WeatherChange', battle.effect);
+                  battle.eachEvent('WeatherChange');
                 } catch (error) {
                   field.weather = previousWeather;
                   field.weatherState = previousState;
                 }
               };
-              Object.defineProperty(prototype, '__osclInitialWeatherInstalled', {value: true});
+              Object.defineProperty(prototype, '__osclAmbientWeatherInstalled', {value: true});
               return true;
             })()
             """;
@@ -65,8 +103,8 @@ public abstract class GraalShowdownServiceMixin {
         System.getLogger("os_cobblemon_library").log(
                 installed ? System.Logger.Level.INFO : System.Logger.Level.ERROR,
                 installed
-                        ? "Installed the Cobblemon 1.8.2 initial battle weather hook"
-                        : "Cobblemon 1.8.2 initial battle weather hook is unavailable"
+                        ? "Installed the Cobblemon 1.8.2 ambient battle weather hook"
+                        : "Cobblemon 1.8.2 ambient battle weather hook is unavailable"
         );
     }
 
@@ -127,7 +165,7 @@ public abstract class GraalShowdownServiceMixin {
         } catch (ReflectiveOperationException | RuntimeException exception) {
             System.getLogger("os_cobblemon_library").log(
                     System.Logger.Level.ERROR,
-                    "Unable to install the Cobblemon 1.8.2 initial battle weather hook",
+                    "Unable to install the Cobblemon 1.8.2 ambient battle weather hook",
                     exception
             );
             return false;
