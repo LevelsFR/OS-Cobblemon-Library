@@ -4,6 +4,10 @@ import com.cobblemon.mod.common.entity.pokemon.PokemonEntity;
 import com.cobblemon.mod.common.pokemon.Pokemon;
 import com.ourstory.oscobblemon.pokemon.PokemonIdentity;
 import com.ourstory.oscobblemon.pokemon.PokemonIdentitySnapshot;
+import it.unimi.dsi.fastutil.objects.Reference2DoubleOpenHashMap;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -19,6 +23,15 @@ import java.util.function.Predicate;
  * consuming mod.</p>
  */
 public final class PokemonEntities {
+    private static final Reference2DoubleOpenHashMap<PokemonEntity> NEAREST_PLAYER_DISTANCE_SQUARED =
+            new Reference2DoubleOpenHashMap<>(256);
+    private static MinecraftServer distanceCacheServer;
+    private static int distanceCacheTick = Integer.MIN_VALUE;
+
+    static {
+        NEAREST_PLAYER_DISTANCE_SQUARED.defaultReturnValue(Double.NaN);
+    }
+
     private PokemonEntities() {
     }
 
@@ -90,6 +103,54 @@ public final class PokemonEntities {
     public static boolean isAliveAndPresent(PokemonEntity entity) {
         Objects.requireNonNull(entity, "entity");
         return entity.isAlive() && !entity.isRemoved();
+    }
+
+    /**
+     * Returns the nearest player's squared distance to this entity, cached for
+     * the current server tick.
+     *
+     * <p>This query must be called on the server thread. It returns
+     * {@link Double#MAX_VALUE} when the entity is not in a server level or no
+     * players are present in its level.</p>
+     */
+    public static double nearestPlayerDistanceSquared(PokemonEntity entity) {
+        Objects.requireNonNull(entity, "entity");
+        if (!(entity.level() instanceof ServerLevel serverLevel)) {
+            return Double.MAX_VALUE;
+        }
+
+        MinecraftServer server = serverLevel.getServer();
+        int currentTick = server.getTickCount();
+        if (distanceCacheServer != server || distanceCacheTick != currentTick) {
+            NEAREST_PLAYER_DISTANCE_SQUARED.clear();
+            distanceCacheServer = server;
+            distanceCacheTick = currentTick;
+        }
+
+        double cachedDistance = NEAREST_PLAYER_DISTANCE_SQUARED.getDouble(entity);
+        if (!Double.isNaN(cachedDistance)) {
+            return cachedDistance;
+        }
+
+        double nearestDistanceSquared = Double.MAX_VALUE;
+        for (ServerPlayer player : serverLevel.players()) {
+            double distanceSquared = player.distanceToSqr(entity);
+            if (!Double.isNaN(distanceSquared) && distanceSquared < nearestDistanceSquared) {
+                nearestDistanceSquared = distanceSquared;
+            }
+        }
+
+        NEAREST_PLAYER_DISTANCE_SQUARED.put(entity, nearestDistanceSquared);
+        return nearestDistanceSquared;
+    }
+
+    /**
+     * Clears the per-tick distance cache, for example when a server stops.
+     */
+    public static void clearNearestPlayerDistanceCache() {
+        NEAREST_PLAYER_DISTANCE_SQUARED.clear();
+        distanceCacheServer = null;
+        distanceCacheTick = Integer.MIN_VALUE;
     }
 
     /**

@@ -12,18 +12,18 @@ import java.util.Set;
 
 /** Loads the Showdown bridge only for the Cobblemon build it was verified on. */
 public final class BattleWeatherMixinPlugin implements IMixinConfigPlugin {
-    private static final String COBBLEMON_VERSION = "1.8.2+1.21.1";
+    private static final Set<String> COBBLEMON_VERSIONS = Set.of("1.8.2+1.21.1", "1.8.3+1.21.1");
 
     @Override
     public void onLoad(String mixinPackage) {
         String detectedVersion = findCobblemonVersion();
-        boolean supported = COBBLEMON_VERSION.equals(detectedVersion);
+        boolean supported = COBBLEMON_VERSIONS.contains(detectedVersion);
         BattleWeatherHookStatus.configure(supported);
         if (!supported) {
             System.getLogger("os_cobblemon_library").log(
                     System.Logger.Level.WARNING,
                     "Initial battle weather hook disabled; verified Cobblemon version is "
-                            + COBBLEMON_VERSION + ", detected "
+                            + COBBLEMON_VERSIONS + ", detected "
                             + (detectedVersion == null ? "unknown" : detectedVersion)
             );
         }

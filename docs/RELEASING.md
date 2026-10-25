@@ -63,10 +63,10 @@ Only the final Fabric and NeoForge JARs are attached to the GitHub release.
 
 ## 5. Resume development
 
-After the 1.3.1 release, return `1.21.1/dev` to the next snapshot version:
+After releasing library version `1.4.1`, return `1.21.1/dev` to the next snapshot version:
 
 ```properties
-mod_version=1.3.2-SNAPSHOT
+mod_version=1.5.0-SNAPSHOT
 ```
 
 Do not overwrite an already published stable version with new development

@@ -16,7 +16,7 @@
       <span class="brand-mark">OSCL</span>
       <span class="brand-copy">
         <strong>OS Cobblemon Library</strong>
-        <small>v1.3.1 Development Documentation</small>
+        <small>v1.4.1 Library Documentation</small>
       </span>
     </a>
 
@@ -90,7 +90,7 @@
 
       <div class="sidebar-footer">
         <strong>OS Cobblemon Library</strong>
-        <span>Development documentation for v1.3.1-SNAPSHOT</span>
+        <span>Documentation for library version 1.4.1</span>
       </div>
     </aside>
 
@@ -107,7 +107,7 @@
       <article>
         <section class="tab-panel active" id="overview" data-panel="overview">
           <div class="page-heading">
-            <span class="page-kicker">OS Cobblemon Library v1.3.1-SNAPSHOT</span>
+            <span class="page-kicker">OS Cobblemon Library v1.4.1</span>
             <h1>OS Cobblemon Library</h1>
             <p class="page-description">
               A lightweight shared Cobblemon API and compatibility library for Fabric and NeoForge.
@@ -133,19 +133,19 @@
             <tbody>
               <tr><td>Minecraft</td><td>1.21.1</td></tr>
               <tr><td>Java</td><td>21</td></tr>
-              <tr><td>Cobblemon</td><td>1.8.2 up to, but not including, 1.9.0</td></tr>
+              <tr><td>Cobblemon</td><td>1.8.2 up to, but not including, 1.8.4</td></tr>
               <tr><td>Loaders</td><td>Fabric and NeoForge</td></tr>
-              <tr><td>Current library release</td><td>1.3.0</td></tr>
+              <tr><td>Latest stable release</td><td>1.4.1</td></tr>
             </tbody>
           </table>
 
           <h2>Library areas</h2>
           <ul>
             <li><code>pokemon</code> for identity, species, creation, IVs, abilities, types, labels, size, persistent data and display snapshots.</li>
-            <li><code>entity</code> for read-only <code>PokemonEntity</code> bridge helpers.</li>
+            <li><code>entity</code> for read-only <code>PokemonEntity</code> helpers, including cached nearest-player distance queries.</li>
             <li><code>storage</code> for server Party/PC access, client party reads, slot-preserving snapshots, matching and counts.</li>
             <li><code>event</code> for Java-friendly Cobblemon event subscriptions and lifecycle management.</li>
-            <li><code>battle</code> for battle classification, actor inspection and event helpers.</li>
+            <li><code>battle</code> for battle classification, actor inspection, event helpers and version-gated initial and active-weather integration.</li>
             <li><code>pokedex</code> for server and client species, form, variation and completion queries with immutable snapshots.</li>
           </ul>
 
@@ -177,7 +177,7 @@
             <thead><tr><th>Requirement</th><th>Value</th></tr></thead>
             <tbody>
               <tr><td>Minecraft</td><td>1.21.1</td></tr>
-              <tr><td>Cobblemon</td><td>1.8.2 to &lt;1.9.0</td></tr>
+              <tr><td>Cobblemon</td><td>1.8.2 to &lt;1.8.4</td></tr>
               <tr><td>Java</td><td>21</td></tr>
               <tr><td>Loaders</td><td>Fabric or NeoForge</td></tr>
             </tbody>
@@ -210,7 +210,7 @@
     mavenLocal()
 }
 
-val osCobblemonLibraryVersion = "1.3.1-SNAPSHOT"
+val osCobblemonLibraryVersion = "1.4.1"
 
 dependencies {
     compileOnly(
@@ -257,7 +257,7 @@ side="BOTH"</code></pre>
           <div class="page-heading">
             <span class="page-kicker">Supported public surface</span>
             <h1>API reference</h1>
-            <p class="page-description">The main public classes exposed by OS Cobblemon Library v1.3.1-SNAPSHOT.</p>
+            <p class="page-description">The main public classes exposed by OS Cobblemon Library v1.4.1.</p>
           </div>
 
           <h2>Pokémon</h2>
@@ -296,7 +296,8 @@ side="BOTH"</code></pre>
 
           <h2>Entities</h2>
           <h3><code>PokemonEntities</code></h3>
-          <p>Read-only bridge helpers for Pokémon access, UUID identity, ownership, battle state, busy/evolution state, presence checks and matcher integration.</p>
+          <p>Read-only bridge helpers for Pokémon access, UUID identity, ownership, battle state, busy/evolution state, presence checks and matcher integration. <code>nearestPlayerDistanceSquared</code> caches the nearest player's squared distance per entity for the current server tick; call it on the server thread. It returns <code>Double.MAX_VALUE</code> outside a server level or when there are no players in that level.</p>
+          <p>Call <code>clearNearestPlayerDistanceCache()</code> when the server stops to release cached entity references immediately.</p>
 
           <h2>Storage</h2>
           <h3><code>PokemonStorage</code></h3>
@@ -318,6 +319,9 @@ side="BOTH"</code></pre>
 
           <h3><code>BattleKind</code></h3>
           <p>High-level classification: <code>WILD</code>, <code>TRAINER</code>, <code>PVP</code> or <code>OTHER</code>.</p>
+
+          <h3><code>BattleWeatherInitializer</code>, <code>BattleWeatherController</code> and <code>AmbientBattleWeather</code></h3>
+          <p>Version-gated initial field weather before player entry and startup abilities, plus queued world-weather updates during an active battle. Move- or ability-controlled weather takes priority. The bridge is verified for Cobblemon <code>1.8.2+1.21.1</code> and <code>1.8.3+1.21.1</code>; a queued request does not confirm that the simulator applied it.</p>
 
           <h2>Pokédex</h2>
           <h3><code>PokedexQueries</code></h3>
@@ -375,6 +379,12 @@ List&lt;Pokemon&gt; all =
 
 int count =
         PokemonStorage.countOwned(player, matcher);</code></pre>
+
+          <h2>Check Pokémon proximity</h2>
+          <pre><code>double distanceSquared =
+        PokemonEntities.nearestPlayerDistanceSquared(entity);
+boolean withinRadius = distanceSquared &lt;= radius * radius;</code></pre>
+          <p>Call this on the server thread. The distance is cached for the current server tick, and a level with no players returns <code>Double.MAX_VALUE</code>.</p>
 
           <h2>Persistent Pokémon data</h2>
           <pre><code>PokemonData.update(pokemon, "examplemod:quest_state", data -&gt; {
@@ -437,6 +447,14 @@ if (BattleInspector.isWild(event.getBattle())) {
 boolean won =
         BattleInspector.didPlayerWin(event, player.getUUID());</code></pre>
 
+          <h2>Queue ambient battle weather</h2>
+          <pre><code>if (BattleWeatherController.isAvailable()) {
+    BattleWeatherController.queueAmbientWeather(
+            battle,
+            AmbientBattleWeather.RAIN);
+}</code></pre>
+          <p>Queue the latest world-weather snapshot again after move- or ability-controlled weather clears. Use <code>AmbientBattleWeather.CLEAR</code> when the world contributes no ambient battle weather.</p>
+
           <h2>Pokédex-aware behavior</h2>
           <pre><code>if (PokedexQueries.hasSeen(player, pokemon)) {
     // Species has been encountered.
@@ -464,10 +482,10 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
             <thead><tr><th>Area</th><th>Current target</th></tr></thead>
             <tbody>
               <tr><td>Minecraft</td><td>1.21.1</td></tr>
-              <tr><td>Cobblemon</td><td>1.8.2 to &lt;1.9.0</td></tr>
+              <tr><td>Cobblemon</td><td>1.8.2 to &lt;1.8.4</td></tr>
               <tr><td>Fabric Loader</td><td>0.17.2</td></tr>
               <tr><td>Fabric API</td><td>0.116.6+1.21.1</td></tr>
-              <tr><td>NeoForge</td><td>21.1.182 minimum</td></tr>
+              <tr><td>NeoForge</td><td>21.1.195 minimum</td></tr>
               <tr><td>Java</td><td>21</td></tr>
             </tbody>
           </table>
@@ -476,10 +494,10 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
           <ul>
             <li>Pokémon identity and reusable property access.</li>
             <li>Species, forms, aspects, marks, types and size data.</li>
-            <li>Read-only Pokémon entity bridge helpers.</li>
+            <li>Read-only Pokémon entity bridge helpers, including cached nearest-player distance queries.</li>
             <li>Party and PC access and lookups.</li>
             <li>Cobblemon event integration.</li>
-            <li>Battle inspection and classification.</li>
+            <li>Battle inspection, classification and version-gated initial and active-weather integration.</li>
             <li>Pokédex queries.</li>
             <li>Small adapters that isolate meaningful Cobblemon API changes.</li>
           </ul>
@@ -521,10 +539,36 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
           <div class="page-heading">
             <span class="page-kicker">Release history</span>
             <h1>Changelog</h1>
-            <p class="page-description">Public release history for OS Cobblemon Library.</p>
+            <p class="page-description">Release history for OS Cobblemon Library.</p>
           </div>
 
-          <h2>1.3.1 - Unreleased</h2>
+          <h2>1.4.1 - 2026-10-25</h2>
+          <h3>Changed</h3>
+          <ul>
+            <li>Extended the initial and active battle-weather bridge to Cobblemon 1.8.3 while retaining Cobblemon 1.8.2 support.</li>
+            <li>Requires NeoForge 21.1.195 or newer.</li>
+          </ul>
+
+          <h2>1.4.0 - 2026-10-25</h2>
+          <h3>Added</h3>
+          <ul>
+            <li><code>PokemonEntities.nearestPlayerDistanceSquared</code>, a server-thread query cached per Pokémon entity for the current server tick.</li>
+            <li><code>BattleWeatherController.queueAmbientWeather</code> and <code>AmbientBattleWeather</code> for version-gated ambient weather updates during Cobblemon 1.8.2 battles.</li>
+            <li>Ambient weather updates are written through the normal Showdown battle stream and yield to weather controlled by moves or abilities.</li>
+            <li>Initial ambient field weather is tracked separately so world-weather changes can update or clear it.</li>
+          </ul>
+          <h3>Compatibility</h3>
+          <ul>
+            <li>At the 1.4.0 release, the battle-weather bridge was verified only for Cobblemon <code>1.8.2+1.21.1</code>; 1.4.1 extends support to 1.8.3.</li>
+          </ul>
+
+          <h2>1.3.1 - Release candidate (2026-10-17)</h2>
+          <h3>Added</h3>
+          <ul>
+            <li>A public pre-battle weather initializer for Cobblemon 1.8.2.</li>
+            <li>A version-gated Showdown bridge that applies the baseline before player entry and startup abilities.</li>
+          </ul>
+
           <h2>1.3.0 - 2026-10-11</h2>
           <h3>Added</h3>
           <ul>

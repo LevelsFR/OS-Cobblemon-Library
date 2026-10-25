@@ -38,6 +38,21 @@ boolean present = PokemonEntities.isAliveAndPresent(entity);
 These helpers are read-only and do not change AI, navigation, persistence,
 battle state or despawn behavior.
 
+## Server player distance
+
+```java
+double distanceSquared = PokemonEntities.nearestPlayerDistanceSquared(entity);
+boolean withinRadius = distanceSquared <= radius * radius;
+```
+
+The method returns the squared distance to the nearest player in the entity's
+server level. The result is cached per entity for the current server tick, so
+call it on the server thread. It returns `Double.MAX_VALUE` for a non-server
+entity or a level with no players.
+
+Call `PokemonEntities.clearNearestPlayerDistanceCache()` when the server stops
+to release cached entity references immediately.
+
 ## Reuse matchers
 
 ```java

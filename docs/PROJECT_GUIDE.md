@@ -2,7 +2,7 @@
 
 A shared Cobblemon API and compatibility library for Fabric and NeoForge.
 
-Source and publication snapshot: **2026-10-21**. This guide describes the checked-out source; a download page can contain an earlier release.
+Source and publication snapshot: **2026-10-25**. This guide describes the checked-out source; a download page can contain an earlier release.
 
 ## Status and official links
 
@@ -15,16 +15,16 @@ This guide belongs to `1.21.1/dev`. Stable releases remain on `1.21.1/main`; dev
 ## Features in the current source
 
 - Pokémon, species, forms, aspects, abilities, marks, types and size helpers.
-- Immutable display snapshots and entity/ownership inspection.
+- Immutable display snapshots, entity/ownership inspection and per-tick cached nearest-player distance queries.
 - Party, PC storage, event and Pokédex integration.
-- Battle inspection and version-gated weather bridges.
+- Battle inspection and version-gated initial and active-weather bridges.
 - Documented public APIs, Maven Local publishing and separate development/stable branches.
 
 ## Compatibility and dependencies
 
 | Component | Value |
 | --- | --- |
-| Source version | `1.4.0` |
+| Library version | `1.4.1` |
 | Minecraft baseline | `1.21.1` |
 | JDK | `21` |
 | Active branch | `1.21.1/dev` |
@@ -36,10 +36,10 @@ This guide belongs to `1.21.1/dev`. Stable releases remain on `1.21.1/main`; dev
 | Fabric | `fabric-language-kotlin` | `*` | required |
 | Fabric | `minecraft` | `1.21.1` | required |
 | Fabric | `java` | `>=21` | required |
-| Fabric | `cobblemon` | `>=1.8.2 <1.9.0` | required |
-| NeoForge | `neoforge` | `[21.1.182,)` | required; BOTH |
+| Fabric | `cobblemon` | `>=1.8.2 <1.8.4` | required |
+| NeoForge | `neoforge` | `[21.1.195,)` | required; BOTH |
 | NeoForge | `minecraft` | `[1.21.1]` | required; BOTH |
-| NeoForge | `cobblemon` | `[1.8.2,1.9.0)` | required; BOTH |
+| NeoForge | `cobblemon` | `[1.8.2,1.8.4)` | required; BOTH |
 
 The table reflects loader metadata. Build-time version pins are in [gradle.properties](../gradle.properties). A dependency used only for compilation or optional integration is not automatically required for every installation.
 

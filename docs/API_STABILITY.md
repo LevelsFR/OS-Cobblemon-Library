@@ -56,8 +56,6 @@ Breaking changes to the supported public API require a major version.
 Minecraft or Cobblemon compatibility changes do not automatically require a
 major library version unless they also require a breaking API change.
 
-## Development snapshots
+## Current release
 
-The current development checkout contains the 1.3.1 release candidate.
-Its artifacts may change until the candidate is promoted to the stable branch
-and released.
+The current library version is 1.4.1. This library version is independent of the Minecraft and Cobblemon versions.

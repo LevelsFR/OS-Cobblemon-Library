@@ -2,10 +2,22 @@
 
 All notable public changes to OS Cobblemon Library are documented here.
 
-## 1.4.0 - Ambient battle weather updates (2026-10-19)
+## 1.4.1 - Cobblemon 1.8.3 battle weather bridge (2026-10-25)
+
+### Changed
+
+- Extend the version-gated initial and active battle weather bridge to Cobblemon 1.8.3.
+
+### Compatibility
+
+- Support Cobblemon `1.8.2+1.21.1` and `1.8.3+1.21.1` on Fabric and NeoForge.
+- Require NeoForge 21.1.195 or newer.
+
+## 1.4.0 - Entity proximity and ambient battle weather updates (2026-10-25)
 
 ### Added
 
+- Added `PokemonEntities.nearestPlayerDistanceSquared`, a server-thread-only query that caches each Pokémon's squared distance to its nearest player for the current tick.
 - Added `BattleWeatherController.queueAmbientWeather` and `AmbientBattleWeather`
   for version-gated weather updates in an active Cobblemon 1.8.2 battle.
 - Ambient weather changes now produce normal Showdown weather records and are

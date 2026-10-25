@@ -62,7 +62,7 @@ if (BattleWeatherInitializer.isAvailable()) {
 }
 ```
 
-The initializer is available only with Cobblemon `1.8.2+1.21.1`, where the
+The initializer is available only with Cobblemon `1.8.2+1.21.1` and `1.8.3+1.21.1`, where the
 version-specific bridge is verified. It returns `false` on other versions or
 when the runtime bridge did not install. The ambient condition is applied once
 as a source-less field baseline; the simulator remains authoritative after
@@ -87,7 +87,7 @@ Use `AmbientBattleWeather.CLEAR` when the sampled world no longer contributes
 battle weather. Supported ambient values are clear, rain, snow and sandstorm.
 The update is written into Showdown's normal battle stream, so Cobblemon sees
 its resulting weather record and executes the corresponding battle mechanics.
-The API is version-gated to the verified Cobblemon `1.8.2+1.21.1` runtime and
+The API is version-gated to the verified Cobblemon `1.8.2+1.21.1` and `1.8.3+1.21.1` runtime and
 returns whether the request was queued; the simulator may ignore it while a
 move- or ability-controlled weather is active.
 

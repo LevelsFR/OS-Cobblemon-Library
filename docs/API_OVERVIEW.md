@@ -140,10 +140,17 @@ Includes:
 - owner UUID inspection
 - battle, busy and evolution state inspection
 - alive/present checks
+- `nearestPlayerDistanceSquared`, a server-thread query cached per entity for
+  the current server tick
 - direct `Predicate<Pokemon>` and `PokemonMatcher` matching
 
 The entity API intentionally does not wrap movement, AI, navigation, despawning
 or persistence behavior.
+
+`nearestPlayerDistanceSquared` returns `Double.MAX_VALUE` outside a server
+level or when that level has no players. Call
+`clearNearestPlayerDistanceCache()` when the server stops to release cached
+entity references immediately.
 
 ## Storage
 
@@ -220,12 +227,12 @@ High-level battle classification:
 - `PVP`
 - `OTHER`
 
-### Initial battle weather
+### Battle weather support
 
 `BattleWeatherInitializer` accepts a `BattleStartedEvent.Pre` event and an
 `InitialBattleWeather` value. It is available on the verified Cobblemon
-`1.8.2+1.21.1` runtime and reports whether the hook is ready through
-`isAvailable()`. Unsupported runtime versions fail closed.
+`1.8.2+1.21.1` and `1.8.3+1.21.1` runtimes and reports whether the hook is
+ready through `isAvailable()`. Unsupported runtime versions fail closed.
 
 `BattleWeatherController.queueAmbientWeather` queues one world-derived
 weather synchronization attempt during an active battle. Move- and
@@ -233,7 +240,7 @@ ability-controlled weather takes priority; the caller should requeue the latest
 ambient state after it clears. Use
 `AmbientBattleWeather` for clear, rain, snow or sandstorm. The request return
 value confirms queuing, not simulator application. This bridge is verified
-only for Cobblemon `1.8.2+1.21.1`.
+for Cobblemon `1.8.2+1.21.1` and `1.8.3+1.21.1`.
 
 ## Pokédex
 
