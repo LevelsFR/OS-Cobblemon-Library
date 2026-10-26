@@ -5,13 +5,16 @@ OS Cobblemon Library.
 
 ## 1. Choose a library version
 
-For local development on the current development branch:
+Current source version:
 
 ```text
-1.3.1-SNAPSHOT
+1.4.1
 ```
 
-The current stable release is `1.3.0`.
+The `1.21.1/dev` source currently builds as library version 1.4.1. It targets
+Minecraft 1.21.1 and Cobblemon 1.8.2 through 1.8.3. For a public release,
+choose the version listed on the repository's GitHub Releases page; source
+availability does not mean that a release JAR has been published.
 
 ## 2. Publish a local development build
 
@@ -41,7 +44,7 @@ published artifacts.
 Compile common code against the common artifact:
 
 ```kotlin
-val osCobblemonLibraryVersion = "1.3.0"
+val osCobblemonLibraryVersion = "1.4.1"
 
 dependencies {
     compileOnly(

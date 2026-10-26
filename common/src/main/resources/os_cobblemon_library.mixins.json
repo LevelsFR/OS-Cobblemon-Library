@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.ourstory.oscobblemon.internal.mixin",
+  "plugin": "com.ourstory.oscobblemon.internal.mixin.BattleWeatherMixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "GraalShowdownServiceMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

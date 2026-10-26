@@ -8,13 +8,15 @@ A lightweight shared Cobblemon API and compatibility library for Fabric and NeoF
 
 **Author:** LevelsFR
 
+**Current library version:** 1.4.1.
+
 OS Cobblemon Library provides reusable helpers for Pokémon, entities, storage, events, battles, Pokédex data and compatibility boundaries so Cobblemon mods can share a consistent integration layer across Fabric and NeoForge.
 
 ## Supported environment
 
 - Minecraft 1.21.1
 - Java 21
-- Cobblemon 1.8.x (1.8.2 minimum)
+- Cobblemon 1.8.2 up to, but not including, 1.8.4
 - Fabric
 - NeoForge
 
@@ -36,10 +38,10 @@ Shared functionality belongs in `common` whenever possible. Loader modules shoul
 The library is organized around a small set of Cobblemon-focused domains:
 
 - `pokemon`: species, forms, aspects, marks, types, native size data, persistent Pokémon data, display snapshots and Poké Ball helpers
-- `entity`: read-only `PokemonEntity` bridge helpers for identity, ownership and Cobblemon entity state
+- `entity`: read-only `PokemonEntity` helpers for identity, ownership, Cobblemon entity state and per-tick cached nearest-player distance
 - `storage`: server Party/PC helpers and client party reads
 - `event`: reusable Cobblemon event integration
-- `battle`: battle inspection and classification helpers
+- `battle`: battle inspection, classification and version-gated initial and active-weather integration
 - `pokedex`: reusable server and client Pokédex queries with immutable snapshots
 
 The library intentionally avoids gameplay systems that belong inside individual mods.
@@ -55,7 +57,7 @@ Requirements for the current compatibility line:
 
 - Minecraft 1.21.1
 - Java 21
-- Cobblemon 1.8.2 up to, but not including, 1.9.0
+- Cobblemon 1.8.2 up to, but not including, 1.8.4
 - Fabric or NeoForge
 
 ## Building
@@ -140,3 +142,11 @@ code.
 The Library itself remains **All Rights Reserved**. Redistribution, modified
 builds, rebranding and source-code reuse are not permitted unless LevelsFR
 grants separate written permission.
+
+## Project guide and verified downloads
+
+[Complete project guide](docs/PROJECT_GUIDE.md) — features, dependency metadata, public documentation, source map and build instructions.
+
+- [Source repository](https://github.com/LevelsFR/OS-Cobblemon-Library/tree/1.21.1/dev) (public).
+- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) — published project verified under LevelsFR.
+- Modrinth: no matching project found in the public LevelsFR project list checked on 2026-10-21.

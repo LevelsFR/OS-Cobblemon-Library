@@ -3,11 +3,11 @@
 OS Cobblemon Library can be published to the local Maven repository for use by
 other development projects on the same machine.
 
-Development branches publish snapshot versions. Stable release branches use the
+Development work normally uses snapshot versions. A release-ready commit may
+temporarily use its final version before promotion. Stable releases use the
 corresponding non-snapshot semantic version.
 
-The current stable release is `1.3.0`. The development branch continues at
-`1.3.1-SNAPSHOT`.
+The current library version is 1.4.1. This version targets Minecraft 1.21.1 and Cobblemon 1.8.2 through 1.8.3. A local Maven publication installs artifacts on this machine; it does not distribute them publicly.
 
 ## Publish locally
 
@@ -26,12 +26,12 @@ The equivalent direct Gradle task is:
 .\gradlew.bat publishAllToMavenLocal
 ```
 
-On the current development branch, this publishes:
+For library version 1.4.1, this publishes:
 
 ```text
-com.ourstory:os-cobblemon-library-common:1.3.1-SNAPSHOT
-com.ourstory:os-cobblemon-library-fabric:1.3.1-SNAPSHOT
-com.ourstory:os-cobblemon-library-neoforge:1.3.1-SNAPSHOT
+com.ourstory:os-cobblemon-library-common:1.4.1
+com.ourstory:os-cobblemon-library-fabric:1.4.1
+com.ourstory:os-cobblemon-library-neoforge:1.4.1
 ```
 
 The artifacts are stored in the standard Maven Local repository.
@@ -49,7 +49,7 @@ repositories {
 The shared/common module can compile against the common artifact:
 
 ```kotlin
-val osCobblemonLibraryVersion = "1.3.1-SNAPSHOT"
+val osCobblemonLibraryVersion = "1.4.1"
 
 dependencies {
     compileOnly(

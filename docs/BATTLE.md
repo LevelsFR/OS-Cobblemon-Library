@@ -50,6 +50,47 @@ wrapper. The library keeps that wrapper behind `BattleInspector` and exposes
 normal `Pokemon` objects instead, giving consuming mods a smaller migration
 surface when battle internals change.
 
+## Initial battle weather
+
+`BattleWeatherInitializer` lets a `BattleStartedEvent.Pre` subscriber set one
+initial Showdown field weather before player entry and startup abilities run:
+
+```java
+if (BattleWeatherInitializer.isAvailable()) {
+    boolean queued = BattleWeatherInitializer.setInitialWeather(
+            event, InitialBattleWeather.RAIN);
+}
+```
+
+The initializer is available only with Cobblemon `1.8.2+1.21.1` and `1.8.3+1.21.1`, where the
+version-specific bridge is verified. It returns `false` on other versions or
+when the runtime bridge did not install. The ambient condition is applied once
+as a source-less field baseline; the simulator remains authoritative after
+startup, and the library does not reapply ambient weather after moves or
+abilities change it.
+
+## Ambient weather during battle
+
+`BattleWeatherController` can queue later world-weather changes for an active
+battle. The update is applied only while the current field weather is the
+library's ambient state or the battle has no weather. A weather effect started
+by a battle move or ability keeps priority. The caller should retry its latest
+ambient snapshot after Cobblemon reports that weather has cleared.
+
+```java
+BattleWeatherController.queueAmbientWeather(
+        battle,
+        AmbientBattleWeather.RAIN);
+```
+
+Use `AmbientBattleWeather.CLEAR` when the sampled world no longer contributes
+battle weather. Supported ambient values are clear, rain, snow and sandstorm.
+The update is written into Showdown's normal battle stream, so Cobblemon sees
+its resulting weather record and executes the corresponding battle mechanics.
+The API is version-gated to the verified Cobblemon `1.8.2+1.21.1` and `1.8.3+1.21.1` runtime and
+returns whether the request was queued; the simulator may ignore it while a
+move- or ability-controlled weather is active.
+
 ## Battle events
 
 The inspector also unwraps common event payloads so feature code does not need

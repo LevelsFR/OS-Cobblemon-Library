@@ -107,6 +107,12 @@ supplies those signals.
 - Fossil-revival subscriptions
 - Held-item and cosmetic-item swap subscriptions
 
+## 1.4 entity proximity and ambient battle weather
+
+- Per-server-tick cached nearest-player distance queries for Pokémon entities.
+- Version-gated initial and active battle-weather integration for the verified
+  Cobblemon 1.8.2 and 1.8.3 runtimes.
+
 ## Later
 
 Additional helpers should be added only when they represent repeated
