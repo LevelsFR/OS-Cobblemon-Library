@@ -145,7 +145,7 @@ grants separate written permission.
 
 ## Project guide and verified downloads
 
-[Complete project guide](docs/PROJECT_GUIDE.md) — features, dependency metadata, commands, configuration, source map and build instructions.
+[Complete project guide](docs/PROJECT_GUIDE.md) — features, dependency metadata, public documentation, source map and build instructions.
 
 - [Source repository](https://github.com/LevelsFR/OS-Cobblemon-Library/tree/1.21.1/dev) (public).
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) — published project verified under LevelsFR.

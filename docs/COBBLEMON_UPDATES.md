@@ -22,6 +22,17 @@ Other 1.8.2 additions such as evolution-tree display metadata, the `negate`
 evolution requirement and extra Molang struct fields are native datapack or
 Molang features. They do not require another Java-facing library adapter.
 
+## Cobblemon 1.8.3
+
+Library version 1.4.1 keeps compatibility with Cobblemon 1.8.2 and adds the
+verified `1.8.3+1.21.1` runtime to the initial and active battle-weather
+bridge. The mixin plugin enables that integration only for the exact verified
+versions `1.8.2+1.21.1` and `1.8.3+1.21.1`; other versions fail closed.
+
+The Gradle dependency is pinned to Cobblemon 1.8.3 while loader metadata allows
+the supported range `>=1.8.2 <1.8.4`. Recheck both the runtime compatibility
+gate and the Fabric and NeoForge builds when changing this range.
+
 ## 1. Update dependency versions
 
 Start with `gradle.properties`:
