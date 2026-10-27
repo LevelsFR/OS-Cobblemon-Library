@@ -145,7 +145,8 @@ public final class PokemonEntities {
     }
 
     /**
-     * Clears the per-tick distance cache, for example when a server stops.
+     * Clears the per-tick distance cache. The Fabric and NeoForge entry points
+     * call this automatically when their server stops.
      */
     public static void clearNearestPlayerDistanceCache() {
         NEAREST_PLAYER_DISTANCE_SQUARED.clear();

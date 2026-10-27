@@ -14,7 +14,7 @@ This guide belongs to `1.21.1/dev`. Stable releases remain on `1.21.1/main`; dev
 
 ## Features in the current source
 
-- Pokémon, species, forms, aspects, abilities, marks, types and size helpers.
+- Pokémon, species, forms, aspects, abilities, marks, types, EVs and size helpers.
 - Immutable display snapshots, entity/ownership inspection and per-tick cached nearest-player distance queries.
 - Party, PC storage, event and Pokédex integration.
 - Battle inspection and version-gated initial and active-weather bridges.
@@ -24,8 +24,8 @@ This guide belongs to `1.21.1/dev`. Stable releases remain on `1.21.1/main`; dev
 
 | Component | Value |
 | --- | --- |
-| Latest stable release | `1.4.1` |
-| Development version | `1.5.0-SNAPSHOT` |
+| Latest stable release | `1.5.0` |
+| Development version | `1.6.0-SNAPSHOT` |
 | Minecraft baseline | `1.21.1` |
 | JDK | `21` |
 | Active branch | `1.21.1/dev` |
@@ -89,7 +89,7 @@ Loader JARs are normally written under the corresponding `build/libs` directory.
 - [Cobblemon updates](COBBLEMON_UPDATES.md) · [Branching](BRANCHING.md) · [Roadmap](ROADMAP.md) · [Scope](SCOPE.md)
 - [Getting started](GETTING_STARTED.md) · [Local Maven](LOCAL_MAVEN.md) · [Releasing](RELEASING.md)
 - [Patterns](PATTERNS.md) · [Pokémon](POKEMON.md) · [Abilities](POKEMON_ABILITIES.md) · [Creation](POKEMON_CREATION.md)
-- [Persistent data](POKEMON_DATA.md) · [Entities](POKEMON_ENTITIES.md) · [IVs](POKEMON_IVS.md) · [Labels](POKEMON_LABELS.md)
+- [Persistent data](POKEMON_DATA.md) · [Entities](POKEMON_ENTITIES.md) · [IVs](POKEMON_IVS.md) · [EVs](POKEMON_EVS.md) · [Labels](POKEMON_LABELS.md)
 - [Matcher](POKEMON_MATCHER.md) · [Size](POKEMON_SIZE.md) · [Snapshots](POKEMON_SNAPSHOTS.md) · [Types](POKEMON_TYPES.md)
 
 ## Validation and reporting a problem

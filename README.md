@@ -8,7 +8,7 @@ A lightweight shared Cobblemon API and compatibility library for Fabric and NeoF
 
 **Author:** LevelsFR
 
-**Latest stable release:** 1.4.1 · **Development version:** 1.5.0-SNAPSHOT.
+**Latest stable release:** 1.5.0 · **Development version:** 1.6.0-SNAPSHOT.
 
 OS Cobblemon Library provides reusable helpers for Pokémon, entities, storage, events, battles, Pokédex data and compatibility boundaries so Cobblemon mods can share a consistent integration layer across Fabric and NeoForge.
 
@@ -37,7 +37,7 @@ Shared functionality belongs in `common` whenever possible. Loader modules shoul
 
 The library is organized around a small set of Cobblemon-focused domains:
 
-- `pokemon`: species, forms, aspects, marks, types, native size data, persistent Pokémon data, display snapshots and Poké Ball helpers
+- `pokemon`: species, forms, aspects, marks, types, IVs and EVs, native size data, persistent Pokémon data, display snapshots and Poké Ball helpers
 - `entity`: read-only `PokemonEntity` helpers for identity, ownership, Cobblemon entity state and per-tick cached nearest-player distance
 - `storage`: server Party/PC helpers and client party reads
 - `event`: reusable Cobblemon event integration
@@ -124,7 +124,7 @@ Common implementation examples are collected in [docs/PATTERNS.md](docs/PATTERNS
 
 Keep additions focused, reusable and Cobblemon-specific. New helpers should represent a real shared need or isolate a meaningful compatibility boundary.
 
-See [docs/POKEMON.md](docs/POKEMON.md), [docs/POKEMON_MATCHER.md](docs/POKEMON_MATCHER.md), [docs/POKEMON_CREATION.md](docs/POKEMON_CREATION.md), [docs/POKEMON_DATA.md](docs/POKEMON_DATA.md), [docs/POKEMON_SNAPSHOTS.md](docs/POKEMON_SNAPSHOTS.md), [docs/POKEMON_IVS.md](docs/POKEMON_IVS.md), [docs/POKEMON_ABILITIES.md](docs/POKEMON_ABILITIES.md), [docs/POKEMON_TYPES.md](docs/POKEMON_TYPES.md), [docs/POKEMON_LABELS.md](docs/POKEMON_LABELS.md), [docs/POKEMON_SIZE.md](docs/POKEMON_SIZE.md), [docs/POKEMON_ENTITIES.md](docs/POKEMON_ENTITIES.md), [docs/STORAGE.md](docs/STORAGE.md), [docs/EVENTS.md](docs/EVENTS.md), [docs/BATTLE.md](docs/BATTLE.md) and [docs/POKEDEX.md](docs/POKEDEX.md) for the current shared helper APIs.
+See [docs/POKEMON.md](docs/POKEMON.md), [docs/POKEMON_MATCHER.md](docs/POKEMON_MATCHER.md), [docs/POKEMON_CREATION.md](docs/POKEMON_CREATION.md), [docs/POKEMON_DATA.md](docs/POKEMON_DATA.md), [docs/POKEMON_SNAPSHOTS.md](docs/POKEMON_SNAPSHOTS.md), [docs/POKEMON_IVS.md](docs/POKEMON_IVS.md), [docs/POKEMON_EVS.md](docs/POKEMON_EVS.md), [docs/POKEMON_ABILITIES.md](docs/POKEMON_ABILITIES.md), [docs/POKEMON_TYPES.md](docs/POKEMON_TYPES.md), [docs/POKEMON_LABELS.md](docs/POKEMON_LABELS.md), [docs/POKEMON_SIZE.md](docs/POKEMON_SIZE.md), [docs/POKEMON_ENTITIES.md](docs/POKEMON_ENTITIES.md), [docs/STORAGE.md](docs/STORAGE.md), [docs/EVENTS.md](docs/EVENTS.md), [docs/BATTLE.md](docs/BATTLE.md) and [docs/POKEDEX.md](docs/POKEDEX.md) for the current shared helper APIs.
 
 For local development consumption, see [docs/LOCAL_MAVEN.md](docs/LOCAL_MAVEN.md).
 

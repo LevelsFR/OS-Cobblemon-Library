@@ -31,6 +31,7 @@ import com.cobblemon.mod.common.api.events.pokemon.PokemonSeenEvent;
 import com.cobblemon.mod.common.api.events.pokemon.TradeEvent;
 import com.cobblemon.mod.common.api.events.pokemon.evolution.EvolutionAcceptedEvent;
 import com.cobblemon.mod.common.api.events.pokemon.evolution.EvolutionCompleteEvent;
+import com.cobblemon.mod.common.api.events.pokemon.evolution.EvolutionTestedEvent;
 import com.cobblemon.mod.common.api.events.pokemon.healing.PokemonHealedEvent;
 import com.cobblemon.mod.common.api.events.pokeball.PokeBallCaptureCalculatedEvent;
 import com.cobblemon.mod.common.api.events.pokeball.PokemonCatchRateEvent;
@@ -103,6 +104,20 @@ public final class CobblemonEventHooks {
             Consumer<EvolutionAcceptedEvent> handler
     ) {
         return subscribe(CobblemonEvents.EVOLUTION_ACCEPTED, priority, handler);
+    }
+
+    /** Subscribes to evolution eligibility checks; handlers may change the result. */
+    public static ObservableSubscription<EvolutionTestedEvent> onEvolutionTested(
+            Consumer<EvolutionTestedEvent> handler
+    ) {
+        return onEvolutionTested(Priority.NORMAL, handler);
+    }
+
+    public static ObservableSubscription<EvolutionTestedEvent> onEvolutionTested(
+            Priority priority,
+            Consumer<EvolutionTestedEvent> handler
+    ) {
+        return subscribe(CobblemonEvents.EVOLUTION_TESTED, priority, handler);
     }
 
     public static ObservableSubscription<EvolutionCompleteEvent> onEvolutionComplete(

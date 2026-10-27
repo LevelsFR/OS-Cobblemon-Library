@@ -19,6 +19,14 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        cobblemon:
+          - version: "1.8.2"
+            coordinate: "1.8.2+1.21.1"
+          - version: "1.8.3"
+            coordinate: "1.8.3+1.21.1"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -63,8 +71,10 @@ jobs:
         with:
           gradle-version: "8.14.3"
 
-      - name: Build
-        run: ./gradlew clean build --stacktrace
+      - name: Build and run tests
+        env:
+          COBBLEMON_VERSION: ${{ matrix.cobblemon.coordinate }}
+        run: ./gradlew "-Pcobblemon_version=$COBBLEMON_VERSION" clean build --stacktrace
 
       - name: Verify packaged mod metadata
         shell: bash
@@ -99,12 +109,14 @@ jobs:
           unzip -p "$NEOFORGE_JAR" META-INF/neoforge.mods.toml | grep -Fq 'A lightweight shared Cobblemon API and compatibility library'
 
       - name: Verify Maven publication
-        run: ./gradlew publishAllToMavenLocal --stacktrace
+        env:
+          COBBLEMON_VERSION: ${{ matrix.cobblemon.coordinate }}
+        run: ./gradlew "-Pcobblemon_version=$COBBLEMON_VERSION" publishAllToMavenLocal --stacktrace
 
       - name: Upload Fabric JAR
         uses: actions/upload-artifact@v4
         with:
-          name: os-cobblemon-library-fabric
+          name: os-cobblemon-library-fabric-cobblemon-${{ matrix.cobblemon.version }}
           path: |
             fabric/build/libs/*-fabric-*.jar
             !fabric/build/libs/*-dev-*.jar
@@ -114,7 +126,7 @@ jobs:
       - name: Upload NeoForge JAR
         uses: actions/upload-artifact@v4
         with:
-          name: os-cobblemon-library-neoforge
+          name: os-cobblemon-library-neoforge-cobblemon-${{ matrix.cobblemon.version }}
           path: |
             neoforge/build/libs/*-neoforge-*.jar
             !neoforge/build/libs/*-dev-*.jar

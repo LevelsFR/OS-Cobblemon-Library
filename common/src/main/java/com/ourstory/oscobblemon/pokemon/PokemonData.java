@@ -7,6 +7,7 @@ import com.mojang.serialization.DynamicOps;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
+import net.minecraft.resources.ResourceLocation;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -39,6 +40,11 @@ public final class PokemonData {
         return Optional.of(persistentData.getCompound(key).copy());
     }
 
+    /** Reads a data section using a namespaced key. */
+    public static Optional<CompoundTag> read(Pokemon pokemon, ResourceLocation key) {
+        return read(pokemon, keyString(key));
+    }
+
     /**
      * Updates a data section and marks the Pokémon as changed.
      *
@@ -59,6 +65,11 @@ public final class PokemonData {
         pokemon.onChange(null);
     }
 
+    /** Updates a data section using a namespaced key. */
+    public static void update(Pokemon pokemon, ResourceLocation key, Consumer<CompoundTag> updater) {
+        update(pokemon, keyString(key), updater);
+    }
+
     /**
      * Returns whether a compound data section exists for the key.
      */
@@ -66,6 +77,11 @@ public final class PokemonData {
         Objects.requireNonNull(pokemon, "pokemon");
         validateKey(key);
         return pokemon.getPersistentData().contains(key, Tag.TAG_COMPOUND);
+    }
+
+    /** Returns whether a data section exists for the namespaced key. */
+    public static boolean contains(Pokemon pokemon, ResourceLocation key) {
+        return contains(pokemon, keyString(key));
     }
 
     /**
@@ -79,6 +95,16 @@ public final class PokemonData {
             T defaultValue
     ) {
         return readOrDefault(pokemon, key, codec, defaultValue, NbtOps.INSTANCE);
+    }
+
+    /** Decodes a typed value using a namespaced key and {@link NbtOps}. */
+    public static <T> DataResult<T> readOrDefault(
+            Pokemon pokemon,
+            ResourceLocation key,
+            Codec<T> codec,
+            T defaultValue
+    ) {
+        return readOrDefault(pokemon, keyString(key), codec, defaultValue);
     }
 
     /**
@@ -114,12 +140,33 @@ public final class PokemonData {
         return codec.parse(ops, value);
     }
 
+    /** Decodes a typed value using a namespaced key and supplied operations. */
+    public static <T> DataResult<T> readOrDefault(
+            Pokemon pokemon,
+            ResourceLocation key,
+            Codec<T> codec,
+            T defaultValue,
+            DynamicOps<Tag> ops
+    ) {
+        return readOrDefault(pokemon, keyString(key), codec, defaultValue, ops);
+    }
+
     /**
      * Encodes a typed value into a data section and notifies Cobblemon after a
      * successful encode. Encoding errors do not mutate Pokémon data.
      */
     public static <T> DataResult<T> write(Pokemon pokemon, String key, Codec<T> codec, T value) {
         return write(pokemon, key, codec, value, NbtOps.INSTANCE);
+    }
+
+    /** Encodes a typed value using a namespaced key and {@link NbtOps}. */
+    public static <T> DataResult<T> write(
+            Pokemon pokemon,
+            ResourceLocation key,
+            Codec<T> codec,
+            T value
+    ) {
+        return write(pokemon, keyString(key), codec, value);
     }
 
     /**
@@ -151,6 +198,17 @@ public final class PokemonData {
         return encoded.map(ignored -> value);
     }
 
+    /** Encodes a typed value using a namespaced key and supplied operations. */
+    public static <T> DataResult<T> write(
+            Pokemon pokemon,
+            ResourceLocation key,
+            Codec<T> codec,
+            T value,
+            DynamicOps<Tag> ops
+    ) {
+        return write(pokemon, keyString(key), codec, value, ops);
+    }
+
     /**
      * Removes a data section and marks the Pokémon as changed when necessary.
      */
@@ -163,6 +221,15 @@ public final class PokemonData {
             persistentData.remove(key);
             pokemon.onChange(null);
         }
+    }
+
+    /** Removes a data section using a namespaced key. */
+    public static void remove(Pokemon pokemon, ResourceLocation key) {
+        remove(pokemon, keyString(key));
+    }
+
+    private static String keyString(ResourceLocation key) {
+        return Objects.requireNonNull(key, "key").toString();
     }
 
     private static void validateKey(String key) {

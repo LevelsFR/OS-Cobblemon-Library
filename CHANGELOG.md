@@ -2,7 +2,20 @@
 
 All notable public changes to OS Cobblemon Library are documented here.
 
-## 1.4.1 - Cobblemon 1.8.3 battle weather bridge (2026-10-25)
+## 1.5.0 - Cobblemon API and lifecycle improvements (2026-10-27)
+
+### Added
+
+- Clear the Pokémon entity nearest-player cache automatically when Fabric or
+  NeoForge servers stop.
+- Add focused common-module tests for defensive snapshots and grouped event
+  subscription lifecycle.
+- Build both loaders against Cobblemon 1.8.2 and 1.8.3 in CI.
+- Add a Java hook for Cobblemon evolution eligibility checks.
+- Add registered-stat EV snapshots, totals and source-aware additions.
+- Accept `ResourceLocation` keys in persistent Pokémon data helpers.
+
+## 1.4.1 - Cobblemon 1.8.3 battle weather bridge (2026-10-27)
 
 ### Changed
 

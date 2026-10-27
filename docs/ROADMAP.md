@@ -113,6 +113,18 @@ supplies those signals.
 - Version-gated initial and active battle-weather integration for the verified
   Cobblemon 1.8.2 and 1.8.3 runtimes.
 
+## 1.5 compatibility and regression coverage
+
+- Build Fabric and NeoForge against both supported Cobblemon versions in CI.
+- Add focused tests for defensive snapshots and subscription lifecycle
+  behavior.
+- Clear the Pokémon entity distance cache automatically when either loader's
+  server stops.
+- Expose Cobblemon's tested evolution eligibility event to Java consumers.
+- Add EV snapshots, totals and source-aware mutations using Cobblemon's stat
+  provider and EV API.
+- Accept namespaced `ResourceLocation` keys throughout `PokemonData`.
+
 ## Later
 
 Additional helpers should be added only when they represent repeated
