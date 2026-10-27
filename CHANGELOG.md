@@ -8,14 +8,28 @@ All notable public changes to OS Cobblemon Library are documented here.
 
 ### Added
 
-- Clear the Pokémon entity nearest-player cache automatically when Fabric or
-  NeoForge servers stop.
+- Add `PokemonEVs` helpers to inspect registered permanent stats, take EV
+  snapshots, calculate totals and apply source-aware EV changes.
+- Add Java hooks for Cobblemon evolution eligibility checks through
+  `CobblemonEventHooks.onEvolutionTested`.
+- Accept `ResourceLocation` keys in persistent Pokémon data helpers.
 - Add focused common-module tests for defensive snapshots and grouped event
   subscription lifecycle.
-- Build both loaders against Cobblemon 1.8.2 and 1.8.3 in CI.
-- Add a Java hook for Cobblemon evolution eligibility checks.
-- Add registered-stat EV snapshots, totals and source-aware additions.
-- Accept `ResourceLocation` keys in persistent Pokémon data helpers.
+
+### Changed
+
+- Build Fabric and NeoForge against Cobblemon 1.8.2 and 1.8.3 in CI.
+- Support Cobblemon `1.8.2+1.21.1` and `1.8.3+1.21.1` on both loaders.
+
+### Fixed
+
+- Clear the nearest-player distance cache automatically when Fabric or
+  NeoForge servers stop, preventing cached entity data from carrying over
+  between server lifecycles.
+
+### Removed
+
+- None.
 
 ## 1.4.1 - Cobblemon 1.8.3 battle weather bridge (2026-10-27)
 
