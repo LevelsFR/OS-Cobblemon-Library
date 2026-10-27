@@ -16,7 +16,7 @@
       <span class="brand-mark">OSCL</span>
       <span class="brand-copy">
         <strong>OS Cobblemon Library</strong>
-        <small>v1.4.1 Library Documentation</small>
+        <small>v1.5.0 Library Documentation</small>
       </span>
     </a>
 
@@ -90,7 +90,7 @@
 
       <div class="sidebar-footer">
         <strong>OS Cobblemon Library</strong>
-        <span>Documentation for library version 1.4.1</span>
+        <span>Documentation for library version 1.5.0</span>
       </div>
     </aside>
 
@@ -107,7 +107,7 @@
       <article>
         <section class="tab-panel active" id="overview" data-panel="overview">
           <div class="page-heading">
-            <span class="page-kicker">OS Cobblemon Library v1.4.1</span>
+            <span class="page-kicker">OS Cobblemon Library v1.5.0</span>
             <h1>OS Cobblemon Library</h1>
             <p class="page-description">
               A lightweight shared Cobblemon API and compatibility library for Fabric and NeoForge.
@@ -135,13 +135,13 @@
               <tr><td>Java</td><td>21</td></tr>
               <tr><td>Cobblemon</td><td>1.8.2 up to, but not including, 1.8.4</td></tr>
               <tr><td>Loaders</td><td>Fabric and NeoForge</td></tr>
-              <tr><td>Latest stable release</td><td>1.4.1</td></tr>
+              <tr><td>Latest stable release</td><td>1.5.0</td></tr>
             </tbody>
           </table>
 
           <h2>Library areas</h2>
           <ul>
-            <li><code>pokemon</code> for identity, species, creation, IVs, abilities, types, labels, size, persistent data and display snapshots.</li>
+            <li><code>pokemon</code> for identity, species, creation, IVs, EVs, abilities, types, labels, size, persistent data and display snapshots.</li>
             <li><code>entity</code> for read-only <code>PokemonEntity</code> helpers, including cached nearest-player distance queries.</li>
             <li><code>storage</code> for server Party/PC access, client party reads, slot-preserving snapshots, matching and counts.</li>
             <li><code>event</code> for Java-friendly Cobblemon event subscriptions and lifecycle management.</li>
@@ -210,7 +210,7 @@
     mavenLocal()
 }
 
-val osCobblemonLibraryVersion = "1.4.1"
+val osCobblemonLibraryVersion = "1.5.0"
 
 dependencies {
     compileOnly(
@@ -257,7 +257,7 @@ side="BOTH"</code></pre>
           <div class="page-heading">
             <span class="page-kicker">Supported public surface</span>
             <h1>API reference</h1>
-            <p class="page-description">The main public classes exposed by OS Cobblemon Library v1.4.1.</p>
+            <p class="page-description">The main public classes exposed by OS Cobblemon Library v1.5.0.</p>
           </div>
 
           <h2>Pokémon</h2>
@@ -274,13 +274,16 @@ side="BOTH"</code></pre>
           <p>Command-free Pokémon parsing, creation, entity creation and server-level spawning through Cobblemon's native property API.</p>
 
           <h3><code>PokemonData</code></h3>
-          <p>Namespaced persistent Pokémon data with defensive reads, typed codec access, explicit decode errors and Cobblemon change notification.</p>
+          <p>Namespaced persistent Pokémon data with defensive reads, string or <code>ResourceLocation</code> keys, typed codec access, explicit decode errors and Cobblemon change notification.</p>
 
           <h3><code>PokemonSnapshot</code> and <code>PokemonBalls</code></h3>
           <p>Copied Pokémon identity, display and condition values, plus canonical Cobblemon Poké Ball IDs and translated item names.</p>
 
           <h3><code>PokemonIVs</code></h3>
           <p>Natural and effective IV inspection, Hyper Training awareness, totals, perfect IV counts and minimum guaranteed perfect natural IVs.</p>
+
+          <h3><code>PokemonEVs</code></h3>
+          <p>EV snapshots and totals over Cobblemon's registered permanent stats, plus source-aware additions through Cobblemon's EV API.</p>
 
           <h3><code>PokemonAbilities</code></h3>
           <p>Classifies active abilities as common, hidden, forced or unknown using Cobblemon ability-pool data.</p>
@@ -297,7 +300,7 @@ side="BOTH"</code></pre>
           <h2>Entities</h2>
           <h3><code>PokemonEntities</code></h3>
           <p>Read-only bridge helpers for Pokémon access, UUID identity, ownership, battle state, busy/evolution state, presence checks and matcher integration. <code>nearestPlayerDistanceSquared</code> caches the nearest player's squared distance per entity for the current server tick; call it on the server thread. It returns <code>Double.MAX_VALUE</code> outside a server level or when there are no players in that level.</p>
-          <p>Call <code>clearNearestPlayerDistanceCache()</code> when the server stops to release cached entity references immediately.</p>
+          <p>Fabric and NeoForge clear the cache automatically when the server stops. Custom lifecycle integrations can call <code>clearNearestPlayerDistanceCache()</code> directly.</p>
 
           <h2>Storage</h2>
           <h3><code>PokemonStorage</code></h3>
@@ -308,7 +311,7 @@ side="BOTH"</code></pre>
 
           <h2>Events</h2>
           <h3><code>CobblemonEventHooks</code></h3>
-          <p>Java-friendly subscriptions for repeated Cobblemon event use cases including capture, evolution, battle completion, held and cosmetic item swaps, sending, recalling, healing, fainting, spawning, persistence, Pokédex updates, hatching, fossil revival, trade, release, nickname, level-up and experience changes.</p>
+          <p>Java-friendly subscriptions for repeated Cobblemon event use cases including capture, evolution eligibility and completion, battle completion, held and cosmetic item swaps, sending, recalling, healing, fainting, spawning, persistence, Pokédex updates, hatching, fossil revival, trade, release, nickname, level-up and experience changes.</p>
 
           <h3><code>EventSubscriptionGroup</code></h3>
           <p>Tracks multiple subscriptions and unsubscribes them together for reloadable or optional systems.</p>
@@ -542,7 +545,16 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
             <p class="page-description">Release history for OS Cobblemon Library.</p>
           </div>
 
-          <h2>1.4.1 - 2026-10-25</h2>
+          <h2>1.5.0 - Cobblemon API and lifecycle improvements (2026-10-27)</h2>
+          <h3>Added</h3>
+          <ul>
+            <li>A Java hook for Cobblemon evolution eligibility checks.</li>
+            <li>Registered-stat EV snapshots, totals and source-aware additions.</li>
+            <li><code>ResourceLocation</code> key overloads for persistent Pokémon data.</li>
+            <li>Automatic nearest-player cache cleanup when Fabric or NeoForge servers stop.</li>
+          </ul>
+
+          <h2>1.4.1 - 2026-10-27</h2>
           <h3>Changed</h3>
           <ul>
             <li>Extended the initial and active battle-weather bridge to Cobblemon 1.8.3 while retaining Cobblemon 1.8.2 support.</li>

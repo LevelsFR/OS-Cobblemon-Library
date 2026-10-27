@@ -8,11 +8,11 @@ OS Cobblemon Library.
 Latest stable release:
 
 ```text
-1.4.1
+1.5.0
 ```
 
-The released 1.4.1 artifacts target Minecraft 1.21.1 and Cobblemon 1.8.2
-through 1.8.3. The `1.21.1/dev` branch has resumed at `1.5.0-SNAPSHOT` for
+The released 1.5.0 artifacts target Minecraft 1.21.1 and Cobblemon 1.8.2
+through 1.8.3. The `1.21.1/dev` branch resumes at `1.6.0-SNAPSHOT` for
 local development. For public use, choose the latest version on the repository's
 GitHub Releases page.
 
@@ -44,7 +44,7 @@ published artifacts.
 Compile common code against the common artifact:
 
 ```kotlin
-val osCobblemonLibraryVersion = "1.4.1"
+val osCobblemonLibraryVersion = "1.5.0"
 
 dependencies {
     compileOnly(
