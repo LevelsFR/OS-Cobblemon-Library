@@ -50,8 +50,9 @@ server level. The result is cached per entity for the current server tick, so
 call it on the server thread. It returns `Double.MAX_VALUE` for a non-server
 entity or a level with no players.
 
-Call `PokemonEntities.clearNearestPlayerDistanceCache()` when the server stops
-to release cached entity references immediately.
+Fabric and NeoForge clear the cache automatically when the server stops.
+Custom lifecycle integrations can call
+`PokemonEntities.clearNearestPlayerDistanceCache()` directly.
 
 ## Reuse matchers
 

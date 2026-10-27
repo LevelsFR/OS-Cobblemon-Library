@@ -16,8 +16,16 @@ boolean completed = PokemonData.read(pokemon, "examplemod:quest_state")
         .orElse(false);
 ```
 
-Use a key owned by the consuming mod. The library does not reserve a global
-schema or interpret the contents of the compound.
+Use a key owned by the consuming mod. Every operation accepts either a string
+key or a `ResourceLocation`; prefer `ResourceLocation` when the key is known at
+compile time. The library does not reserve a global schema or interpret the
+contents of the compound.
+
+```java
+ResourceLocation key = ResourceLocation.fromNamespaceAndPath(
+        "examplemod", "quest_state");
+PokemonData.update(pokemon, key, data -> data.putBoolean("completed", true));
+```
 
 `read(...)` returns a defensive copy, so changing the returned tag does not
 silently mutate the Pokémon. Use `update(...)` for writes; it replaces the
@@ -41,6 +49,8 @@ DataResult<Integer> attempts = PokemonData.readOrDefault(
 DataResult<Integer> saved = PokemonData.write(
         pokemon, "examplemod:attempts", Codec.INT, 3);
 ```
+
+The typed methods also accept `ResourceLocation` keys.
 
 The typed methods store the encoded value under the section's `value` field and
 notify Cobblemon after a successful write. Keep a typed section separate from

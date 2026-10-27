@@ -26,10 +26,26 @@ Poké Ball entity. Read the ball definition with
 `event.getPokeBallEntity().getPokeBall()`; no second capture event is needed.
 
 Current convenience hooks cover recurring areas such as capture and capture
-calculation, evolution, battle start and gimmicks, send/recall, healing,
-Pokémon entity persistence, Pokémon spawning, Pokédex updates, hatching,
-fossil revival, held and cosmetic item swaps, trade, release, nickname changes,
-level-up and experience gain.
+calculation, evolution eligibility and completion, battle start and gimmicks,
+send/recall, healing, Pokémon entity persistence, Pokémon spawning, Pokédex
+updates, hatching, fossil revival, held and cosmetic item swaps, trade,
+release, nickname changes, level-up and experience gain.
+
+`onEvolutionTested` exposes Cobblemon's mutable evolution eligibility result.
+Use it to impose an additional rule while retaining Cobblemon's native
+requirements:
+
+```java
+ObservableSubscription<EvolutionTestedEvent> evolutionChecks =
+        CobblemonEventHooks.onEvolutionTested(event -> {
+            if (event.getOriginalResult() && !hasEvolutionPermit(event.getPokemon())) {
+                event.setResult(false);
+            }
+        });
+```
+
+Cobblemon may test eligibility while updating or displaying evolution choices,
+so keep handlers fast and avoid repeating side effects in the callback.
 
 Held-item and cosmetic-item hooks each have pre and post forms. A pre handler
 can cancel or adjust the receiving/returning stacks and decrement flag. A post

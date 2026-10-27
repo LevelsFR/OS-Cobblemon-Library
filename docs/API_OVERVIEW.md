@@ -61,6 +61,7 @@ Namespaced persistent data for a Pokémon.
 - removal also notifies Cobblemon
 - codec-backed reads use defaults for missing sections and report invalid data
   through `DataResult`
+- accepts either string keys or namespaced `ResourceLocation` keys
 
 Use a key owned by the consuming mod, for example `examplemod:quest_state`:
 
@@ -86,6 +87,12 @@ Includes:
 - perfect IV counts
 - IV totals
 - minimum guaranteed perfect natural IVs
+
+### `PokemonEVs`
+
+Reads immutable snapshots and totals from Cobblemon's registered permanent
+stats. Source-aware additions delegate to Cobblemon's EV API, so its limits and
+EV pre/post events remain in effect.
 
 ### `PokemonSnapshot` and `PokemonBalls`
 
@@ -148,9 +155,9 @@ The entity API intentionally does not wrap movement, AI, navigation, despawning
 or persistence behavior.
 
 `nearestPlayerDistanceSquared` returns `Double.MAX_VALUE` outside a server
-level or when that level has no players. Call
-`clearNearestPlayerDistanceCache()` when the server stops to release cached
-entity references immediately.
+level or when that level has no players. Fabric and NeoForge clear the cache
+automatically when the server stops. Custom lifecycle integrations can call
+`clearNearestPlayerDistanceCache()` directly.
 
 ## Storage
 
@@ -185,7 +192,7 @@ Java-friendly subscriptions for frequently reused Cobblemon events.
 Convenience hooks cover:
 
 - capture rate, calculated capture and completed capture
-- accepted and completed evolution
+- evolution eligibility checks, accepted evolution and completed evolution
 - battle start, victory, end, faint, flee and gimmick instructions
 - Pokémon send, recall, healing and fainting
 - Pokémon aspects and Pokédex pre/post changes
