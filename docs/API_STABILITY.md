@@ -58,6 +58,6 @@ major library version unless they also require a breaking API change.
 
 ## Current versions
 
-The latest stable release is `1.5.0`; `1.21.1/dev` resumes at
+The latest stable release is `1.5.1`; `1.21.1/dev` continues at
 `1.6.0-SNAPSHOT`. The library version is independent of the Minecraft and
 Cobblemon versions.

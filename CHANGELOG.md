@@ -2,6 +2,14 @@
 
 All notable public changes to OS Cobblemon Library are documented here.
 
+## 1.5.1 - Cobblemon 1.8.4 compatibility (2026-10-28)
+
+### Changed
+
+- Extend the version-gated initial and active battle-weather bridge to Cobblemon 1.8.4.
+- Support Cobblemon `1.8.2+1.21.1` through `1.8.4+1.21.1` on Fabric and NeoForge.
+- Build both loaders against all three supported Cobblemon versions in CI.
+
 ## 1.5.0 - Cobblemon API and lifecycle improvements (2026-10-27)
 
 ### Added

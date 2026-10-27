@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.UUID;
 
-/** Cobblemon 1.8.2/1.8.3-only adapter for its bundled Showdown stream. */
+/** Cobblemon 1.8.2–1.8.4-only adapter for its bundled Showdown stream. */
 @Mixin(value = GraalShowdownService.class, remap = false)
 public abstract class GraalShowdownServiceMixin {
     private static final String INSTALL_SCRIPT = """
@@ -103,8 +103,8 @@ public abstract class GraalShowdownServiceMixin {
         System.getLogger("os_cobblemon_library").log(
                 installed ? System.Logger.Level.INFO : System.Logger.Level.ERROR,
                 installed
-                        ? "Installed the Cobblemon 1.8.2/1.8.3 ambient battle weather hook"
-                        : "Cobblemon 1.8.2/1.8.3 ambient battle weather hook is unavailable"
+                        ? "Installed the Cobblemon 1.8.2–1.8.4 ambient battle weather hook"
+                        : "Cobblemon 1.8.2–1.8.4 ambient battle weather hook is unavailable"
         );
     }
 
@@ -165,7 +165,7 @@ public abstract class GraalShowdownServiceMixin {
         } catch (ReflectiveOperationException | RuntimeException exception) {
             System.getLogger("os_cobblemon_library").log(
                     System.Logger.Level.ERROR,
-                    "Unable to install the Cobblemon 1.8.2/1.8.3 ambient battle weather hook",
+                    "Unable to install the Cobblemon 1.8.2–1.8.4 ambient battle weather hook",
                     exception
             );
             return false;
