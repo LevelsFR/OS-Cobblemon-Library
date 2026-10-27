@@ -12,7 +12,7 @@ import java.util.Set;
 
 /** Loads the Showdown bridge only for the Cobblemon build it was verified on. */
 public final class BattleWeatherMixinPlugin implements IMixinConfigPlugin {
-    private static final Set<String> COBBLEMON_VERSIONS = Set.of("1.8.2+1.21.1", "1.8.3+1.21.1");
+    private static final Set<String> COBBLEMON_VERSIONS = Set.of("1.8.2+1.21.1", "1.8.3+1.21.1", "1.8.4+1.21.1");
 
     @Override
     public void onLoad(String mixinPackage) {

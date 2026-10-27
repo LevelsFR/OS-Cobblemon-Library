@@ -111,7 +111,7 @@ supplies those signals.
 
 - Per-server-tick cached nearest-player distance queries for Pokémon entities.
 - Version-gated initial and active battle-weather integration for the verified
-  Cobblemon 1.8.2 and 1.8.3 runtimes.
+  Cobblemon 1.8.2, 1.8.3 and 1.8.4 runtimes.
 
 ## 1.5 compatibility and regression coverage
 
