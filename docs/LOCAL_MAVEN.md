@@ -7,7 +7,10 @@ Development work normally uses snapshot versions. A release-ready commit may
 temporarily use its final version before promotion. Stable releases use the
 corresponding non-snapshot semantic version.
 
-The current library version is 1.4.1. This version targets Minecraft 1.21.1 and Cobblemon 1.8.2 through 1.8.3. A local Maven publication installs artifacts on this machine; it does not distribute them publicly.
+The latest stable release is `1.4.1`, targeting Minecraft 1.21.1 and Cobblemon
+1.8.2 through 1.8.3. The development branch resumes at `1.5.0-SNAPSHOT`. A
+local Maven publication installs artifacts on this machine; it does not
+distribute them publicly.
 
 ## Publish locally
 

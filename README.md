@@ -8,7 +8,7 @@ A lightweight shared Cobblemon API and compatibility library for Fabric and NeoF
 
 **Author:** LevelsFR
 
-**Current library version:** 1.4.1.
+**Latest stable release:** 1.4.1 · **Development version:** 1.5.0-SNAPSHOT.
 
 OS Cobblemon Library provides reusable helpers for Pokémon, entities, storage, events, battles, Pokédex data and compatibility boundaries so Cobblemon mods can share a consistent integration layer across Fabric and NeoForge.
 

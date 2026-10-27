@@ -24,7 +24,8 @@ This guide belongs to `1.21.1/dev`. Stable releases remain on `1.21.1/main`; dev
 
 | Component | Value |
 | --- | --- |
-| Library version | `1.4.1` |
+| Latest stable release | `1.4.1` |
+| Development version | `1.5.0-SNAPSHOT` |
 | Minecraft baseline | `1.21.1` |
 | JDK | `21` |
 | Active branch | `1.21.1/dev` |

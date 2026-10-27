@@ -5,16 +5,16 @@ OS Cobblemon Library.
 
 ## 1. Choose a library version
 
-Current source version:
+Latest stable release:
 
 ```text
 1.4.1
 ```
 
-The `1.21.1/dev` source currently builds as library version 1.4.1. It targets
-Minecraft 1.21.1 and Cobblemon 1.8.2 through 1.8.3. For a public release,
-choose the version listed on the repository's GitHub Releases page; source
-availability does not mean that a release JAR has been published.
+The released 1.4.1 artifacts target Minecraft 1.21.1 and Cobblemon 1.8.2
+through 1.8.3. The `1.21.1/dev` branch has resumed at `1.5.0-SNAPSHOT` for
+local development. For public use, choose the latest version on the repository's
+GitHub Releases page.
 
 ## 2. Publish a local development build
 
