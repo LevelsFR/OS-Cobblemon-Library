@@ -17,7 +17,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  build_matrix:
+    name: build matrix
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -132,3 +133,15 @@ jobs:
             !neoforge/build/libs/*-dev-*.jar
             !neoforge/build/libs/*-sources.jar
           if-no-files-found: error
+
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    needs: build_matrix
+    if: always()
+    steps:
+      - name: Require all compatibility builds to pass
+        shell: bash
+        env:
+          MATRIX_RESULT: ${{ needs.build_matrix.result }}
+        run: test "$MATRIX_RESULT" = "success"
