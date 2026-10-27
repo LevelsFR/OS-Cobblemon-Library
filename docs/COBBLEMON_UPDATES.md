@@ -32,6 +32,11 @@ versions `1.8.2+1.21.1` and `1.8.3+1.21.1`; other versions fail closed.
 The Gradle dependency is pinned to Cobblemon 1.8.3 while loader metadata allows
 the supported range `>=1.8.2 <1.8.4`. Recheck both the runtime compatibility
 gate and the Fabric and NeoForge builds when changing this range.
+CI builds both loaders against Cobblemon 1.8.2 and 1.8.3 and runs the common
+module's regression tests for each dependency version.
+The EV helper delegates additions to Cobblemon's source-aware `EVs.add` API,
+and the evolution hook wraps `EVOLUTION_TESTED`; both APIs are present in the
+1.8.2 and 1.8.3 source artifacts.
 
 ## 1. Update dependency versions
 
