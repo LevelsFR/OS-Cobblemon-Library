@@ -238,7 +238,7 @@ High-level battle classification:
 
 `BattleWeatherInitializer` accepts a `BattleStartedEvent.Pre` event and an
 `InitialBattleWeather` value. It is available on the verified Cobblemon
-`1.8.2+1.21.1` and `1.8.3+1.21.1` runtimes and reports whether the hook is
+`1.8.2+1.21.1`, `1.8.3+1.21.1` and `1.8.4+1.21.1` runtimes and reports whether the hook is
 ready through `isAvailable()`. Unsupported runtime versions fail closed.
 
 `BattleWeatherController.queueAmbientWeather` queues one world-derived
@@ -247,7 +247,7 @@ ability-controlled weather takes priority; the caller should requeue the latest
 ambient state after it clears. Use
 `AmbientBattleWeather` for clear, rain, snow or sandstorm. The request return
 value confirms queuing, not simulator application. This bridge is verified
-for Cobblemon `1.8.2+1.21.1` and `1.8.3+1.21.1`.
+for Cobblemon `1.8.2+1.21.1`, `1.8.3+1.21.1` and `1.8.4+1.21.1`.
 
 ## Pokédex
 

@@ -28,6 +28,7 @@ dependencies {
     api("org.jetbrains.kotlin:kotlin-stdlib:${property("kotlin_version")}")
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
+    testImplementation("net.fabricmc:sponge-mixin:0.15.4+mixin.0.8.7")
 }
 
 tasks.test {

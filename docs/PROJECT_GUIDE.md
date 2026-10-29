@@ -24,7 +24,7 @@ This guide belongs to `1.21.1/dev`. Stable releases remain on `1.21.1/main`; dev
 
 | Component | Value |
 | --- | --- |
-| Latest stable release | `1.5.0` |
+| Latest stable release | `1.5.1` |
 | Development version | `1.6.0-SNAPSHOT` |
 | Minecraft baseline | `1.21.1` |
 | JDK | `21` |
@@ -37,10 +37,10 @@ This guide belongs to `1.21.1/dev`. Stable releases remain on `1.21.1/main`; dev
 | Fabric | `fabric-language-kotlin` | `*` | required |
 | Fabric | `minecraft` | `1.21.1` | required |
 | Fabric | `java` | `>=21` | required |
-| Fabric | `cobblemon` | `>=1.8.2 <1.8.4` | required |
+| Fabric | `cobblemon` | `>=1.8.2 <1.8.5` | required |
 | NeoForge | `neoforge` | `[21.1.195,)` | required; BOTH |
 | NeoForge | `minecraft` | `[1.21.1]` | required; BOTH |
-| NeoForge | `cobblemon` | `[1.8.2,1.8.4)` | required; BOTH |
+| NeoForge | `cobblemon` | `[1.8.2,1.8.5)` | required; BOTH |
 
 The table reflects loader metadata. Build-time version pins are in [gradle.properties](../gradle.properties). A dependency used only for compilation or optional integration is not automatically required for every installation.
 

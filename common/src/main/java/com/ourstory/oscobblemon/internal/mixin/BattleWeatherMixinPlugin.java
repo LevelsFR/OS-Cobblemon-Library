@@ -12,12 +12,12 @@ import java.util.Set;
 
 /** Loads the Showdown bridge only for the Cobblemon build it was verified on. */
 public final class BattleWeatherMixinPlugin implements IMixinConfigPlugin {
-    private static final Set<String> COBBLEMON_VERSIONS = Set.of("1.8.2+1.21.1", "1.8.3+1.21.1");
+    private static final Set<String> COBBLEMON_VERSIONS = Set.of("1.8.2+1.21.1", "1.8.3+1.21.1", "1.8.4+1.21.1");
 
     @Override
     public void onLoad(String mixinPackage) {
         String detectedVersion = findCobblemonVersion();
-        boolean supported = COBBLEMON_VERSIONS.contains(detectedVersion);
+        boolean supported = detectedVersion != null && COBBLEMON_VERSIONS.contains(detectedVersion);
         BattleWeatherHookStatus.configure(supported);
         if (!supported) {
             System.getLogger("os_cobblemon_library").log(
@@ -88,7 +88,7 @@ public final class BattleWeatherMixinPlugin implements IMixinConfigPlugin {
             Object metadata = containerApi.getMethod("getMetadata").invoke(container);
             Class<?> metadataApi = Class.forName("net.fabricmc.loader.api.metadata.ModMetadata");
             Object version = metadataApi.getMethod("getVersion").invoke(metadata);
-            Class<?> versionApi = Class.forName("net.fabricmc.loader.api.metadata.version.Version");
+            Class<?> versionApi = Class.forName("net.fabricmc.loader.api.Version");
             return String.valueOf(versionApi.getMethod("getFriendlyString").invoke(version));
         } catch (ReflectiveOperationException | ClassCastException ignored) {
             return null;
