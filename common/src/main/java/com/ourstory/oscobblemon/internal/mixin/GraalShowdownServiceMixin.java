@@ -112,10 +112,12 @@ public abstract class GraalShowdownServiceMixin {
             method = "startBattle(Lcom/cobblemon/mod/common/api/battles/model/PokemonBattle;[Ljava/lang/String;)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lcom/cobblemon/mod/relocations/graalvm/polyglot/Value;execute([Ljava/lang/Object;)Lcom/cobblemon/mod/relocations/graalvm/polyglot/Value;",
+                    // NeoForge relocates Graal; Fabric keeps its original package.
+                    target = "execute",
                     remap = false
             ),
-            remap = false
+            remap = false,
+            allow = 1
     )
     private void oscl$addInitialWeather(Args call) {
         Object[] invocation = call.get(0);

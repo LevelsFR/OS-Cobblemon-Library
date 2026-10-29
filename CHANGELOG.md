@@ -2,6 +2,14 @@
 
 All notable public changes to OS Cobblemon Library are documented here.
 
+## 1.5.2 - Loader version detection (unreleased)
+
+### Fixed
+
+- Resolve Fabric versions through the public `net.fabricmc.loader.api.Version` interface.
+- Match the single Graal `execute` call in `startBattle` across Fabric and NeoForge relocation namespaces, retaining the required injection check.
+- Disable the battle-weather bridge safely when the Cobblemon version cannot be detected, instead of throwing during mixin configuration.
+
 ## 1.5.1 - Cobblemon 1.8.4 compatibility (2026-10-28)
 
 ### Changed

@@ -17,7 +17,7 @@ public final class BattleWeatherMixinPlugin implements IMixinConfigPlugin {
     @Override
     public void onLoad(String mixinPackage) {
         String detectedVersion = findCobblemonVersion();
-        boolean supported = COBBLEMON_VERSIONS.contains(detectedVersion);
+        boolean supported = detectedVersion != null && COBBLEMON_VERSIONS.contains(detectedVersion);
         BattleWeatherHookStatus.configure(supported);
         if (!supported) {
             System.getLogger("os_cobblemon_library").log(
@@ -88,7 +88,7 @@ public final class BattleWeatherMixinPlugin implements IMixinConfigPlugin {
             Object metadata = containerApi.getMethod("getMetadata").invoke(container);
             Class<?> metadataApi = Class.forName("net.fabricmc.loader.api.metadata.ModMetadata");
             Object version = metadataApi.getMethod("getVersion").invoke(metadata);
-            Class<?> versionApi = Class.forName("net.fabricmc.loader.api.metadata.version.Version");
+            Class<?> versionApi = Class.forName("net.fabricmc.loader.api.Version");
             return String.valueOf(versionApi.getMethod("getFriendlyString").invoke(version));
         } catch (ReflectiveOperationException | ClassCastException ignored) {
             return null;
