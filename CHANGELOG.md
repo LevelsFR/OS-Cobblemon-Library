@@ -14,12 +14,12 @@ All notable public changes to OS Cobblemon Library are documented here.
 - Add regression checks for server-stop distance-cache cleanup and the Cobblemon `boot()V` mixin target.
 - Run a Cobblemon 1.8.4 NeoForge runtime smoke that requires the ambient-weather hook to initialize successfully.
 - Verify both loader JARs embed the project version in CI and the release workflow.
-- Test PokemonData defensive copies, typed codecs and malformed values; cover addon namespace parsing and form-ID normalization.
+- Test PokemonData defensive copies, typed codecs and malformed values; cover addon namespace parsing.
 
 ### Verification limit
 
 - Fabric runtime injection remains unverified: Cobblemon 1.8.4 Kotlin reflection fails before the OSCL mixin target loads in the official-mapped development launch. The target is checked by the ASM regression test across the matrix.
-- Live addon species registry lookup and active-Pokémon form resolution require a fully bootstrapped game runtime; the headless unit tests cover namespace parsing and form-ID normalization only.
+- Live addon species registry lookup and active-Pokémon form resolution require a fully bootstrapped game runtime and are not covered by the headless unit suite.
 - This maintenance release changes CI and regression coverage; it adds no public API or gameplay behavior.
 
 ## 1.5.2 - Loader version detection (2026-10-29)

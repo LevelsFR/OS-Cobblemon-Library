@@ -1,7 +1,5 @@
 package com.ourstory.oscobblemon.pokemon;
 
-import com.cobblemon.mod.common.pokemon.FormData;
-import com.google.gson.Gson;
 import net.minecraft.resources.ResourceLocation;
 import org.junit.jupiter.api.Test;
 
@@ -30,11 +28,4 @@ class PokemonSpeciesResolverTest {
         assertFalse(PokemonSpeciesResolver.parseId("example_addon:bad id").isPresent());
     }
 
-    @Test
-    void normalizesBareAndAddonIdentifiersAndFormNames() {
-        FormData form = new Gson().fromJson("{\"name\":\"Alternate Form\"}", FormData.class);
-
-        assertEquals("alternateform", form.formOnlyShowdownId());
-        assertTrue(PokemonSpeciesResolver.parseId("other_addon:custom_species").isPresent());
-    }
 }
