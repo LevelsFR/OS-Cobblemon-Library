@@ -8,9 +8,10 @@ Source snapshot: **2026-11-20**. This guide describes the checked-out source; do
 
 - [Source repository](https://github.com/LevelsFR/OS-Cobblemon-Library/tree/1.21.1/dev) (public).
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) — published project verified under LevelsFR.
-- Modrinth: [OS Cobblemon Library v1.5.2](https://modrinth.com/mod/os-cobblemon-library/version/1.5.2).
+- GitHub: [OS Cobblemon Library v1.6.0](https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0) (Fabric and NeoForge JARs).
+- CurseForge and Modrinth currently list v1.5.2.
 
-Stable releases remain on `1.21.1/main`; `1.21.1/dev` continues at `1.6.0-SNAPSHOT` and may include APIs ahead of the latest stable release.
+Stable releases remain on `1.21.1/main`; `1.21.1/dev` continues at `1.7.0-SNAPSHOT` and may include APIs ahead of the latest stable release.
 
 ## Features in the current source
 
@@ -24,8 +25,8 @@ Stable releases remain on `1.21.1/main`; `1.21.1/dev` continues at `1.6.0-SNAPSH
 
 | Component | Value |
 | --- | --- |
-| Latest stable release | `1.5.2` |
-| Development version | `1.6.0-SNAPSHOT` |
+| Latest stable release | `1.6.0` |
+| Development version | `1.7.0-SNAPSHOT` |
 | Minecraft baseline | `1.21.1` |
 | JDK | `21` |
 | Active branch | `1.21.1/dev` |
@@ -51,7 +52,7 @@ The CurseForge Fabric and NeoForge files (IDs `9363559` and `9363562`) and the M
 - Fabric SHA-256: `1CF0B5F2FDD8661F0D8532641727B1F7D89BD5E379D7F6FE78152AC70217D1A3`
 - NeoForge SHA-256: `412139525C5DA38ADEC7676094F06AD437288A70ED291CF843AA5EF7B57B450A`
 
-The GitHub release list still ends at v1.5.0. This synchronization creates no v1.5.2 tag or GitHub binary release because pushing a v* tag triggers the repository release workflow.
+The historical v1.5.2 synchronization did not create a GitHub release. The v1.6.0 release is published separately from a stable-branch tag and contains the Fabric and NeoForge JARs; CurseForge and Modrinth remain at v1.5.2 until those platforms receive a separate upload.
 
 ## Installation and first use
 

@@ -16,7 +16,7 @@
       <span class="brand-mark">OSCL</span>
       <span class="brand-copy">
         <strong>OS Cobblemon Library</strong>
-        <small>v1.5.2 Library Documentation</small>
+        <small>v1.6.0 Library Documentation</small>
       </span>
     </a>
 
@@ -90,7 +90,7 @@
 
       <div class="sidebar-footer">
         <strong>OS Cobblemon Library</strong>
-        <span>Documentation for library version 1.5.2</span>
+        <span>Documentation for library version 1.6.0</span>
       </div>
     </aside>
 
@@ -107,7 +107,7 @@
       <article>
         <section class="tab-panel active" id="overview" data-panel="overview">
           <div class="page-heading">
-            <span class="page-kicker">OS Cobblemon Library v1.5.2</span>
+            <span class="page-kicker">OS Cobblemon Library v1.6.0</span>
             <h1>OS Cobblemon Library</h1>
             <p class="page-description">
               A lightweight shared Cobblemon API and compatibility library for Fabric and NeoForge.
@@ -135,7 +135,7 @@
               <tr><td>Java</td><td>21</td></tr>
               <tr><td>Cobblemon</td><td>1.8.2 up to, but not including, 1.8.5</td></tr>
               <tr><td>Loaders</td><td>Fabric and NeoForge</td></tr>
-              <tr><td>Latest stable release</td><td>1.5.2</td></tr>
+              <tr><td>Latest stable release</td><td>1.6.0</td></tr>
             </tbody>
           </table>
 
@@ -210,7 +210,7 @@
     mavenLocal()
 }
 
-val osCobblemonLibraryVersion = "1.5.2"
+val osCobblemonLibraryVersion = "1.6.0"
 
 dependencies {
     compileOnly(
@@ -257,7 +257,7 @@ side="BOTH"</code></pre>
           <div class="page-heading">
             <span class="page-kicker">Supported public surface</span>
             <h1>API reference</h1>
-            <p class="page-description">The main public classes exposed by OS Cobblemon Library v1.5.2.</p>
+            <p class="page-description">The main public classes exposed by OS Cobblemon Library v1.6.0.</p>
           </div>
 
           <h2>Pokémon</h2>
@@ -544,6 +544,19 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
             <h1>Changelog</h1>
             <p class="page-description">Release history for OS Cobblemon Library.</p>
           </div>
+
+          <h2>1.6.0 - CI and runtime verification hardening (2026-11-20)</h2>
+          <h3>Changed</h3>
+          <ul>
+            <li>Retry Gradle builds and Maven Local publication for transient HTTP 429 and 5xx responses.</li>
+            <li>Build and run common tests across Cobblemon 1.8.2, 1.8.3 and 1.8.4 for Fabric and NeoForge.</li>
+          </ul>
+          <h3>Added</h3>
+          <ul>
+            <li>Regression checks for server-stop distance-cache cleanup and the Cobblemon <code>boot()V</code> mixin target.</li>
+            <li>A Cobblemon 1.8.4 NeoForge runtime smoke that requires the ambient-weather hook success log.</li>
+          </ul>
+          <p>This maintenance release changes CI and test coverage without changing public APIs or gameplay behavior. Fabric runtime injection remains unverified because Cobblemon fails before the OSCL mixin target loads in the official-mapped development launch.</p>
 
           <h2>1.5.2 - Loader version detection (2026-10-29)</h2>
           <h3>Fixed</h3>
