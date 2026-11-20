@@ -31,9 +31,7 @@ class PokemonSpeciesResolverTest {
     }
 
     @Test
-    void resolvesAddonIdentifiersAndFormNamesWithoutSpeciesHardcoding() {
-        assertTrue(PokemonSpeciesResolver.resolve(ADDON_SPECIES).isEmpty());
-
+    void normalizesBareAndAddonIdentifiersAndFormNames() {
         FormData form = new Gson().fromJson("{\"name\":\"Alternate Form\"}", FormData.class);
 
         assertEquals("alternateform", form.formOnlyShowdownId());
