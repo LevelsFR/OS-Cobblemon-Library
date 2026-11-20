@@ -2,6 +2,7 @@ package com.ourstory.oscobblemon.pokemon;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.resources.ResourceLocation;
 import org.junit.jupiter.api.Test;
 
@@ -11,55 +12,55 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PokemonDataTest {
-    private static final ResourceLocation KEY =
-            ResourceLocation.fromNamespaceAndPath("test_addon", "state");
+    private static final String KEY =
+            ResourceLocation.fromNamespaceAndPath("test_addon", "state").toString();
 
     @Test
     void readsAndUpdatesDefensiveNamespacedSections() {
-        var pokemon = PokemonTestFixture.newPokemon();
+        CompoundTag data = new CompoundTag();
 
-        assertTrue(PokemonData.read(pokemon, KEY).isEmpty());
-        PokemonData.update(pokemon, KEY, section -> section.putString("status", "ready"));
+        assertTrue(PokemonData.read(data, KEY).isEmpty());
+        PokemonData.update(data, KEY, section -> section.putString("status", "ready"));
 
-        CompoundTag read = PokemonData.read(pokemon, KEY).orElseThrow();
+        CompoundTag read = PokemonData.read(data, KEY).orElseThrow();
         read.putString("status", "changed");
 
-        assertEquals("ready", PokemonData.read(pokemon, KEY).orElseThrow().getString("status"));
+        assertEquals("ready", PokemonData.read(data, KEY).orElseThrow().getString("status"));
     }
 
     @Test
     void decodesTypedValuesAndUsesDefaultOnlyWhenAbsent() {
-        var pokemon = PokemonTestFixture.newPokemon();
+        CompoundTag data = new CompoundTag();
 
-        assertEquals(Integer.valueOf(7), PokemonData.readOrDefault(pokemon, KEY, Codec.INT, 7).result().orElseThrow());
-        assertEquals(Integer.valueOf(42), PokemonData.write(pokemon, KEY, Codec.INT, 42).result().orElseThrow());
-        assertEquals(Integer.valueOf(42), PokemonData.readOrDefault(pokemon, KEY, Codec.INT, 7).result().orElseThrow());
+        assertEquals(Integer.valueOf(7), PokemonData.readOrDefault(data, KEY, Codec.INT, 7, NbtOps.INSTANCE).result().orElseThrow());
+        assertEquals(Integer.valueOf(42), PokemonData.write(data, KEY, Codec.INT, 42, NbtOps.INSTANCE).result().orElseThrow());
+        assertEquals(Integer.valueOf(42), PokemonData.readOrDefault(data, KEY, Codec.INT, 7, NbtOps.INSTANCE).result().orElseThrow());
     }
 
     @Test
     void rejectsMalformedStoredSectionsInsteadOfReturningDefault() {
-        var pokemon = PokemonTestFixture.newPokemon();
+        CompoundTag data = new CompoundTag();
 
-        pokemon.getPersistentData().putString(KEY.toString(), "not a compound");
-        assertTrue(PokemonData.readOrDefault(pokemon, KEY, Codec.INT, 7).error().isPresent());
+        data.putString(KEY, "not a compound");
+        assertTrue(PokemonData.readOrDefault(data, KEY, Codec.INT, 7, NbtOps.INSTANCE).error().isPresent());
 
-        pokemon.getPersistentData().put(KEY.toString(), new CompoundTag());
-        assertTrue(PokemonData.readOrDefault(pokemon, KEY, Codec.INT, 7).error().isPresent());
+        data.put(KEY, new CompoundTag());
+        assertTrue(PokemonData.readOrDefault(data, KEY, Codec.INT, 7, NbtOps.INSTANCE).error().isPresent());
     }
 
     @Test
     void failedUpdaterDoesNotReplaceStoredSectionAndRemoveIsIdempotent() {
-        var pokemon = PokemonTestFixture.newPokemon();
-        PokemonData.update(pokemon, KEY, section -> section.putString("status", "ready"));
+        CompoundTag data = new CompoundTag();
+        PokemonData.update(data, KEY, section -> section.putString("status", "ready"));
 
-        assertThrows(IllegalStateException.class, () -> PokemonData.update(pokemon, KEY, section -> {
+        assertThrows(IllegalStateException.class, () -> PokemonData.update(data, KEY, section -> {
             section.putString("status", "partial");
             throw new IllegalStateException("abort update");
         }));
-        assertEquals("ready", PokemonData.read(pokemon, KEY).orElseThrow().getString("status"));
+        assertEquals("ready", PokemonData.read(data, KEY).orElseThrow().getString("status"));
 
-        PokemonData.remove(pokemon, KEY);
-        PokemonData.remove(pokemon, KEY);
-        assertFalse(PokemonData.contains(pokemon, KEY));
+        PokemonData.remove(data, KEY);
+        PokemonData.remove(data, KEY);
+        assertFalse(PokemonData.contains(data, KEY));
     }
 }

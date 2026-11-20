@@ -14,7 +14,7 @@ All notable public changes to OS Cobblemon Library are documented here.
 - Add regression checks for server-stop distance-cache cleanup and the Cobblemon `boot()V` mixin target.
 - Run a Cobblemon 1.8.4 NeoForge runtime smoke that requires the ambient-weather hook to initialize successfully.
 - Verify both loader JARs embed the project version in CI and the release workflow.
-- Test PokemonData defensive copies, typed codecs and malformed values, plus addon species and form resolution across the Cobblemon matrix.
+- Test PokemonData defensive copies, typed codecs and malformed values; cover addon namespace parsing, unknown-species lookups and form-ID normalization.
 
 ### Verification limit
 
