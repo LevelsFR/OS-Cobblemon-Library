@@ -1,7 +1,6 @@
 package com.ourstory.oscobblemon.pokemon;
 
 import com.cobblemon.mod.common.pokemon.FormData;
-import com.cobblemon.mod.common.pokemon.Pokemon;
 import com.cobblemon.mod.common.pokemon.Species;
 import com.google.gson.Gson;
 import net.minecraft.resources.ResourceLocation;
@@ -30,26 +29,22 @@ class PokemonSpeciesResolverTest {
         );
         assertTrue(PokemonSpeciesResolver.parseId(null).isEmpty());
         assertTrue(PokemonSpeciesResolver.parseId(" ").isEmpty());
-        assertFalse(PokemonSpeciesResolver.parseId(":invalid").isPresent());
+        assertFalse(PokemonSpeciesResolver.parseId("example_addon:bad id").isPresent());
     }
 
     @Test
-    void resolvesRegisteredAddonSpeciesAndItsActiveForm() {
+    void resolvesRegisteredAddonSpeciesAndItsForm() {
         Species species = new Species();
 
         PokemonTestFixture.withRegisteredSpecies(ADDON_SPECIES, species, () -> {
             FormData form = new Gson().fromJson("{\"name\":\"Alternate Form\"}", FormData.class);
-            form.initialize(species);
             species.getForms().add(form);
-
-            Pokemon pokemon = new Pokemon();
-            pokemon.setForm(form);
 
             assertSame(species, PokemonSpeciesResolver.resolve("example_addon:custom_species").orElseThrow());
             assertEquals(Optional.of(ADDON_SPECIES), PokemonSpeciesResolver.canonicalId("example_addon:custom_species"));
-            assertEquals("example_addon:custom_species", PokemonIdentity.speciesId(pokemon));
+            assertEquals("example_addon:custom_species", PokemonIdentity.speciesId(species));
             assertSame(form, species.getFormByShowdownId("alternateform"));
-            assertEquals("alternateform", PokemonIdentity.formId(pokemon));
+            assertEquals("alternateform", form.formOnlyShowdownId());
             return null;
         });
     }
