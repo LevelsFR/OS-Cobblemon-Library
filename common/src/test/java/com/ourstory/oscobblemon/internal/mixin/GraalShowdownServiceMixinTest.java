@@ -43,6 +43,15 @@ class GraalShowdownServiceMixinTest {
         }
     }
 
+    @Test
+    void bootInjectionTargetsCobblemonsExistingMethod() throws IOException {
+        ClassNode service = readClass("com/cobblemon/mod/common/battles/runner/graal/GraalShowdownService.class");
+        long matches = service.methods.stream()
+                .filter(method -> method.name.equals("boot") && method.desc.equals("()V"))
+                .count();
+        assertEquals(1, matches);
+    }
+
     private static Object value(AnnotationNode annotation, String name) {
         return annotation.values.get(annotation.values.indexOf(name) + 1);
     }
