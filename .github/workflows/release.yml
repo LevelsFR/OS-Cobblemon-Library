@@ -76,6 +76,8 @@ jobs:
 
           test -f "$FABRIC_JAR"
           test -f "$NEOFORGE_JAR"
+          unzip -p "$FABRIC_JAR" fabric.mod.json | jq -e --arg version "$VERSION" '.version == $version' > /dev/null
+          unzip -p "$NEOFORGE_JAR" META-INF/neoforge.mods.toml | grep -Fxq "version=\"$VERSION\""
 
           for JAR in "$FABRIC_JAR" "$NEOFORGE_JAR"; do
             jar tf "$JAR" | grep -Fxq "$ICON"
