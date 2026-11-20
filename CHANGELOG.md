@@ -2,6 +2,23 @@
 
 All notable public changes to OS Cobblemon Library are documented here.
 
+## 1.6.0 - CI and runtime verification hardening (2026-11-20)
+
+### Changed
+
+- Retry Gradle builds and Maven Local publication up to three times for transient HTTP 429 and 5xx responses.
+- Build and run common tests across Cobblemon 1.8.2, 1.8.3 and 1.8.4, with Fabric and NeoForge artifacts.
+
+### Added
+
+- Add regression checks for server-stop distance-cache cleanup and the Cobblemon `boot()V` mixin target.
+- Run a Cobblemon 1.8.4 NeoForge runtime smoke that requires the ambient-weather hook to initialize successfully.
+
+### Verification limit
+
+- Fabric runtime injection remains unverified: Cobblemon 1.8.4 Kotlin reflection fails before the OSCL mixin target loads in the official-mapped development launch. The target is checked by the ASM regression test across the matrix.
+- This maintenance release changes CI and regression coverage; it adds no public API or gameplay behavior.
+
 ## 1.5.2 - Loader version detection (2026-10-29)
 
 ### Fixed

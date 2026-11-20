@@ -65,10 +65,10 @@ Pushing a v* tag triggers this workflow and creates a public GitHub binary relea
 
 ## 5. Resume development
 
-After releasing library version `1.5.2`, return `1.21.1/dev` to the next snapshot version:
+After releasing library version `1.6.0`, return `1.21.1/dev` to the next snapshot version:
 
 ```properties
-mod_version=1.6.0-SNAPSHOT
+mod_version=1.7.0-SNAPSHOT
 ```
 
 Do not overwrite an already published stable version with new development

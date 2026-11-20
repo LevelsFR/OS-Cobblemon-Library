@@ -8,15 +8,14 @@ OS Cobblemon Library.
 Latest stable release:
 
 ```text
-1.5.2
+1.6.0
 ```
 
-The released 1.5.2 artifacts target Minecraft 1.21.1 and Cobblemon 1.8.2
-through 1.8.4. The Fabric and NeoForge builds are available on
-[CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library)
-and the Fabric build is available on
-[Modrinth](https://modrinth.com/mod/os-cobblemon-library/version/1.5.2).
-The `1.21.1/dev` branch continues at `1.6.0-SNAPSHOT` for local development.
+The released 1.6.0 artifacts target Minecraft 1.21.1 and Cobblemon 1.8.2
+through 1.8.4. Fabric and NeoForge JARs are available from the
+[GitHub v1.6.0 release](https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0).
+CurseForge and Modrinth currently list v1.5.2. The `1.21.1/dev` branch
+continues at `1.7.0-SNAPSHOT` for local development.
 
 ## 2. Publish a local development build
 
@@ -46,7 +45,7 @@ published artifacts.
 Compile common code against the common artifact:
 
 ```kotlin
-val osCobblemonLibraryVersion = "1.5.2"
+val osCobblemonLibraryVersion = "1.6.0"
 
 dependencies {
     compileOnly(
