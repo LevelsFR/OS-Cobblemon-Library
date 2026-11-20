@@ -2,15 +2,15 @@
 
 A shared Cobblemon API and compatibility library for Fabric and NeoForge.
 
-Source snapshot: **2026-10-27**. This guide describes the checked-out source; a download page can contain an earlier release.
+Source snapshot: **2026-11-20**. This guide describes the checked-out source; download pages carry the latest stable release.
 
 ## Status and official links
 
 - [Source repository](https://github.com/LevelsFR/OS-Cobblemon-Library/tree/1.21.1/dev) (public).
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) — published project verified under LevelsFR.
-- Modrinth: no matching project found in the public LevelsFR project list checked on 2026-10-21.
+- Modrinth: [OS Cobblemon Library v1.5.2](https://modrinth.com/mod/os-cobblemon-library/version/1.5.2).
 
-This guide belongs to `1.21.1/dev`. Stable releases remain on `1.21.1/main`; development APIs and dependency requirements may precede the latest stable release.
+Stable releases remain on `1.21.1/main`; `1.21.1/dev` continues at `1.6.0-SNAPSHOT` and may include APIs ahead of the latest stable release.
 
 ## Features in the current source
 
@@ -24,7 +24,7 @@ This guide belongs to `1.21.1/dev`. Stable releases remain on `1.21.1/main`; dev
 
 | Component | Value |
 | --- | --- |
-| Latest stable release | `1.5.0` |
+| Latest stable release | `1.5.2` |
 | Development version | `1.6.0-SNAPSHOT` |
 | Minecraft baseline | `1.21.1` |
 | JDK | `21` |
@@ -37,12 +37,21 @@ This guide belongs to `1.21.1/dev`. Stable releases remain on `1.21.1/main`; dev
 | Fabric | `fabric-language-kotlin` | `*` | required |
 | Fabric | `minecraft` | `1.21.1` | required |
 | Fabric | `java` | `>=21` | required |
-| Fabric | `cobblemon` | `>=1.8.2 <1.8.4` | required |
+| Fabric | `cobblemon` | `>=1.8.2 <1.8.5` | required |
 | NeoForge | `neoforge` | `[21.1.195,)` | required; BOTH |
 | NeoForge | `minecraft` | `[1.21.1]` | required; BOTH |
-| NeoForge | `cobblemon` | `[1.8.2,1.8.4)` | required; BOTH |
+| NeoForge | `cobblemon` | `[1.8.2,1.8.5)` | required; BOTH |
 
 The table reflects loader metadata. Build-time version pins are in [gradle.properties](../gradle.properties). A dependency used only for compilation or optional integration is not automatically required for every installation.
+
+## v1.5.2 release provenance
+
+The CurseForge Fabric and NeoForge files (IDs `9363559` and `9363562`) and the Modrinth Fabric version (`hT3yLdDC`) are public releases. Rebuilding source commit `7775087c601de4b41bad1c0186794f8083822695` with Gradle 8.14.3 produced byte-identical CurseForge JARs:
+
+- Fabric SHA-256: `1CF0B5F2FDD8661F0D8532641727B1F7D89BD5E379D7F6FE78152AC70217D1A3`
+- NeoForge SHA-256: `412139525C5DA38ADEC7676094F06AD437288A70ED291CF843AA5EF7B57B450A`
+
+The GitHub release list still ends at v1.5.0. This synchronization creates no v1.5.2 tag or GitHub binary release because pushing a v* tag triggers the repository release workflow.
 
 ## Installation and first use
 

@@ -22,6 +22,18 @@ Other 1.8.2 additions such as evolution-tree display metadata, the `negate`
 evolution requirement and extra Molang struct fields are native datapack or
 Molang features. They do not require another Java-facing library adapter.
 
+## Cobblemon 1.8.4
+
+Library version 1.5.1 extended the exact-version-gated initial and active
+battle-weather bridge to `1.8.4+1.21.1`. Version 1.5.2 fixes Fabric version
+detection and the initial mixin target across both loaders, and safely disables
+the bridge for unknown Cobblemon versions. It remains enabled only for the
+verified `1.8.2+1.21.1`, `1.8.3+1.21.1` and `1.8.4+1.21.1` builds.
+
+The compile dependency is pinned to Cobblemon 1.8.4 and loader metadata allows
+`>=1.8.2 <1.8.5`. Both loaders and common regression tests are built against
+all three supported releases in CI.
+
 ## Cobblemon 1.8.3
 
 Library version 1.4.1 keeps compatibility with Cobblemon 1.8.2 and adds the

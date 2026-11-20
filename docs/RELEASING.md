@@ -61,9 +61,11 @@ The release workflow validates that:
 
 Only the final Fabric and NeoForge JARs are attached to the GitHub release.
 
+Pushing a v* tag triggers this workflow and creates a public GitHub binary release. Do not push a tag solely to mark an artifact already published on CurseForge or Modrinth; create a GitHub release only when a new binary publication is intended.
+
 ## 5. Resume development
 
-After releasing library version `1.5.0`, return `1.21.1/dev` to the next snapshot version:
+After releasing library version `1.5.2`, return `1.21.1/dev` to the next snapshot version:
 
 ```properties
 mod_version=1.6.0-SNAPSHOT

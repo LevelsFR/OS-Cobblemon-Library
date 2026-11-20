@@ -16,7 +16,7 @@
       <span class="brand-mark">OSCL</span>
       <span class="brand-copy">
         <strong>OS Cobblemon Library</strong>
-        <small>v1.5.0 Library Documentation</small>
+        <small>v1.5.2 Library Documentation</small>
       </span>
     </a>
 
@@ -90,7 +90,7 @@
 
       <div class="sidebar-footer">
         <strong>OS Cobblemon Library</strong>
-        <span>Documentation for library version 1.5.0</span>
+        <span>Documentation for library version 1.5.2</span>
       </div>
     </aside>
 
@@ -107,7 +107,7 @@
       <article>
         <section class="tab-panel active" id="overview" data-panel="overview">
           <div class="page-heading">
-            <span class="page-kicker">OS Cobblemon Library v1.5.0</span>
+            <span class="page-kicker">OS Cobblemon Library v1.5.2</span>
             <h1>OS Cobblemon Library</h1>
             <p class="page-description">
               A lightweight shared Cobblemon API and compatibility library for Fabric and NeoForge.
@@ -133,9 +133,9 @@
             <tbody>
               <tr><td>Minecraft</td><td>1.21.1</td></tr>
               <tr><td>Java</td><td>21</td></tr>
-              <tr><td>Cobblemon</td><td>1.8.2 up to, but not including, 1.8.4</td></tr>
+              <tr><td>Cobblemon</td><td>1.8.2 up to, but not including, 1.8.5</td></tr>
               <tr><td>Loaders</td><td>Fabric and NeoForge</td></tr>
-              <tr><td>Latest stable release</td><td>1.5.0</td></tr>
+              <tr><td>Latest stable release</td><td>1.5.2</td></tr>
             </tbody>
           </table>
 
@@ -177,7 +177,7 @@
             <thead><tr><th>Requirement</th><th>Value</th></tr></thead>
             <tbody>
               <tr><td>Minecraft</td><td>1.21.1</td></tr>
-              <tr><td>Cobblemon</td><td>1.8.2 to &lt;1.8.4</td></tr>
+              <tr><td>Cobblemon</td><td>1.8.2 to &lt;1.8.5</td></tr>
               <tr><td>Java</td><td>21</td></tr>
               <tr><td>Loaders</td><td>Fabric or NeoForge</td></tr>
             </tbody>
@@ -210,7 +210,7 @@
     mavenLocal()
 }
 
-val osCobblemonLibraryVersion = "1.5.0"
+val osCobblemonLibraryVersion = "1.5.2"
 
 dependencies {
     compileOnly(
@@ -257,7 +257,7 @@ side="BOTH"</code></pre>
           <div class="page-heading">
             <span class="page-kicker">Supported public surface</span>
             <h1>API reference</h1>
-            <p class="page-description">The main public classes exposed by OS Cobblemon Library v1.5.0.</p>
+            <p class="page-description">The main public classes exposed by OS Cobblemon Library v1.5.2.</p>
           </div>
 
           <h2>Pokémon</h2>
@@ -485,7 +485,7 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
             <thead><tr><th>Area</th><th>Current target</th></tr></thead>
             <tbody>
               <tr><td>Minecraft</td><td>1.21.1</td></tr>
-              <tr><td>Cobblemon</td><td>1.8.2 to &lt;1.8.4</td></tr>
+              <tr><td>Cobblemon</td><td>1.8.2 to &lt;1.8.5</td></tr>
               <tr><td>Fabric Loader</td><td>0.17.2</td></tr>
               <tr><td>Fabric API</td><td>0.116.6+1.21.1</td></tr>
               <tr><td>NeoForge</td><td>21.1.195 minimum</td></tr>
@@ -544,6 +544,15 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
             <h1>Changelog</h1>
             <p class="page-description">Release history for OS Cobblemon Library.</p>
           </div>
+
+          <h2>1.5.2 - Loader version detection (2026-10-29)</h2>
+          <h3>Fixed</h3>
+          <ul>
+            <li>Resolved Fabric Cobblemon versions through the public loader API.</li>
+            <li>Matched the initial battle-weather mixin target across Fabric and NeoForge.</li>
+            <li>Safely disabled the battle-weather bridge when the Cobblemon version is unknown.</li>
+          </ul>
+          <p>CurseForge Fabric and NeoForge releases were published on 2026-10-29; Modrinth Fabric was published on 2026-11-10.</p>
 
           <h2>1.5.0 - Cobblemon API and lifecycle improvements (2026-10-27)</h2>
           <h3>Added</h3>
