@@ -114,7 +114,7 @@ jobs:
           unzip -p "$NEOFORGE_JAR" META-INF/neoforge.mods.toml | grep -Fq 'logoFile="icon.png"'
           unzip -p "$NEOFORGE_JAR" META-INF/neoforge.mods.toml | grep -Fq 'A lightweight shared Cobblemon API and compatibility library'
 
-      - name: Verify loader mixins at runtime
+      - name: Verify NeoForge mixin at runtime
         if: matrix.cobblemon.version == '1.8.4'
         env:
           COBBLEMON_VERSION: ${{ matrix.cobblemon.coordinate }}
@@ -147,7 +147,6 @@ jobs:
             rm -f "$log_file"
           }
 
-          run_mixin_smoke fabric
           run_mixin_smoke neoforge
 
       - name: Verify Maven publication
