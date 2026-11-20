@@ -2,7 +2,7 @@
 
 All notable public changes to OS Cobblemon Library are documented here.
 
-## 1.6.0 - CI and runtime verification hardening (2026-11-20)
+## 1.6.0 - CI, runtime, and API verification hardening (2026-11-20)
 
 ### Changed
 
@@ -13,6 +13,8 @@ All notable public changes to OS Cobblemon Library are documented here.
 
 - Add regression checks for server-stop distance-cache cleanup and the Cobblemon `boot()V` mixin target.
 - Run a Cobblemon 1.8.4 NeoForge runtime smoke that requires the ambient-weather hook to initialize successfully.
+- Verify both loader JARs embed the project version in CI and the release workflow.
+- Test PokemonData defensive copies, typed codecs and malformed values, plus addon species and form resolution across the Cobblemon matrix.
 
 ### Verification limit
 
