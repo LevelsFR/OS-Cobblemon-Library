@@ -29,6 +29,13 @@ case "$RETRY_TEST_MODE" in
     fi
     exit 0
     ;;
+  transient_ansi)
+    if (( count == 1 )); then
+      printf 'Received status code \033[31m503\033[0m from server\n'
+      exit 1
+    fi
+    exit 0
+    ;;
   not_found)
     echo "Received status code 404 from server"
     exit 1
@@ -69,7 +76,8 @@ run_case() {
 
 run_case transient 0 2
 run_case transient429 0 2
+run_case transient_ansi 0 2
 run_case not_found 1 1
 run_case compile 1 1
 run_case persistent 1 3
-echo "Gradle retry checks passed (transient, permanent build failure, retry limit)."
+echo "Gradle retry checks passed (transient 429/5xx, ANSI output, non-transient failures, retry limit)."

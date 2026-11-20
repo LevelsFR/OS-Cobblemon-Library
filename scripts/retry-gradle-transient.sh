@@ -20,7 +20,7 @@ while (( attempt <= max_attempts )); do
     exit 0
   fi
 
-  if (( attempt == max_attempts )) || ! grep -Eiq '(status code|response code)[^0-9]*(429|5[0-9][0-9])|HTTP[^0-9]*(429|5[0-9][0-9])' "$log_file"; then
+  if (( attempt == max_attempts )) || ! grep -Eiq '(status code|response code).{0,100}(429|5[0-9][0-9])|HTTP.{0,100}(429|5[0-9][0-9])' "$log_file"; then
     exit "$status"
   fi
 
