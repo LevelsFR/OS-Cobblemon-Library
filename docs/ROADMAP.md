@@ -111,11 +111,11 @@ supplies those signals.
 
 - Per-server-tick cached nearest-player distance queries for Pokémon entities.
 - Version-gated initial and active battle-weather integration for the verified
-  Cobblemon 1.8.2 and 1.8.3 runtimes.
+  Cobblemon 1.8.2, 1.8.3 and 1.8.4 runtimes.
 
 ## 1.5 compatibility and regression coverage
 
-- Build Fabric and NeoForge against both supported Cobblemon versions in CI.
+- Expand Fabric and NeoForge CI coverage from Cobblemon 1.8.2 and 1.8.3 to include 1.8.4.
 - Add focused tests for defensive snapshots and subscription lifecycle
   behavior.
 - Clear the Pokémon entity distance cache automatically when either loader's
@@ -124,6 +124,16 @@ supplies those signals.
 - Add EV snapshots, totals and source-aware mutations using Cobblemon's stat
   provider and EV API.
 - Accept namespaced `ResourceLocation` keys throughout `PokemonData`.
+
+## 1.6 release verification hardening
+
+- Keep the public API and gameplay behavior unchanged.
+- Verify Fabric and NeoForge artifacts and common tests against Cobblemon 1.8.2, 1.8.3 and 1.8.4.
+- Test defensive Pokémon data copies, typed codecs, invalid values and species namespace parsing.
+- Check server-stop cache cleanup and the Cobblemon `boot()V` mixin target.
+- Require the NeoForge 1.8.4 ambient-weather runtime smoke to report a successful hook.
+- Retry only transient Gradle dependency HTTP 429/5xx failures with a bounded policy.
+- Document the remaining Fabric runtime verification limitation without treating a passing unit test as proof of a successful in-game injection.
 
 ## Later
 

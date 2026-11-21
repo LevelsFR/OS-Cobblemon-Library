@@ -8,13 +8,13 @@ OS Cobblemon Library.
 Latest stable release:
 
 ```text
-1.5.0
+1.6.0
 ```
 
-The released 1.5.0 artifacts target Minecraft 1.21.1 and Cobblemon 1.8.2
-through 1.8.3. The `1.21.1/dev` branch resumes at `1.6.0-SNAPSHOT` for
-local development. For public use, choose the latest version on the repository's
-GitHub Releases page.
+The released 1.6.0 artifacts target Minecraft 1.21.1 and Cobblemon 1.8.2
+through 1.8.4. Fabric and NeoForge JARs are available from the
+[GitHub v1.6.0 release](https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0).
+[CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) and [Modrinth](https://modrinth.com/mod/os-cobblemon-library) still list v1.5.2 as checked on 2026-11-21. The `1.21.1/dev` branch continues at `1.7.0-SNAPSHOT` for local development.
 
 ## 2. Publish a local development build
 
@@ -44,7 +44,7 @@ published artifacts.
 Compile common code against the common artifact:
 
 ```kotlin
-val osCobblemonLibraryVersion = "1.5.0"
+val osCobblemonLibraryVersion = "1.6.0"
 
 dependencies {
     compileOnly(
@@ -77,11 +77,11 @@ required dependency in its `fabric.mod.json`:
 
 ```json
 "depends": {
-  "os_cobblemon_library": ">=1.0.0"
+  "os_cobblemon_library": ">=1.6.0"
 }
 ```
 
-Keep the rest of the consuming mod's existing dependencies alongside it.
+Keep the rest of the consuming mod's existing dependencies alongside it. The example minimum is v1.6.0 because this guide uses its published dependency version; set the actual minimum to the oldest OSCL version your mod supports.
 
 ## 6. NeoForge module
 
@@ -102,7 +102,7 @@ required dependency in its mod metadata:
 [[dependencies.your_mod_id]]
 modId="os_cobblemon_library"
 type="required"
-versionRange="[1.0.0,)"
+versionRange="[1.6.0,)"
 ordering="AFTER"
 side="BOTH"
 ```

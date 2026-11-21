@@ -2,7 +2,50 @@
 
 All notable public changes to OS Cobblemon Library are documented here.
 
-## 1.6.0 - In development
+## 1.7.0 - In development
+
+No unreleased public API or gameplay changes have been recorded yet.
+
+## 1.6.0 - CI, runtime, and API verification hardening (2026-11-20)
+
+### Changed
+
+- Retry Gradle builds and Maven Local publication up to three times for transient HTTP 429 and 5xx responses.
+- Build and run common tests across Cobblemon 1.8.2, 1.8.3 and 1.8.4, with Fabric and NeoForge artifacts.
+
+### Added
+
+- Add regression checks for server-stop distance-cache cleanup and the Cobblemon `boot()V` mixin target.
+- Run a Cobblemon 1.8.4 NeoForge runtime smoke that requires the ambient-weather hook to initialize successfully.
+- Verify both loader JARs embed the project version in CI and the release workflow.
+- Test PokemonData defensive copies, typed codecs and malformed values; cover addon namespace parsing.
+
+### Verification limit
+
+- Fabric runtime injection remains unverified: Cobblemon 1.8.4 Kotlin reflection fails before the OSCL mixin target loads in the official-mapped development launch. The target is checked by the ASM regression test across the matrix.
+- Live addon species registry lookup and active-Pokémon form resolution require a fully bootstrapped game runtime and are not covered by the headless unit suite.
+- This maintenance release changes CI and regression coverage; it adds no public API or gameplay behavior.
+
+## 1.5.2 - Loader version detection (2026-10-29)
+
+### Fixed
+
+- Resolve Fabric versions through the public `net.fabricmc.loader.api.Version` interface.
+- Match the single Graal `execute` call in `startBattle` across Fabric and NeoForge relocation namespaces, retaining the required injection check.
+- Disable the battle-weather bridge safely when the Cobblemon version cannot be detected, instead of throwing during mixin configuration.
+
+### Release verification
+
+- CurseForge published Fabric and NeoForge builds on 2026-10-29; Modrinth published the Fabric build on 2026-11-10.
+- Both published CurseForge JARs match a Gradle 8.14.3 rebuild of source commit 7775087c601de4b41bad1c0186794f8083822695 byte-for-byte.
+
+## 1.5.1 - Cobblemon 1.8.4 compatibility (2026-10-28)
+
+### Changed
+
+- Extend the version-gated initial and active battle-weather bridge to Cobblemon 1.8.4.
+- Support Cobblemon `1.8.2+1.21.1` through `1.8.4+1.21.1` on Fabric and NeoForge.
+- Build both loaders against all three supported Cobblemon versions in CI.
 
 ## 1.5.0 - Cobblemon API and lifecycle improvements (2026-10-27)
 
