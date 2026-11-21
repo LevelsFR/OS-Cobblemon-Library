@@ -31,9 +31,13 @@ public final class PokemonData {
      */
     public static Optional<CompoundTag> read(Pokemon pokemon, String key) {
         Objects.requireNonNull(pokemon, "pokemon");
+        return read(pokemon.getPersistentData(), key);
+    }
+
+    static Optional<CompoundTag> read(CompoundTag persistentData, String key) {
+        Objects.requireNonNull(persistentData, "persistentData");
         validateKey(key);
 
-        CompoundTag persistentData = pokemon.getPersistentData();
         if (!persistentData.contains(key, Tag.TAG_COMPOUND)) {
             return Optional.empty();
         }
@@ -53,16 +57,20 @@ public final class PokemonData {
      */
     public static void update(Pokemon pokemon, String key, Consumer<CompoundTag> updater) {
         Objects.requireNonNull(pokemon, "pokemon");
+        update(pokemon.getPersistentData(), key, updater);
+        pokemon.onChange(null);
+    }
+
+    static void update(CompoundTag persistentData, String key, Consumer<CompoundTag> updater) {
+        Objects.requireNonNull(persistentData, "persistentData");
         validateKey(key);
         Objects.requireNonNull(updater, "updater");
 
-        CompoundTag persistentData = pokemon.getPersistentData();
         CompoundTag section = persistentData.contains(key, Tag.TAG_COMPOUND)
                 ? persistentData.getCompound(key).copy()
                 : new CompoundTag();
         updater.accept(section);
         persistentData.put(key, section);
-        pokemon.onChange(null);
     }
 
     /** Updates a data section using a namespaced key. */
@@ -75,8 +83,13 @@ public final class PokemonData {
      */
     public static boolean contains(Pokemon pokemon, String key) {
         Objects.requireNonNull(pokemon, "pokemon");
+        return contains(pokemon.getPersistentData(), key);
+    }
+
+    static boolean contains(CompoundTag persistentData, String key) {
+        Objects.requireNonNull(persistentData, "persistentData");
         validateKey(key);
-        return pokemon.getPersistentData().contains(key, Tag.TAG_COMPOUND);
+        return persistentData.contains(key, Tag.TAG_COMPOUND);
     }
 
     /** Returns whether a data section exists for the namespaced key. */
@@ -119,12 +132,22 @@ public final class PokemonData {
             DynamicOps<Tag> ops
     ) {
         Objects.requireNonNull(pokemon, "pokemon");
+        return readOrDefault(pokemon.getPersistentData(), key, codec, defaultValue, ops);
+    }
+
+    static <T> DataResult<T> readOrDefault(
+            CompoundTag persistentData,
+            String key,
+            Codec<T> codec,
+            T defaultValue,
+            DynamicOps<Tag> ops
+    ) {
+        Objects.requireNonNull(persistentData, "persistentData");
         validateKey(key);
         Objects.requireNonNull(codec, "codec");
         Objects.requireNonNull(defaultValue, "defaultValue");
         Objects.requireNonNull(ops, "ops");
 
-        CompoundTag persistentData = pokemon.getPersistentData();
         if (!persistentData.contains(key)) {
             return DataResult.success(defaultValue);
         }
@@ -181,6 +204,21 @@ public final class PokemonData {
             DynamicOps<Tag> ops
     ) {
         Objects.requireNonNull(pokemon, "pokemon");
+        DataResult<T> result = write(pokemon.getPersistentData(), key, codec, value, ops);
+        if (result.error().isEmpty()) {
+            pokemon.onChange(null);
+        }
+        return result;
+    }
+
+    static <T> DataResult<T> write(
+            CompoundTag persistentData,
+            String key,
+            Codec<T> codec,
+            T value,
+            DynamicOps<Tag> ops
+    ) {
+        Objects.requireNonNull(persistentData, "persistentData");
         validateKey(key);
         Objects.requireNonNull(codec, "codec");
         Objects.requireNonNull(value, "value");
@@ -193,8 +231,7 @@ public final class PokemonData {
 
         CompoundTag section = new CompoundTag();
         section.put(CODEC_VALUE_KEY, encoded.result().orElseThrow().copy());
-        pokemon.getPersistentData().put(key, section);
-        pokemon.onChange(null);
+        persistentData.put(key, section);
         return encoded.map(ignored -> value);
     }
 
@@ -214,13 +251,20 @@ public final class PokemonData {
      */
     public static void remove(Pokemon pokemon, String key) {
         Objects.requireNonNull(pokemon, "pokemon");
-        validateKey(key);
-
-        CompoundTag persistentData = pokemon.getPersistentData();
-        if (persistentData.contains(key)) {
-            persistentData.remove(key);
+        if (remove(pokemon.getPersistentData(), key)) {
             pokemon.onChange(null);
         }
+    }
+
+    static boolean remove(CompoundTag persistentData, String key) {
+        Objects.requireNonNull(persistentData, "persistentData");
+        validateKey(key);
+
+        if (!persistentData.contains(key)) {
+            return false;
+        }
+        persistentData.remove(key);
+        return true;
     }
 
     /** Removes a data section using a namespaced key. */

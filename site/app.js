@@ -186,9 +186,9 @@
 
   loadDiscord();
   loadShield("https://img.shields.io/curseforge/dt/1698981.json", "curseforgeStats", "downloads");
-  loadShield("https://img.shields.io/modrinth/dt/recipe-item-sync.json", "modrinthStats", "downloads");
+  loadShield("https://img.shields.io/modrinth/dt/os-cobblemon-library.json", "modrinthStats", "downloads");
 
   setInterval(loadDiscord, 300000);
   setInterval(() => loadShield("https://img.shields.io/curseforge/dt/1698981.json", "curseforgeStats", "downloads"), 600000);
-  setInterval(() => loadShield("https://img.shields.io/modrinth/dt/recipe-item-sync.json", "modrinthStats", "downloads"), 600000);
+  setInterval(() => loadShield("https://img.shields.io/modrinth/dt/os-cobblemon-library.json", "modrinthStats", "downloads"), 600000);
 })();
