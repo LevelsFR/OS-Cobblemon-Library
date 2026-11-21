@@ -8,7 +8,9 @@ A lightweight shared Cobblemon API and compatibility library for Fabric and NeoF
 
 **Author:** LevelsFR
 
-**Latest stable release:** [1.6.0 (Fabric + NeoForge)](https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0). CurseForge and Modrinth currently list v1.5.2. **Development version:** 1.7.0-SNAPSHOT.
+**Latest stable release:** [1.6.0 (Fabric + NeoForge)](https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0). **Development version:** `1.7.0-SNAPSHOT` on `1.21.1/dev`.
+
+**Downloads and documentation:** [GitHub release](https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0) · [CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) · [Modrinth](https://modrinth.com/mod/os-cobblemon-library) · [Official API wiki](https://levelsfr.github.io/OS-Cobblemon-Library/). As checked on 2026-11-21, CurseForge and Modrinth still list v1.5.2; use the GitHub release to obtain the published v1.6.0 JARs.
 
 **v1.6.0 maintenance:** bounded retries for transient Maven HTTP 429/5xx responses, Cobblemon version-matrix regression coverage, and a NeoForge runtime smoke that verifies the ambient-weather hook. This release changes CI and tests without changing public APIs or gameplay behavior.
 
@@ -29,8 +31,10 @@ OS-Cobblemon-Library/
 ├── common/       Shared Cobblemon logic
 ├── fabric/       Fabric integration
 ├── neoforge/     NeoForge integration
-├── docs/         Scope, roadmap and versioning notes
-└── .github/      Build and release workflows
+├── docs/         API guides, compatibility policy and release notes
+├── site/         GitHub Pages documentation wiki
+├── scripts/      Build, retry and Maven Local helpers
+└── .github/      Build, release and wiki deployment workflows
 ```
 
 Shared functionality belongs in `common` whenever possible. Loader modules should contain only platform-specific wiring or unavoidable loader differences.
@@ -112,7 +116,7 @@ The current Minecraft compatibility line uses:
 1.21.1/main  stable releases
 ```
 
-See [docs/BRANCHING.md](docs/BRANCHING.md) for the multi-version strategy and [docs/RELEASING.md](docs/RELEASING.md) for the release process.
+See [docs/BRANCHING.md](docs/BRANCHING.md) for the multi-version strategy and [docs/RELEASING.md](docs/RELEASING.md) for the release process. For this maintenance release, see the [v1.6.0 release notes](CHANGELOG-v1.6.0.md) and [complete version history](CHANGELOG.md).
 
 ## Getting started
 
@@ -149,6 +153,6 @@ grants separate written permission.
 
 [Complete project guide](docs/PROJECT_GUIDE.md) — features, dependency metadata, public documentation, source map and build instructions.
 
-- [Source repository](https://github.com/LevelsFR/OS-Cobblemon-Library/tree/1.21.1/dev) (public).
-- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) — published project verified under LevelsFR.
-- Modrinth: no matching project found in the public LevelsFR project list checked on 2026-10-21.
+- [Stable source branch](https://github.com/LevelsFR/OS-Cobblemon-Library/tree/1.21.1/main) and [development branch](https://github.com/LevelsFR/OS-Cobblemon-Library/tree/1.21.1/dev).
+- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) and [Modrinth](https://modrinth.com/mod/os-cobblemon-library) — public distribution pages. Check platform file versions independently of the GitHub release.
+- [Official API wiki](https://levelsfr.github.io/OS-Cobblemon-Library/) — GitHub Pages documentation maintained from `site/`.
