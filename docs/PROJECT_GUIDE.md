@@ -6,10 +6,10 @@ Source snapshot: **2026-11-20**. This guide describes the checked-out source; do
 
 ## Status and official links
 
-- [Source repository](https://github.com/LevelsFR/OS-Cobblemon-Library/tree/1.21.1/dev) (public).
-- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) — published project verified under LevelsFR.
-- GitHub: [OS Cobblemon Library v1.6.0](https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0) (Fabric and NeoForge JARs).
-- CurseForge and Modrinth currently list v1.5.2.
+- [Stable source branch](https://github.com/LevelsFR/OS-Cobblemon-Library/tree/1.21.1/main) and [development branch](https://github.com/LevelsFR/OS-Cobblemon-Library/tree/1.21.1/dev).
+- [GitHub v1.6.0 release](https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0) (Fabric and NeoForge JARs) and [v1.6.0 release notes](../CHANGELOG-v1.6.0.md).
+- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) and [Modrinth](https://modrinth.com/mod/os-cobblemon-library) — distribution pages, both still listing v1.5.2 as checked on 2026-11-21.
+- [Official API wiki](https://levelsfr.github.io/OS-Cobblemon-Library/) — published from `site/` on the stable branch.
 
 Stable releases remain on `1.21.1/main`; `1.21.1/dev` continues at `1.7.0-SNAPSHOT` and may include APIs ahead of the latest stable release.
 
@@ -93,7 +93,7 @@ Loader JARs are normally written under the corresponding `build/libs` directory.
 
 ## Documentation index
 
-- [Changelog](../CHANGELOG.md) · [README](../README.md)
+- [Complete changelog](../CHANGELOG.md) · [v1.6.0 release notes](../CHANGELOG-v1.6.0.md) · [README](../README.md)
 - [API overview](API_OVERVIEW.md) · [API stability](API_STABILITY.md)
 - [Battle](BATTLE.md) · [Events](EVENTS.md) · [Storage](STORAGE.md) · [Pokédex](POKEDEX.md)
 - [Cobblemon updates](COBBLEMON_UPDATES.md) · [Branching](BRANCHING.md) · [Roadmap](ROADMAP.md) · [Scope](SCOPE.md)

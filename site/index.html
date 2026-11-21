@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="OS Cobblemon Library documentation for Fabric and NeoForge Cobblemon mod development.">
+  <meta name="description" content="Official OS Cobblemon Library v1.6.0 documentation, installation and public API reference for Minecraft 1.21.1, Fabric, NeoForge and Cobblemon.">
+  <link rel="canonical" href="https://levelsfr.github.io/OS-Cobblemon-Library/">
   <title>OS Cobblemon Library Documentation</title>
   <link rel="stylesheet" href="styles.css">
   <script defer src="app.js"></script>
@@ -53,6 +54,14 @@
       </span>
     </a>
 
+    <a class="community-badge modrinth-badge" id="modrinthBadge" href="https://modrinth.com/mod/os-cobblemon-library" target="_blank" rel="noopener noreferrer" aria-label="View OS Cobblemon Library on Modrinth">
+      <span class="community-icon modrinth-icon" aria-hidden="true">MR</span>
+      <span class="community-copy">
+        <strong>Modrinth</strong>
+        <small id="modrinthStats">OS Cobblemon Library</small>
+      </span>
+    </a>
+
     <a class="community-badge github-badge" href="https://github.com/LevelsFR/OS-Cobblemon-Library" target="_blank" rel="noopener noreferrer" aria-label="View OS Cobblemon Library on GitHub">
       <span class="community-icon github-icon" aria-hidden="true">GH</span>
       <span class="community-copy">
@@ -84,6 +93,7 @@
         <a class="sidebar-link" href="https://www.bisecthosting.com/OurStory" target="_blank" rel="noopener noreferrer sponsored">🤝 BisectHosting Partner</a>
         <a class="sidebar-link" href="https://discord.gg/kb8NSTF45n" target="_blank" rel="noopener noreferrer">💬 Discord</a>
         <a class="sidebar-link" href="https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library" target="_blank" rel="noopener noreferrer">🧡 CurseForge</a>
+        <a class="sidebar-link" href="https://modrinth.com/mod/os-cobblemon-library" target="_blank" rel="noopener noreferrer">💚 Modrinth</a>
         <a class="sidebar-link" href="https://github.com/LevelsFR/OS-Cobblemon-Library" target="_blank" rel="noopener noreferrer">💻 GitHub</a>
         <a class="sidebar-link" href="https://www.patreon.com/c/OurStoryCollection" target="_blank" rel="noopener noreferrer">❤️ Patreon</a>
       </div>
@@ -172,6 +182,7 @@
 
           <h2>For players</h2>
           <p>Download the OS Cobblemon Library JAR matching your loader and place it in the normal <code>mods</code> folder when another mod requires it.</p>
+          <p>For the published v1.6.0 Fabric and NeoForge binaries, use the <a href="https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0" target="_blank" rel="noopener noreferrer">GitHub v1.6.0 release</a>. CurseForge and Modrinth listings may be behind the latest GitHub release; always verify the file version.</p>
 
           <table>
             <thead><tr><th>Requirement</th><th>Value</th></tr></thead>
@@ -236,14 +247,14 @@ dependencies {
           <p>Consuming mods should also declare OS Cobblemon Library as a required dependency.</p>
           <pre><code>// Fabric fabric.mod.json
 "depends": {
-  "os_cobblemon_library": ">=1.0.0"
+  "os_cobblemon_library": ">=1.6.0"
 }</code></pre>
 
           <pre><code># NeoForge neoforge.mods.toml
 [[dependencies.your_mod_id]]
 modId="os_cobblemon_library"
 type="required"
-versionRange="[1.0.0,)"
+versionRange="[1.6.0,)"
 ordering="AFTER"
 side="BOTH"</code></pre>
 
@@ -545,7 +556,9 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
             <p class="page-description">Release history for OS Cobblemon Library.</p>
           </div>
 
-          <h2>1.6.0 - CI and runtime verification hardening (2026-11-20)</h2>
+          <p>Latest stable release: <a href="https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0" target="_blank" rel="noopener noreferrer">v1.6.0 for Fabric and NeoForge</a>. For the complete technical history, see <a href="https://github.com/LevelsFR/OS-Cobblemon-Library/blob/1.21.1/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">CHANGELOG.md</a>.</p>
+
+           <h2>1.6.0 - CI and runtime verification hardening (2026-11-20)</h2>
           <h3>Changed</h3>
           <ul>
             <li>Retry Gradle builds and Maven Local publication for transient HTTP 429 and 5xx responses.</li>
@@ -555,6 +568,7 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
           <ul>
             <li>Regression checks for server-stop distance-cache cleanup and the Cobblemon <code>boot()V</code> mixin target.</li>
             <li>A Cobblemon 1.8.4 NeoForge runtime smoke that requires the ambient-weather hook success log.</li>
+             <li>Defensive NBT copy, typed codec, malformed-value, addon species namespace and metadata-version regression tests.</li>
           </ul>
           <p>This maintenance release changes CI and test coverage without changing public APIs or gameplay behavior. Fabric runtime injection remains unverified because Cobblemon fails before the OSCL mixin target loads in the official-mapped development launch.</p>
 
@@ -567,7 +581,14 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
           </ul>
           <p>CurseForge Fabric and NeoForge releases were published on 2026-10-29; Modrinth Fabric was published on 2026-11-10.</p>
 
-          <h2>1.5.0 - Cobblemon API and lifecycle improvements (2026-10-27)</h2>
+          <h2>1.5.1 - Cobblemon 1.8.4 compatibility (2026-10-28)</h2>
+           <h3>Changed</h3>
+           <ul>
+             <li>Extended the version-gated initial and active battle-weather bridge to Cobblemon 1.8.4.</li>
+             <li>Supported Cobblemon 1.8.2 through 1.8.4 on Fabric and NeoForge with a three-version CI matrix.</li>
+           </ul>
+
+           <h2>1.5.0 - Cobblemon API and lifecycle improvements (2026-10-27)</h2>
           <h3>Added</h3>
           <ul>
             <li>A Java hook for Cobblemon evolution eligibility checks.</li>
