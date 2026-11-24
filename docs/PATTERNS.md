@@ -176,3 +176,25 @@ PokemonIdentitySnapshot identity =
 
 Use namespaced species IDs and normalized form IDs instead of display names for
 persistent identifiers.
+
+## Adjust eligible natural spawn weights
+
+```java
+SpawnFilter filter = SpawnFilter.builder()
+        .type("ice")
+        .excludeLabels(List.of("legendary", "mythical"))
+        .build();
+
+SpawnModifierHandle event = SpawnModifiers.register(server,
+        SpawnModifier.builder(
+                        ResourceLocation.fromNamespaceAndPath("examplemod", "ice_event"),
+                        ResourceLocation.fromNamespaceAndPath("examplemod", "events"))
+                .filter(filter)
+                .multiplier(1.75)
+                .build());
+```
+
+This changes a candidate's relative weight after Cobblemon has checked its
+native conditions. It does not guarantee a 75% higher observed spawn chance or
+change the rarity bucket. See [SPAWNING.md](SPAWNING.md) for scopes, form
+resolution, stacking and lifecycle details.

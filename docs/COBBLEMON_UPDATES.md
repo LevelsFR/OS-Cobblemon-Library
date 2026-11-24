@@ -37,6 +37,14 @@ an automated runtime smoke; Fabric runtime injection remains unverified because
 the official-mapped development launch fails in upstream Kotlin reflection
 before the mixin target loads.
 
+OSCL 1.7 adds a natural spawn-weight integration through Cobblemon's public
+`SpawningInfluenceDetector` extension. The detector, `SpawningInfluence`,
+`PlayerSpawner`, position-weight and `FlatSelector` source contracts are
+byte-identical in the 1.8.2, 1.8.3 and 1.8.4 source artifacts. `Spawner.kt`
+changes its start-position check to equivalent explicit early returns in
+1.8.4; the native eligibility and selection order used by OSCL are unchanged.
+See [the v1.7 source audit](COBBLEMON_1_7_SPAWNING_AUDIT.md).
+
 ## Cobblemon 1.8.3 (historical 1.4.1 compatibility notes)
 
 The following version pins and range describe the 1.4.1 release, not the current 1.6.0 configuration.

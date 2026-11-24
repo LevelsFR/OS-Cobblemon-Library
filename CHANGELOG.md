@@ -4,7 +4,16 @@ All notable public changes to OS Cobblemon Library are documented here.
 
 ## 1.7.0 - In development
 
-No unreleased public API or gameplay changes have been recorded yet.
+### Added
+
+- Add the server-local Spawn Modifier API for changing weights of already eligible natural Cobblemon spawn details.
+- Add global, dimension and UUID-attributed player scopes, form-aware data filters, source cleanup, generation-safe handles, tick expiry and deterministic stacking.
+- Add source-verified Cobblemon 1.8.2–1.8.4 spawn-engine audit, Java integration examples and seeded weighted-distribution tests.
+
+### Preserved
+
+- Keep native eligibility checks, rarity bucket selection, explicit percentage entries and Poké Snack effects unchanged.
+- Retain source-compatible Pokémon helper APIs while adding `FormData`/`PokemonProperties` overloads for spawn-definition inspection.
 
 ## 1.6.0 - CI, runtime, and API verification hardening (2026-11-20)
 

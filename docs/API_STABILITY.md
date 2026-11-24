@@ -15,6 +15,7 @@ Public packages currently include:
 - `com.ourstory.oscobblemon.event`
 - `com.ourstory.oscobblemon.battle`
 - `com.ourstory.oscobblemon.pokedex`
+- `com.ourstory.oscobblemon.spawning`
 
 ## Internal API
 

@@ -13,6 +13,7 @@ OS Cobblemon Library is focused on reusable Cobblemon integration shared across 
 - Cobblemon event integration
 - Battle inspection and classification
 - Pokédex queries
+- Declarative modifiers for eligible natural spawn weights
 - Small compatibility adapters that isolate Cobblemon API changes
 
 ## Out of scope
@@ -21,7 +22,7 @@ OS Cobblemon Library is focused on reusable Cobblemon integration shared across 
 - Progression systems
 - Custom balancing formulas
 - Mod-specific user interfaces
-- Mod-specific spawning systems
+- Mod-specific spawning systems, events, consumables or spawn balancing
 - Entity AI, movement, navigation or despawn systems
 - Leaderboard scoring
 - Generic Minecraft configuration frameworks

@@ -1,6 +1,7 @@
 package com.ourstory.oscobblemon.pokemon;
 
 import com.cobblemon.mod.common.pokemon.Pokemon;
+import com.cobblemon.mod.common.pokemon.FormData;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -25,9 +26,18 @@ public final class PokemonLabels {
      */
     public static Set<String> labels(Pokemon pokemon) {
         Objects.requireNonNull(pokemon, "pokemon");
+        return labels(pokemon.getForm());
+    }
+
+    /**
+     * Returns an immutable normalized snapshot of a form's native labels,
+     * without constructing a Pokémon.
+     */
+    public static Set<String> labels(FormData form) {
+        Objects.requireNonNull(form, "form");
 
         LinkedHashSet<String> result = new LinkedHashSet<>();
-        for (String label : pokemon.getForm().getLabels()) {
+        for (String label : form.getLabels()) {
             String normalized = normalize(label);
             if (!normalized.isEmpty()) {
                 result.add(normalized);
@@ -41,12 +51,18 @@ public final class PokemonLabels {
      */
     public static boolean hasLabel(Pokemon pokemon, String label) {
         Objects.requireNonNull(pokemon, "pokemon");
+        return hasLabel(pokemon.getForm(), label);
+    }
+
+    /** Returns whether the supplied form has the given native label. */
+    public static boolean hasLabel(FormData form, String label) {
+        Objects.requireNonNull(form, "form");
         String expected = normalize(label);
         if (expected.isEmpty()) {
             return false;
         }
 
-        for (String current : pokemon.getForm().getLabels()) {
+        for (String current : form.getLabels()) {
             if (expected.equals(normalize(current))) {
                 return true;
             }
@@ -59,10 +75,16 @@ public final class PokemonLabels {
      */
     public static boolean hasAnyLabel(Pokemon pokemon, Collection<String> labels) {
         Objects.requireNonNull(pokemon, "pokemon");
+        return hasAnyLabel(pokemon.getForm(), labels);
+    }
+
+    /** Returns whether the supplied form has at least one supplied label. */
+    public static boolean hasAnyLabel(FormData form, Collection<String> labels) {
+        Objects.requireNonNull(form, "form");
         Objects.requireNonNull(labels, "labels");
 
         for (String label : labels) {
-            if (hasLabel(pokemon, label)) {
+            if (hasLabel(form, label)) {
                 return true;
             }
         }
@@ -74,10 +96,16 @@ public final class PokemonLabels {
      */
     public static boolean hasAllLabels(Pokemon pokemon, Collection<String> labels) {
         Objects.requireNonNull(pokemon, "pokemon");
+        return hasAllLabels(pokemon.getForm(), labels);
+    }
+
+    /** Returns whether the supplied form has every supplied label. */
+    public static boolean hasAllLabels(FormData form, Collection<String> labels) {
+        Objects.requireNonNull(form, "form");
         Objects.requireNonNull(labels, "labels");
 
         for (String label : labels) {
-            if (!hasLabel(pokemon, label)) {
+            if (!hasLabel(form, label)) {
                 return false;
             }
         }

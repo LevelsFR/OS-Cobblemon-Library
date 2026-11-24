@@ -17,7 +17,7 @@
       <span class="brand-mark">OSCL</span>
       <span class="brand-copy">
         <strong>OS Cobblemon Library</strong>
-        <small>v1.6.0 Library Documentation</small>
+        <small>v1.7.0-SNAPSHOT Library Documentation</small>
       </span>
     </a>
 
@@ -100,7 +100,7 @@
 
       <div class="sidebar-footer">
         <strong>OS Cobblemon Library</strong>
-        <span>Documentation for library version 1.6.0</span>
+        <span>Development documentation for 1.7.0-SNAPSHOT; latest stable is 1.6.0</span>
       </div>
     </aside>
 
@@ -117,7 +117,7 @@
       <article>
         <section class="tab-panel active" id="overview" data-panel="overview">
           <div class="page-heading">
-            <span class="page-kicker">OS Cobblemon Library v1.6.0</span>
+            <span class="page-kicker">OS Cobblemon Library v1.7.0-SNAPSHOT</span>
             <h1>OS Cobblemon Library</h1>
             <p class="page-description">
               A lightweight shared Cobblemon API and compatibility library for Fabric and NeoForge.
@@ -134,7 +134,7 @@
             OS Cobblemon Library centralizes reusable Cobblemon integrations so multiple mods can share the same implementation instead of duplicating loader-specific or Cobblemon-specific code.
           </p>
           <p>
-            Its public API focuses on Pokémon identity, creation, storage, events, battles, Pokédex data and small compatibility boundaries that are useful across multiple projects.
+            Its public API focuses on Pokémon identity, creation, storage, events, battles, Pokédex data, natural spawn-weight modifiers and small compatibility boundaries that are useful across multiple projects.
           </p>
 
           <h2>Supported environment</h2>
@@ -157,6 +157,7 @@
             <li><code>event</code> for Java-friendly Cobblemon event subscriptions and lifecycle management.</li>
             <li><code>battle</code> for battle classification, actor inspection, event helpers and version-gated initial and active-weather integration.</li>
             <li><code>pokedex</code> for server and client species, form, variation and completion queries with immutable snapshots.</li>
+            <li><code>spawning</code> for server-local modifiers to the weights of naturally eligible Cobblemon spawn details.</li>
           </ul>
 
           <h2>Design goals</h2>
@@ -221,7 +222,7 @@
     mavenLocal()
 }
 
-val osCobblemonLibraryVersion = "1.6.0"
+val osCobblemonLibraryVersion = "1.7.0-SNAPSHOT"
 
 dependencies {
     compileOnly(
@@ -268,7 +269,7 @@ side="BOTH"</code></pre>
           <div class="page-heading">
             <span class="page-kicker">Supported public surface</span>
             <h1>API reference</h1>
-            <p class="page-description">The main public classes exposed by OS Cobblemon Library v1.6.0.</p>
+            <p class="page-description">The documented public classes exposed by OS Cobblemon Library v1.7.0-SNAPSHOT.</p>
           </div>
 
           <h2>Pokémon</h2>
@@ -307,6 +308,15 @@ side="BOTH"</code></pre>
 
           <h3><code>PokemonSize</code></h3>
           <p>Native size category helpers, translation keys and safe positive scale values for Pokémon and Pokémon entities.</p>
+
+          <h2>Spawning</h2>
+          <h3><code>SpawnModifiers</code> and <code>SpawnModifier</code></h3>
+          <p>Register immutable, server-local modifiers that change the selection weight of Cobblemon's already eligible natural spawn details. Global, dimension and UUID-attributed player scopes are available when the corresponding runtime capability is present.</p>
+          <h3><code>SpawnFilter</code> and <code>SpawnCandidate</code></h3>
+          <p>Filter by type, species, exact form, resolved spawn-property aspect, native form label or rarity bucket. Ambiguous forms are evaluated conservatively against every possible form, without constructing a temporary Pokémon.</p>
+          <h3><code>SpawnStackingPolicy</code>, <code>SpawnModifierHandle</code> and <code>SpawnModifierCapabilities</code></h3>
+          <p>Use deterministic MAX stacking or an explicit capped multiplicative group. Handles remove only their own registration generation; capabilities report the loaded Cobblemon version, detector, form-resolution and scope availability.</p>
+          <p>The API changes relative candidate weights after native eligibility checks. It leaves buckets, explicit percentage entries and Poké Snacks unchanged. See <code>docs/SPAWNING.md</code> and <code>docs/COBBLEMON_1_7_SPAWNING_AUDIT.md</code> in the source repository for full examples and version-by-version source evidence.</p>
 
           <h2>Entities</h2>
           <h3><code>PokemonEntities</code></h3>
@@ -513,6 +523,7 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
             <li>Cobblemon event integration.</li>
             <li>Battle inspection, classification and version-gated initial and active-weather integration.</li>
             <li>Pokédex queries.</li>
+            <li>Declarative modifiers for eligible natural spawn weights.</li>
             <li>Small adapters that isolate meaningful Cobblemon API changes.</li>
           </ul>
 
@@ -520,7 +531,7 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
           <ul>
             <li>Gameplay rules or progression systems specific to one mod.</li>
             <li>Custom balancing formulas.</li>
-            <li>Mod-specific user interfaces or spawning systems.</li>
+            <li>Mod-specific user interfaces, spawning systems, consumables or spawn balancing.</li>
             <li>Entity AI, movement, navigation or despawn systems.</li>
             <li>Leaderboards and scoring systems.</li>
             <li>Generic networking, permission, registry or configuration frameworks.</li>
@@ -555,6 +566,17 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
             <h1>Changelog</h1>
             <p class="page-description">Release history for OS Cobblemon Library.</p>
           </div>
+
+          <h2>1.7.0-SNAPSHOT - In development</h2>
+          <h3>Added</h3>
+          <ul>
+            <li>A server-local API for modifying weights of naturally eligible Cobblemon spawn details, with scopes, declarative filters, stacking and tick expiry.</li>
+            <li>Form-aware spawn-definition matching and Cobblemon 1.8.2–1.8.4 source audit.</li>
+          </ul>
+          <h3>Preserved</h3>
+          <ul>
+            <li>Native eligibility rules, rarity bucket choice, explicit percentage entries and Poké Snack effects.</li>
+          </ul>
 
           <p>Latest stable release: <a href="https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0" target="_blank" rel="noopener noreferrer">v1.6.0 for Fabric and NeoForge</a>. For the complete technical history, see <a href="https://github.com/LevelsFR/OS-Cobblemon-Library/blob/1.21.1/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">CHANGELOG.md</a>.</p>
 

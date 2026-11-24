@@ -14,7 +14,7 @@ A lightweight shared Cobblemon API and compatibility library for Fabric and NeoF
 
 **v1.6.0 maintenance:** bounded retries for transient Maven HTTP 429/5xx responses, Cobblemon version-matrix regression coverage, and a NeoForge runtime smoke that verifies the ambient-weather hook. This release changes CI and tests without changing public APIs or gameplay behavior.
 
-OS Cobblemon Library provides reusable helpers for Pokémon, entities, storage, events, battles, Pokédex data and compatibility boundaries so Cobblemon mods can share a consistent integration layer across Fabric and NeoForge.
+OS Cobblemon Library provides reusable helpers for Pokémon, entities, storage, events, battles, Pokédex data, natural spawn-weight modifiers and compatibility boundaries so Cobblemon mods can share a consistent integration layer across Fabric and NeoForge.
 
 ## Supported environment
 
@@ -49,6 +49,7 @@ The library is organized around a small set of Cobblemon-focused domains:
 - `event`: reusable Cobblemon event integration
 - `battle`: battle inspection, classification and version-gated initial and active-weather integration
 - `pokedex`: reusable server and client Pokédex queries with immutable snapshots
+- `spawning`: server-local, form-aware modifiers for weights of naturally eligible Cobblemon spawn details
 
 The library intentionally avoids gameplay systems that belong inside individual mods.
 
@@ -123,6 +124,8 @@ See [docs/BRANCHING.md](docs/BRANCHING.md) for the multi-version strategy and [d
 For integration in another mod, see [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md).
 
 For a compact list of the supported public classes, see [docs/API_OVERVIEW.md](docs/API_OVERVIEW.md).
+
+For natural spawn-weight semantics, scopes and integration examples, see [docs/SPAWNING.md](docs/SPAWNING.md) and its [Cobblemon source audit](docs/COBBLEMON_1_7_SPAWNING_AUDIT.md).
 
 Common implementation examples are collected in [docs/PATTERNS.md](docs/PATTERNS.md).
 
