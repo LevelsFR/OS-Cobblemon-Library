@@ -29,6 +29,7 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
     testImplementation("net.fabricmc:sponge-mixin:0.15.4+mixin.0.8.7")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.11.4")
 }
 
 tasks.test {

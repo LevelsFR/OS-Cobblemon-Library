@@ -1,7 +1,7 @@
 $ErrorActionPreference = "Stop"
 
 $root = Split-Path -Parent $PSScriptRoot
-$version = "8.14.3"
+$version = "9.5.1"
 $bootstrap = Join-Path $root ".gradle-bootstrap"
 $zip = Join-Path $bootstrap "gradle-$version-bin.zip"
 $checksumFile = "$zip.sha256"

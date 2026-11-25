@@ -73,7 +73,7 @@ current when the library version changes.
 
 ## Building
 
-The Gradle wrapper is committed to the repository.
+The Gradle 9.5.1 wrapper is committed to the repository.
 
 Windows:
 
