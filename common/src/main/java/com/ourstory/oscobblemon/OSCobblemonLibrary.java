@@ -1,5 +1,7 @@
 package com.ourstory.oscobblemon;
 
+import com.ourstory.oscobblemon.internal.SpawnModifierRuntime;
+
 /**
  * Shared entry point for OS Cobblemon Library.
  *
@@ -20,6 +22,7 @@ public final class OSCobblemonLibrary {
             return;
         }
         initialized = true;
+        SpawnModifierRuntime.initialize();
     }
 
     public static boolean isInitialized() {

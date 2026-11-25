@@ -69,10 +69,10 @@ jobs:
           distribution: temurin
           java-version: "21"
 
-      - name: Setup Gradle 8.14.3
+      - name: Setup Gradle 9.5.1
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: "8.14.3"
+          gradle-version: "9.5.1"
 
       - name: Verify bounded Gradle retry behavior
         run: bash scripts/test-gradle-retry.sh
@@ -116,7 +116,7 @@ jobs:
           unzip -p "$NEOFORGE_JAR" META-INF/neoforge.mods.toml | grep -Fq 'logoFile="icon.png"'
           unzip -p "$NEOFORGE_JAR" META-INF/neoforge.mods.toml | grep -Fq 'A lightweight shared Cobblemon API and compatibility library'
 
-      - name: Verify NeoForge mixin at runtime
+      - name: Verify NeoForge runtime integrations
         if: matrix.cobblemon.version == '1.8.4'
         env:
           COBBLEMON_VERSION: ${{ matrix.cobblemon.coordinate }}
@@ -138,6 +138,11 @@ jobs:
             fi
             if ! grep -Fq 'Installed the Cobblemon 1.8.2–1.8.4 ambient battle weather hook' "$log_file"; then
               echo "::error::The $loader runtime did not report successful ambient-weather mixin installation."
+              rm -f "$log_file"
+              return 1
+            fi
+            if ! grep -Fq 'Registered Cobblemon natural spawn-weight influence detector' "$log_file"; then
+              echo "::error::The $loader runtime did not register the Spawn Modifier API integration."
               rm -f "$log_file"
               return 1
             fi

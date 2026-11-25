@@ -8,13 +8,15 @@ A lightweight shared Cobblemon API and compatibility library for Fabric and NeoF
 
 **Author:** LevelsFR
 
-**Latest stable release:** [1.6.0 (Fabric + NeoForge)](https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0). **Development version:** `1.7.0-SNAPSHOT` on `1.21.1/dev`.
+**Current source and API version:** `1.7.0` (Minecraft 1.21.1, Fabric + NeoForge).
 
-**Downloads and documentation:** [GitHub release](https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0) · [CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) · [Modrinth](https://modrinth.com/mod/os-cobblemon-library) · [Official API wiki](https://levelsfr.github.io/OS-Cobblemon-Library/). As checked on 2026-11-21, CurseForge and Modrinth still list v1.5.2; use the GitHub release to obtain the published v1.6.0 JARs.
+**Downloads and documentation:** [GitHub releases](https://github.com/LevelsFR/OS-Cobblemon-Library/releases) · [CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) · [Modrinth](https://modrinth.com/mod/os-cobblemon-library) · [Official API wiki](https://levelsfr.github.io/OS-Cobblemon-Library/).
 
-**v1.6.0 maintenance:** bounded retries for transient Maven HTTP 429/5xx responses, Cobblemon version-matrix regression coverage, and a NeoForge runtime smoke that verifies the ambient-weather hook. This release changes CI and tests without changing public APIs or gameplay behavior.
+This documentation targets 1.7.0. Use a matching published JAR if available, or build this version locally; download platforms may lag behind the source.
 
-OS Cobblemon Library provides reusable helpers for Pokémon, entities, storage, events, battles, Pokédex data and compatibility boundaries so Cobblemon mods can share a consistent integration layer across Fabric and NeoForge.
+**v1.7.0 highlights:** a server-local Spawn Modifier API, form-aware filtering and deterministic stacking, the `/oscl` version command, and Gradle 9.5.1. See the [v1.7.0 notes](CHANGELOG-v1.7.0.md) for verification and remaining gameplay checks.
+
+OS Cobblemon Library provides reusable helpers for Pokémon, entities, storage, events, battles, Pokédex data, natural spawn-weight modifiers and compatibility boundaries so Cobblemon mods can share a consistent integration layer across Fabric and NeoForge.
 
 ## Supported environment
 
@@ -49,6 +51,7 @@ The library is organized around a small set of Cobblemon-focused domains:
 - `event`: reusable Cobblemon event integration
 - `battle`: battle inspection, classification and version-gated initial and active-weather integration
 - `pokedex`: reusable server and client Pokédex queries with immutable snapshots
+- `spawning`: server-local, form-aware modifiers for weights of naturally eligible Cobblemon spawn details
 
 The library intentionally avoids gameplay systems that belong inside individual mods.
 
@@ -66,9 +69,13 @@ Requirements for the current compatibility line:
 - Cobblemon 1.8.2 up to, but not including, 1.8.5
 - Fabric or NeoForge
 
+Use `/oscl` in-game to display the installed OS Cobblemon Library version.
+The command reads the version from the loader's mod metadata, so it stays
+current when the library version changes.
+
 ## Building
 
-The Gradle wrapper is committed to the repository.
+The Gradle 9.5.1 wrapper is committed to the repository.
 
 Windows:
 
@@ -116,13 +123,15 @@ The current Minecraft compatibility line uses:
 1.21.1/main  stable releases
 ```
 
-See [docs/BRANCHING.md](docs/BRANCHING.md) for the multi-version strategy and [docs/RELEASING.md](docs/RELEASING.md) for the release process. For this maintenance release, see the [v1.6.0 release notes](CHANGELOG-v1.6.0.md) and [complete version history](CHANGELOG.md).
+See [docs/BRANCHING.md](docs/BRANCHING.md) for the multi-version strategy and [docs/RELEASING.md](docs/RELEASING.md) for the release process. See the [v1.7.0 notes](CHANGELOG-v1.7.0.md) and [complete version history](CHANGELOG.md).
 
 ## Getting started
 
 For integration in another mod, see [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md).
 
 For a compact list of the supported public classes, see [docs/API_OVERVIEW.md](docs/API_OVERVIEW.md).
+
+For natural spawn-weight semantics, scopes and integration examples, see [docs/SPAWNING.md](docs/SPAWNING.md) and its [Cobblemon source audit](docs/COBBLEMON_1_7_SPAWNING_AUDIT.md).
 
 Common implementation examples are collected in [docs/PATTERNS.md](docs/PATTERNS.md).
 

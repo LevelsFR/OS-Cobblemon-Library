@@ -1,7 +1,8 @@
 plugins {
     id("dev.architectury.loom")
     id("architectury-plugin")
-    id("com.github.johnrengelman.shadow")
+    id("com.gradleup.shadow")
+    id("org.jetbrains.kotlin.jvm")
     `maven-publish`
 }
 

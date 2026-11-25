@@ -20,7 +20,7 @@ git pull
 powershell -ExecutionPolicy Bypass -File .\scripts\publish-local.ps1
 ```
 
-Both loader builds and Maven publication must succeed.
+Both loader builds and Maven publication must succeed. For v1.7.0, also review the [manual natural-spawn acceptance scenario](SPAWNING.md#manual-gameplay-acceptance); a successful startup smoke is not proof of gameplay behavior.
 
 ## 2. Set the stable version
 
@@ -78,10 +78,10 @@ Pushing a v* tag triggers this workflow and creates a public GitHub binary relea
 
 ## 6. Resume development
 
-After releasing library version `1.6.0`, return `1.21.1/dev` to the next snapshot version:
+After releasing library version `1.7.0`, return `1.21.1/dev` to the next snapshot version (for example):
 
 ```properties
-mod_version=1.7.0-SNAPSHOT
+mod_version=1.8.0-SNAPSHOT
 ```
 
 Do not overwrite an already published stable version with new development

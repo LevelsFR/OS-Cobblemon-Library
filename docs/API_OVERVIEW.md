@@ -114,12 +114,14 @@ matching.
 
 ### `PokemonTypes`
 
-Current-form type inspection and matching.
+Current-form type inspection and matching. `FormData` overloads read a resolved form's types without constructing a Pokémon.
 
 ### `PokemonLabels`
 
 Generic access to data-driven Cobblemon form labels without hard-coding category
 semantics.
+
+`FormData` overloads support spawn-definition matching without creating a Pokémon.
 
 ### `PokemonSize`
 
@@ -266,6 +268,36 @@ Read-only Pokédex helpers for:
 
 `ClientPokedexQueries` reads the Pokédex synchronized to the local player and
 is client-only.
+
+## Spawning
+
+### `SpawnModifiers` and `SpawnModifier`
+
+Register immutable, server-local modifiers for the weight of Cobblemon natural
+spawn details. A modifier combines a namespaced ID and source, a global,
+dimension or player scope, a declarative `SpawnFilter`, a finite positive
+multiplier, a stacking policy and an optional server-tick duration.
+
+### `SpawnFilter` and `SpawnCandidate`
+
+Filter by types, species, exact forms, resolved spawn-property aspects, native
+form labels and buckets; exclusions are available for species, forms, aspects
+and labels. `SpawnCandidate` contains a read-only profile of the spawn
+definition's known attributes and possible forms. If the form is ambiguous,
+form-sensitive criteria must match every possible form.
+
+### Stacking, lifecycle and capabilities
+
+`SpawnStackingPolicy` provides default `MAX` and explicit `multiplicativeCapped`
+rules. `SpawnModifierHandle` is generation-safe and `SpawnModifierSnapshot` is
+immutable. `SpawnModifiers.capabilities()` reports whether the Cobblemon
+detector was installed, the loaded Cobblemon version, whether form data is
+available and which scopes this runtime supports.
+
+The detector changes only candidate weights after native eligibility checks.
+It does not affect bucket weights, inject candidates, create Pokémon or alter
+Poké Snacks. See [SPAWNING.md](SPAWNING.md) for Java examples and selection
+semantics.
 
 ## Internal package
 

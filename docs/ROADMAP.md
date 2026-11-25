@@ -135,6 +135,18 @@ supplies those signals.
 - Retry only transient Gradle dependency HTTP 429/5xx failures with a bounded policy.
 - Document the remaining Fabric runtime verification limitation without treating a passing unit test as proof of a successful in-game injection.
 
+## 1.7 natural spawn modifiers
+
+- Provides a server-local, declarative API for weights of already eligible
+  natural Cobblemon spawn details.
+- Reuses Cobblemon's native influence-detector extension on 1.8.2, 1.8.3 and
+  1.8.4; preserves buckets, datapack conditions and Poké Snacks.
+- Supports global, dimension and UUID-attributed `PlayerSpawner` scopes, with
+  conservative form-aware filters, deterministic stacking and tick expiry.
+- Keeps consumer gameplay, charms, events and configuration out of OSCL.
+- Adds `/oscl` version reporting and upgrades the build to Gradle 9.5.1.
+- CI matrix and NeoForge 1.8.4 startup smoke passed; full gameplay acceptance remains a separate check. See [v1.7.0 notes](../CHANGELOG-v1.7.0.md).
+
 ## Later
 
 Additional helpers should be added only when they represent repeated

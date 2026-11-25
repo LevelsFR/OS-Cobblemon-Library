@@ -15,6 +15,7 @@ Public packages currently include:
 - `com.ourstory.oscobblemon.event`
 - `com.ourstory.oscobblemon.battle`
 - `com.ourstory.oscobblemon.pokedex`
+- `com.ourstory.oscobblemon.spawning`
 
 ## Internal API
 
@@ -58,6 +59,5 @@ major library version unless they also require a breaking API change.
 
 ## Current versions
 
-The latest stable release is `1.6.0`; `1.21.1/dev` continues at
-`1.7.0-SNAPSHOT`. The library version is independent of the Minecraft and
+This API documentation targets library version `1.7.0`. The library version is independent of the Minecraft and
 Cobblemon versions.

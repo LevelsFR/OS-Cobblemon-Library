@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Official OS Cobblemon Library v1.6.0 documentation, installation and public API reference for Minecraft 1.21.1, Fabric, NeoForge and Cobblemon.">
+  <meta name="description" content="OS Cobblemon Library v1.7.0 documentation, installation and public API reference for Minecraft 1.21.1, Fabric, NeoForge and Cobblemon.">
   <link rel="canonical" href="https://levelsfr.github.io/OS-Cobblemon-Library/">
   <title>OS Cobblemon Library Documentation</title>
   <link rel="stylesheet" href="styles.css">
@@ -17,7 +17,7 @@
       <span class="brand-mark">OSCL</span>
       <span class="brand-copy">
         <strong>OS Cobblemon Library</strong>
-        <small>v1.6.0 Library Documentation</small>
+        <small>v1.7.0 API Documentation</small>
       </span>
     </a>
 
@@ -100,7 +100,7 @@
 
       <div class="sidebar-footer">
         <strong>OS Cobblemon Library</strong>
-        <span>Documentation for library version 1.6.0</span>
+        <span>API documentation for library version 1.7.0</span>
       </div>
     </aside>
 
@@ -117,7 +117,7 @@
       <article>
         <section class="tab-panel active" id="overview" data-panel="overview">
           <div class="page-heading">
-            <span class="page-kicker">OS Cobblemon Library v1.6.0</span>
+            <span class="page-kicker">OS Cobblemon Library v1.7.0</span>
             <h1>OS Cobblemon Library</h1>
             <p class="page-description">
               A lightweight shared Cobblemon API and compatibility library for Fabric and NeoForge.
@@ -134,7 +134,7 @@
             OS Cobblemon Library centralizes reusable Cobblemon integrations so multiple mods can share the same implementation instead of duplicating loader-specific or Cobblemon-specific code.
           </p>
           <p>
-            Its public API focuses on Pokémon identity, creation, storage, events, battles, Pokédex data and small compatibility boundaries that are useful across multiple projects.
+            Its public API focuses on Pokémon identity, creation, storage, events, battles, Pokédex data, natural spawn-weight modifiers and small compatibility boundaries that are useful across multiple projects.
           </p>
 
           <h2>Supported environment</h2>
@@ -145,7 +145,7 @@
               <tr><td>Java</td><td>21</td></tr>
               <tr><td>Cobblemon</td><td>1.8.2 up to, but not including, 1.8.5</td></tr>
               <tr><td>Loaders</td><td>Fabric and NeoForge</td></tr>
-              <tr><td>Latest stable release</td><td>1.6.0</td></tr>
+              <tr><td>Source and API version</td><td>1.7.0</td></tr>
             </tbody>
           </table>
 
@@ -157,6 +157,7 @@
             <li><code>event</code> for Java-friendly Cobblemon event subscriptions and lifecycle management.</li>
             <li><code>battle</code> for battle classification, actor inspection, event helpers and version-gated initial and active-weather integration.</li>
             <li><code>pokedex</code> for server and client species, form, variation and completion queries with immutable snapshots.</li>
+            <li><code>spawning</code> for server-local modifiers to the weights of naturally eligible Cobblemon spawn details.</li>
           </ul>
 
           <h2>Design goals</h2>
@@ -182,7 +183,7 @@
 
           <h2>For players</h2>
           <p>Download the OS Cobblemon Library JAR matching your loader and place it in the normal <code>mods</code> folder when another mod requires it.</p>
-          <p>For the published v1.6.0 Fabric and NeoForge binaries, use the <a href="https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0" target="_blank" rel="noopener noreferrer">GitHub v1.6.0 release</a>. CurseForge and Modrinth listings may be behind the latest GitHub release; always verify the file version.</p>
+          <p>This guide targets OSCL 1.7.0. Check <a href="https://github.com/LevelsFR/OS-Cobblemon-Library/releases" target="_blank" rel="noopener noreferrer">GitHub releases</a>, CurseForge or Modrinth for a matching JAR. If it is not available yet, build from source. Always match the installed version to the API you use.</p>
 
           <table>
             <thead><tr><th>Requirement</th><th>Value</th></tr></thead>
@@ -200,7 +201,7 @@
           </div>
 
           <h2>Build from source</h2>
-          <p>The Gradle wrapper is committed to the repository.</p>
+          <p>The committed Gradle 9.5.1 wrapper builds the 1.7.0 source version. Use <code>/oscl</code> in this version to display the installed version from loader metadata.</p>
           <pre><code># Windows
 .\gradlew.bat build
 
@@ -217,11 +218,12 @@
           <p>The script reads the active version from <code>gradle.properties</code> and publishes the common, Fabric and NeoForge artifacts to Maven Local.</p>
 
           <h2>Gradle dependency pattern</h2>
+          <p>The following examples target 1.7.0, which is the minimum required version for the Spawn Modifier API.</p>
           <pre><code>repositories {
     mavenLocal()
 }
 
-val osCobblemonLibraryVersion = "1.6.0"
+val osCobblemonLibraryVersion = "1.7.0"
 
 dependencies {
     compileOnly(
@@ -247,20 +249,20 @@ dependencies {
           <p>Consuming mods should also declare OS Cobblemon Library as a required dependency.</p>
           <pre><code>// Fabric fabric.mod.json
 "depends": {
-  "os_cobblemon_library": ">=1.6.0"
+  "os_cobblemon_library": ">=1.7.0"
 }</code></pre>
 
           <pre><code># NeoForge neoforge.mods.toml
 [[dependencies.your_mod_id]]
 modId="os_cobblemon_library"
 type="required"
-versionRange="[1.6.0,)"
+versionRange="[1.7.0,)"
 ordering="AFTER"
 side="BOTH"</code></pre>
 
           <div class="hint hint-info">
             <strong>Dependency version choice</strong>
-            <p>Set the minimum version required by the API features your mod actually uses.</p>
+            <p>Set the minimum version required by the API features your mod actually uses. Keep Gradle and loader metadata consistent with your required API version.</p>
           </div>
         </section>
 
@@ -268,7 +270,7 @@ side="BOTH"</code></pre>
           <div class="page-heading">
             <span class="page-kicker">Supported public surface</span>
             <h1>API reference</h1>
-            <p class="page-description">The main public classes exposed by OS Cobblemon Library v1.6.0.</p>
+            <p class="page-description">The documented public classes exposed by OS Cobblemon Library v1.7.0.</p>
           </div>
 
           <h2>Pokémon</h2>
@@ -307,6 +309,15 @@ side="BOTH"</code></pre>
 
           <h3><code>PokemonSize</code></h3>
           <p>Native size category helpers, translation keys and safe positive scale values for Pokémon and Pokémon entities.</p>
+
+          <h2>Spawning</h2>
+          <h3><code>SpawnModifiers</code> and <code>SpawnModifier</code></h3>
+          <p>Register immutable, server-local modifiers that change the selection weight of Cobblemon's already eligible natural spawn details. Global, dimension and UUID-attributed player scopes are available when the corresponding runtime capability is present.</p>
+          <h3><code>SpawnFilter</code> and <code>SpawnCandidate</code></h3>
+          <p>Filter by type, species, exact form, resolved spawn-property aspect, native form label or rarity bucket. Ambiguous forms are evaluated conservatively against every possible form, without constructing a temporary Pokémon.</p>
+          <h3><code>SpawnStackingPolicy</code>, <code>SpawnModifierHandle</code> and <code>SpawnModifierCapabilities</code></h3>
+          <p>Use deterministic MAX stacking or an explicit capped multiplicative group. Handles remove only their own registration generation; capabilities report the loaded Cobblemon version, detector, form-resolution and scope availability.</p>
+          <p>The API changes relative candidate weights after native eligibility checks. It leaves buckets, explicit percentage entries and Poké Snacks unchanged. See <code>docs/SPAWNING.md</code> and <code>docs/COBBLEMON_1_7_SPAWNING_AUDIT.md</code> in the source repository for full examples and version-by-version source evidence.</p>
 
           <h2>Entities</h2>
           <h3><code>PokemonEntities</code></h3>
@@ -513,6 +524,7 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
             <li>Cobblemon event integration.</li>
             <li>Battle inspection, classification and version-gated initial and active-weather integration.</li>
             <li>Pokédex queries.</li>
+            <li>Declarative modifiers for eligible natural spawn weights.</li>
             <li>Small adapters that isolate meaningful Cobblemon API changes.</li>
           </ul>
 
@@ -520,7 +532,7 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
           <ul>
             <li>Gameplay rules or progression systems specific to one mod.</li>
             <li>Custom balancing formulas.</li>
-            <li>Mod-specific user interfaces or spawning systems.</li>
+            <li>Mod-specific user interfaces, spawning systems, consumables or spawn balancing.</li>
             <li>Entity AI, movement, navigation or despawn systems.</li>
             <li>Leaderboards and scoring systems.</li>
             <li>Generic networking, permission, registry or configuration frameworks.</li>
@@ -556,7 +568,27 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
             <p class="page-description">Release history for OS Cobblemon Library.</p>
           </div>
 
-          <p>Latest stable release: <a href="https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0" target="_blank" rel="noopener noreferrer">v1.6.0 for Fabric and NeoForge</a>. For the complete technical history, see <a href="https://github.com/LevelsFR/OS-Cobblemon-Library/blob/1.21.1/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">CHANGELOG.md</a>.</p>
+          <h2>1.7.0 - Natural spawn modifiers and version reporting</h2>
+          <h3>Added</h3>
+          <ul>
+            <li>A server-local API for modifying weights of naturally eligible Cobblemon spawn details, with scopes, declarative filters, stacking and tick expiry.</li>
+            <li>Form-aware spawn-definition matching and Cobblemon 1.8.2–1.8.4 source audit.</li>
+            <li><code>/oscl</code> installed-version command on Fabric and NeoForge.</li>
+          </ul>
+          <h3>Changed</h3>
+          <ul>
+            <li>Gradle 9.5.1 and JUnit platform launcher; NeoForge startup smoke verifies detector registration.</li>
+          </ul>
+          <h3>Verification</h3>
+          <ul>
+            <li><a href="https://github.com/LevelsFR/OS-Cobblemon-Library/actions/runs/45524029601">CI build matrix</a> passed, including NeoForge 1.8.4 startup smoke. Full natural-spawn gameplay acceptance and equivalent Fabric runtime verification are not established by that run.</li>
+          </ul>
+          <h3>Preserved</h3>
+          <ul>
+            <li>Native eligibility rules, rarity bucket choice, explicit percentage entries and Poké Snack effects.</li>
+          </ul>
+
+          <p>See <a href="https://github.com/LevelsFR/OS-Cobblemon-Library/releases" target="_blank" rel="noopener noreferrer">GitHub releases</a> for binary availability and <a href="https://github.com/LevelsFR/OS-Cobblemon-Library/blob/1.21.1/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">CHANGELOG.md</a> for the complete technical history.</p>
 
            <h2>1.6.0 - CI and runtime verification hardening (2026-11-20)</h2>
           <h3>Changed</h3>

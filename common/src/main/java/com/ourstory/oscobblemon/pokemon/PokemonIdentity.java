@@ -1,6 +1,7 @@
 package com.ourstory.oscobblemon.pokemon;
 
 import com.cobblemon.mod.common.api.mark.Mark;
+import com.cobblemon.mod.common.api.pokemon.PokemonProperties;
 import com.cobblemon.mod.common.pokemon.FormData;
 import com.cobblemon.mod.common.pokemon.Pokemon;
 import com.cobblemon.mod.common.pokemon.Species;
@@ -73,6 +74,15 @@ public final class PokemonIdentity {
 
         Species species = Objects.requireNonNull(pokemon.getSpecies(), "pokemon.species");
         FormData form = Objects.requireNonNull(pokemon.getForm(), "pokemon.form");
+        return formId(species, form);
+    }
+
+    /**
+     * Returns the normalized form-only ID for a resolved species form.
+     */
+    public static String formId(Species species, FormData form) {
+        Objects.requireNonNull(species, "species");
+        Objects.requireNonNull(form, "form");
 
         if (form == species.getStandardForm()) {
             return STANDARD_FORM_ID;
@@ -108,6 +118,14 @@ public final class PokemonIdentity {
     public static Set<String> aspects(Pokemon pokemon) {
         Objects.requireNonNull(pokemon, "pokemon");
         return Set.copyOf(pokemon.getAspects());
+    }
+
+    /**
+     * Returns the aspects already resolved from a spawn properties definition.
+     */
+    public static Set<String> aspects(PokemonProperties properties) {
+        Objects.requireNonNull(properties, "properties");
+        return Set.copyOf(properties.getAspects());
     }
 
     /**

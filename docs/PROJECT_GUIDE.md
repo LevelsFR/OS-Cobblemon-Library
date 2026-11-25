@@ -2,16 +2,16 @@
 
 A shared Cobblemon API and compatibility library for Fabric and NeoForge.
 
-Source snapshot: **2026-11-20**. This guide describes the checked-out source; download pages carry the latest stable release.
+Source snapshot: **2026-11-25**, v1.7.0 source. This guide describes the checked-out source; download pages carry the latest stable release.
 
 ## Status and official links
 
 - [Stable source branch](https://github.com/LevelsFR/OS-Cobblemon-Library/tree/1.21.1/main) and [development branch](https://github.com/LevelsFR/OS-Cobblemon-Library/tree/1.21.1/dev).
-- [GitHub v1.6.0 release](https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0) (Fabric and NeoForge JARs) and [v1.6.0 release notes](../CHANGELOG-v1.6.0.md).
-- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) and [Modrinth](https://modrinth.com/mod/os-cobblemon-library) — distribution pages, both still listing v1.5.2 as checked on 2026-11-21.
+- [GitHub releases](https://github.com/LevelsFR/OS-Cobblemon-Library/releases) (Fabric and NeoForge JARs) and [v1.7.0 notes](../CHANGELOG-v1.7.0.md).
+- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) and [Modrinth](https://modrinth.com/mod/os-cobblemon-library) — distribution pages; verify that the file version matches the API you use.
 - [Official API wiki](https://levelsfr.github.io/OS-Cobblemon-Library/) — published from `site/` on the stable branch.
 
-Stable releases remain on `1.21.1/main`; `1.21.1/dev` continues at `1.7.0-SNAPSHOT` and may include APIs ahead of the latest stable release.
+This guide targets 1.7.0. Use a matching published artifact or build the source locally. Stable source is maintained on `1.21.1/main`, development on `1.21.1/dev`.
 
 ## Features in the current source
 
@@ -19,17 +19,19 @@ Stable releases remain on `1.21.1/main`; `1.21.1/dev` continues at `1.7.0-SNAPSH
 - Immutable display snapshots, entity/ownership inspection and per-tick cached nearest-player distance queries.
 - Party, PC storage, event and Pokédex integration.
 - Battle inspection and version-gated initial and active-weather bridges.
+- Natural spawn-weight modifiers with scoped, form-aware filters and deterministic stacking (v1.7.0).
+- `/oscl` installed-version command on both loaders (v1.7.0).
 - Documented public APIs, Maven Local publishing and separate development/stable branches.
 
 ## Compatibility and dependencies
 
 | Component | Value |
 | --- | --- |
-| Latest stable release | `1.6.0` |
-| Development version | `1.7.0-SNAPSHOT` |
+| Source and API version | `1.7.0` |
+| Gradle wrapper | `9.5.1` |
 | Minecraft baseline | `1.21.1` |
 | JDK | `21` |
-| Active branch | `1.21.1/dev` |
+| Minecraft compatibility line | `1.21.1` |
 
 | Loader | Dependency | Declared constraint | Requirement |
 | --- | --- | --- | --- |
@@ -52,16 +54,16 @@ The CurseForge Fabric and NeoForge files (IDs `9363559` and `9363562`) and the M
 - Fabric SHA-256: `1CF0B5F2FDD8661F0D8532641727B1F7D89BD5E379D7F6FE78152AC70217D1A3`
 - NeoForge SHA-256: `412139525C5DA38ADEC7676094F06AD437288A70ED291CF843AA5EF7B57B450A`
 
-The historical v1.5.2 synchronization did not create a GitHub release. The v1.6.0 release is published separately from a stable-branch tag and contains the Fabric and NeoForge JARs; CurseForge and Modrinth remain at v1.5.2 until those platforms receive a separate upload.
+The historical v1.5.2 synchronization did not create a GitHub release. See the [release archive](https://github.com/LevelsFR/OS-Cobblemon-Library/releases) for later GitHub binaries; platform uploads are independent.
 
 ## Installation and first use
 
 OS Cobblemon Library is a dependency library and does not add standalone
-gameplay content, commands or a configuration screen. Install the loader JAR
+gameplay content or a configuration screen. In v1.7.0, `/oscl` displays the installed library version. Install the loader JAR
 when a consuming mod declares the library as a required dependency. Match the
 loader, Minecraft, Java and Cobblemon versions listed in this guide. For an
 unreleased source build, publish it to Maven Local or use a separate test
-instance; the consuming mod controls its own commands and configuration.
+instance; the consuming mod controls its own gameplay commands and configuration.
 
 ## Persistence boundary
 
@@ -93,7 +95,8 @@ Loader JARs are normally written under the corresponding `build/libs` directory.
 
 ## Documentation index
 
-- [Complete changelog](../CHANGELOG.md) · [v1.6.0 release notes](../CHANGELOG-v1.6.0.md) · [README](../README.md)
+- [v1.7.0 notes](../CHANGELOG-v1.7.0.md) · [Spawn Modifier API](SPAWNING.md) · [Cobblemon spawn source audit](COBBLEMON_1_7_SPAWNING_AUDIT.md)
+- [Complete changelog](../CHANGELOG.md) · [README](../README.md)
 - [API overview](API_OVERVIEW.md) · [API stability](API_STABILITY.md)
 - [Battle](BATTLE.md) · [Events](EVENTS.md) · [Storage](STORAGE.md) · [Pokédex](POKEDEX.md)
 - [Cobblemon updates](COBBLEMON_UPDATES.md) · [Branching](BRANCHING.md) · [Roadmap](ROADMAP.md) · [Scope](SCOPE.md)
@@ -103,6 +106,8 @@ Loader JARs are normally written under the corresponding `build/libs` directory.
 - [Matcher](POKEMON_MATCHER.md) · [Size](POKEMON_SIZE.md) · [Snapshots](POKEMON_SNAPSHOTS.md) · [Types](POKEMON_TYPES.md)
 
 ## Validation and reporting a problem
+
+[Build run 45524029601](https://github.com/LevelsFR/OS-Cobblemon-Library/actions/runs/45524029601) passed on the v1.7.0 development source for all supported Cobblemon versions, including both loaders and Maven publication. NeoForge 1.8.4 startup smoke passed; full natural-spawn gameplay acceptance and equivalent Fabric runtime checks remain unverified by that run.
 
 A source audit, successful compilation, automated checks and in-game validation are different forms of evidence. A successful build does not establish runtime compatibility. Preserve the project-specific remaining release gates.
 
