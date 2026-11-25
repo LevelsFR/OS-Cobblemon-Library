@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="OS Cobblemon Library v1.7.0 development documentation, installation and public API reference for Minecraft 1.21.1, Fabric, NeoForge and Cobblemon.">
+  <meta name="description" content="OS Cobblemon Library v1.7.0 documentation, installation and public API reference for Minecraft 1.21.1, Fabric, NeoForge and Cobblemon.">
   <link rel="canonical" href="https://levelsfr.github.io/OS-Cobblemon-Library/">
   <title>OS Cobblemon Library Documentation</title>
   <link rel="stylesheet" href="styles.css">
@@ -17,7 +17,7 @@
       <span class="brand-mark">OSCL</span>
       <span class="brand-copy">
         <strong>OS Cobblemon Library</strong>
-        <small>v1.7.0 Development Documentation</small>
+        <small>v1.7.0 API Documentation</small>
       </span>
     </a>
 
@@ -100,7 +100,7 @@
 
       <div class="sidebar-footer">
         <strong>OS Cobblemon Library</strong>
-        <span>Development documentation for unreleased 1.7.0; latest stable is 1.6.0</span>
+        <span>API documentation for library version 1.7.0</span>
       </div>
     </aside>
 
@@ -145,7 +145,7 @@
               <tr><td>Java</td><td>21</td></tr>
               <tr><td>Cobblemon</td><td>1.8.2 up to, but not including, 1.8.5</td></tr>
               <tr><td>Loaders</td><td>Fabric and NeoForge</td></tr>
-              <tr><td>Latest stable release</td><td>1.6.0</td></tr>
+              <tr><td>Source and API version</td><td>1.7.0</td></tr>
             </tbody>
           </table>
 
@@ -183,7 +183,7 @@
 
           <h2>For players</h2>
           <p>Download the OS Cobblemon Library JAR matching your loader and place it in the normal <code>mods</code> folder when another mod requires it.</p>
-          <p>For the published v1.6.0 Fabric and NeoForge binaries, use the <a href="https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0" target="_blank" rel="noopener noreferrer">GitHub v1.6.0 release</a>. CurseForge and Modrinth listings may be behind the latest GitHub release; always verify the file version.</p>
+          <p>This guide targets OSCL 1.7.0. Check <a href="https://github.com/LevelsFR/OS-Cobblemon-Library/releases" target="_blank" rel="noopener noreferrer">GitHub releases</a>, CurseForge or Modrinth for a matching JAR. If it is not available yet, build from source. Always match the installed version to the API you use.</p>
 
           <table>
             <thead><tr><th>Requirement</th><th>Value</th></tr></thead>
@@ -201,7 +201,7 @@
           </div>
 
           <h2>Build from source</h2>
-          <p>The committed Gradle 9.5.1 wrapper builds the unreleased 1.7.0 development version. Use <code>/oscl</code> in this version to display the installed version from loader metadata.</p>
+          <p>The committed Gradle 9.5.1 wrapper builds the 1.7.0 source version. Use <code>/oscl</code> in this version to display the installed version from loader metadata.</p>
           <pre><code># Windows
 .\gradlew.bat build
 
@@ -218,7 +218,7 @@
           <p>The script reads the active version from <code>gradle.properties</code> and publishes the common, Fabric and NeoForge artifacts to Maven Local.</p>
 
           <h2>Gradle dependency pattern</h2>
-          <p>The following examples target a locally published 1.7.0 development build; the Spawn Modifier API is not available in stable 1.6.0.</p>
+          <p>The following examples target 1.7.0, which is the minimum required version for the Spawn Modifier API.</p>
           <pre><code>repositories {
     mavenLocal()
 }
@@ -262,7 +262,7 @@ side="BOTH"</code></pre>
 
           <div class="hint hint-info">
             <strong>Dependency version choice</strong>
-            <p>Set the minimum version required by the API features your mod actually uses. For stable 1.6.0 consumers, use 1.6.0 consistently in Gradle and loader metadata.</p>
+            <p>Set the minimum version required by the API features your mod actually uses. Keep Gradle and loader metadata consistent with your required API version.</p>
           </div>
         </section>
 
@@ -568,7 +568,7 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
             <p class="page-description">Release history for OS Cobblemon Library.</p>
           </div>
 
-          <h2>1.7.0 - Unreleased development build</h2>
+          <h2>1.7.0 - Natural spawn modifiers and version reporting</h2>
           <h3>Added</h3>
           <ul>
             <li>A server-local API for modifying weights of naturally eligible Cobblemon spawn details, with scopes, declarative filters, stacking and tick expiry.</li>
@@ -588,7 +588,7 @@ if (PokedexQueries.hasCaughtForm(player, pokemon)) {
             <li>Native eligibility rules, rarity bucket choice, explicit percentage entries and Poké Snack effects.</li>
           </ul>
 
-          <p>Latest stable release: <a href="https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0" target="_blank" rel="noopener noreferrer">v1.6.0 for Fabric and NeoForge</a>. For the complete technical history, see <a href="https://github.com/LevelsFR/OS-Cobblemon-Library/blob/1.21.1/dev/CHANGELOG.md" target="_blank" rel="noopener noreferrer">CHANGELOG.md</a>.</p>
+          <p>See <a href="https://github.com/LevelsFR/OS-Cobblemon-Library/releases" target="_blank" rel="noopener noreferrer">GitHub releases</a> for binary availability and <a href="https://github.com/LevelsFR/OS-Cobblemon-Library/blob/1.21.1/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">CHANGELOG.md</a> for the complete technical history.</p>
 
            <h2>1.6.0 - CI and runtime verification hardening (2026-11-20)</h2>
           <h3>Changed</h3>

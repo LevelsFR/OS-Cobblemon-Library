@@ -1,6 +1,6 @@
 # Spawn Modifier API
 
-Introduced in OSCL 1.7.0 (unreleased development build). Publish the current source to Maven Local to use it; the published 1.6.0 library does not include this API.
+Requires OSCL 1.7.0 or newer. Use a matching runtime JAR and compile against the corresponding API; publish the source to Maven Local if needed.
 
 The Spawn Modifier API adjusts the **selection weight** of Pokémon spawn details that Cobblemon has already accepted for a natural world-spawn attempt. It does not add spawn details, create Pokémon, or replace Cobblemon's conditions and spawn loop.
 

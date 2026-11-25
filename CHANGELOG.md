@@ -2,7 +2,7 @@
 
 All notable public changes to OS Cobblemon Library are documented here.
 
-## 1.7.0 - Unreleased development build
+## 1.7.0 - Natural spawn modifiers and version reporting
 
 ### Added
 

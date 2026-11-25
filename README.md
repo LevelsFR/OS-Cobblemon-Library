@@ -8,11 +8,13 @@ A lightweight shared Cobblemon API and compatibility library for Fabric and NeoF
 
 **Author:** LevelsFR
 
-**Latest stable release:** [1.6.0 (Fabric + NeoForge)](https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0). **Development version:** `1.7.0` (unreleased development build) on `1.21.1/dev`.
+**Current source and API version:** `1.7.0` (Minecraft 1.21.1, Fabric + NeoForge).
 
-**Downloads and documentation:** [GitHub release](https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0) · [CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) · [Modrinth](https://modrinth.com/mod/os-cobblemon-library) · [Official API wiki](https://levelsfr.github.io/OS-Cobblemon-Library/). As checked on 2026-11-21, CurseForge and Modrinth still list v1.5.2; use the GitHub release to obtain the published v1.6.0 JARs.
+**Downloads and documentation:** [GitHub releases](https://github.com/LevelsFR/OS-Cobblemon-Library/releases) · [CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) · [Modrinth](https://modrinth.com/mod/os-cobblemon-library) · [Official API wiki](https://levelsfr.github.io/OS-Cobblemon-Library/).
 
-**v1.7.0 development highlights:** a server-local Spawn Modifier API, form-aware filtering and deterministic stacking, the `/oscl` version command, and Gradle 9.5.1. See the [v1.7.0 notes](CHANGELOG-v1.7.0.md) for the verified CI results and remaining gameplay checks. These APIs are not included in the published 1.6.0 artifacts.
+This documentation targets 1.7.0. Use a matching published JAR if available, or build this version locally; download platforms may lag behind the source.
+
+**v1.7.0 highlights:** a server-local Spawn Modifier API, form-aware filtering and deterministic stacking, the `/oscl` version command, and Gradle 9.5.1. See the [v1.7.0 notes](CHANGELOG-v1.7.0.md) for verification and remaining gameplay checks.
 
 OS Cobblemon Library provides reusable helpers for Pokémon, entities, storage, events, battles, Pokédex data, natural spawn-weight modifiers and compatibility boundaries so Cobblemon mods can share a consistent integration layer across Fabric and NeoForge.
 
@@ -121,7 +123,7 @@ The current Minecraft compatibility line uses:
 1.21.1/main  stable releases
 ```
 
-See [docs/BRANCHING.md](docs/BRANCHING.md) for the multi-version strategy and [docs/RELEASING.md](docs/RELEASING.md) for the release process. See the [v1.7.0 development notes](CHANGELOG-v1.7.0.md), [v1.6.0 stable release notes](CHANGELOG-v1.6.0.md) and [complete version history](CHANGELOG.md).
+See [docs/BRANCHING.md](docs/BRANCHING.md) for the multi-version strategy and [docs/RELEASING.md](docs/RELEASING.md) for the release process. See the [v1.7.0 notes](CHANGELOG-v1.7.0.md) and [complete version history](CHANGELOG.md).
 
 ## Getting started
 

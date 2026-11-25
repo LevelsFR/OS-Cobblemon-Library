@@ -135,7 +135,7 @@ supplies those signals.
 - Retry only transient Gradle dependency HTTP 429/5xx failures with a bounded policy.
 - Document the remaining Fabric runtime verification limitation without treating a passing unit test as proof of a successful in-game injection.
 
-## 1.7 natural spawn modifiers (unreleased development build)
+## 1.7 natural spawn modifiers
 
 - Provides a server-local, declarative API for weights of already eligible
   natural Cobblemon spawn details.

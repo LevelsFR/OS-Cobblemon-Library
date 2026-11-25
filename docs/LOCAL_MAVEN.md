@@ -7,8 +7,8 @@ Development work normally uses snapshot versions. A release-ready commit may
 temporarily use its final version before promotion. Stable releases use the
 corresponding non-snapshot semantic version.
 
-The latest stable release is `1.6.0`, targeting Minecraft 1.21.1 and Cobblemon
-1.8.2 through 1.8.4. The development branch currently builds `1.7.0` (unreleased). A
+The source version documented here is `1.7.0`, targeting Minecraft 1.21.1 and
+Cobblemon 1.8.2 through 1.8.4. A
 local Maven publication installs artifacts on this machine; it does not
 distribute them publicly.
 
@@ -29,7 +29,7 @@ The equivalent direct Gradle task is:
 .\gradlew.bat publishAllToMavenLocal
 ```
 
-For the current local development version 1.7.0, this publishes:
+For the current source version 1.7.0, this publishes:
 
 ```text
 com.ourstory:os-cobblemon-library-common:1.7.0

@@ -1,6 +1,6 @@
 # OS Cobblemon Library 1.7.0
 
-Status: unreleased development build on `1.21.1/dev`. The latest published GitHub release is 1.6.0.
+Source and API version: `1.7.0`. Check [GitHub releases](https://github.com/LevelsFR/OS-Cobblemon-Library/releases) for binary availability; the notes describe this source version.
 
 ## Added
 
