@@ -1,5 +1,7 @@
 # Spawn Modifier API
 
+Introduced in OSCL 1.7.0 (unreleased development build). Publish the current source to Maven Local to use it; the published 1.6.0 library does not include this API.
+
 The Spawn Modifier API adjusts the **selection weight** of Pokémon spawn details that Cobblemon has already accepted for a natural world-spawn attempt. It does not add spawn details, create Pokémon, or replace Cobblemon's conditions and spawn loop.
 
 The API is available on Minecraft 1.21.1 with Cobblemon `1.8.2+1.21.1`, `1.8.3+1.21.1` and `1.8.4+1.21.1`, on Fabric and NeoForge. Check `SpawnModifiers.capabilities()` before advertising an effect. It reports the loaded Cobblemon version, supported scopes and whether form resolution is available. Registration fails explicitly when the native detector is unavailable.

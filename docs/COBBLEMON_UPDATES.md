@@ -30,7 +30,7 @@ detection and the initial mixin target across both loaders, and safely disables
 the bridge for unknown Cobblemon versions. It remains enabled only for the
 verified `1.8.2+1.21.1`, `1.8.3+1.21.1` and `1.8.4+1.21.1` builds.
 
-The stable 1.6.0 compile dependency is pinned to Cobblemon 1.8.4 and loader metadata allows
+Both stable 1.6.0 and development 1.7.0 pin the compile dependency to Cobblemon 1.8.4 and loader metadata allows
 `>=1.8.2 <1.8.5`. Both loaders and common regression tests are built against
 all three supported releases in CI. The NeoForge 1.8.4 ambient-weather hook has
 an automated runtime smoke; Fabric runtime injection remains unverified because

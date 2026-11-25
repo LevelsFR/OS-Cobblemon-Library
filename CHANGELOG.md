@@ -2,13 +2,25 @@
 
 All notable public changes to OS Cobblemon Library are documented here.
 
-## 1.7.0 - In development
+## 1.7.0 - Unreleased development build
 
 ### Added
 
 - Add the server-local Spawn Modifier API for changing weights of already eligible natural Cobblemon spawn details.
 - Add global, dimension and UUID-attributed player scopes, form-aware data filters, source cleanup, generation-safe handles, tick expiry and deterministic stacking.
 - Add source-verified Cobblemon 1.8.2–1.8.4 spawn-engine audit, Java integration examples and seeded weighted-distribution tests.
+
+- Add `/oscl` on Fabric and NeoForge to report the installed version from loader metadata.
+
+### Changed
+
+- Upgrade the Gradle wrapper and CI to 9.5.1 and add the JUnit platform launcher for tests.
+- Require natural spawn-weight detector registration in the NeoForge 1.8.4 startup smoke.
+
+### Verification
+
+- [Build run 45524029601](https://github.com/LevelsFR/OS-Cobblemon-Library/actions/runs/45524029601) passed for all three Cobblemon versions, including both loader builds, tests, metadata and Maven publication; NeoForge 1.8.4 startup smoke passed.
+- Full natural-spawn gameplay acceptance and equivalent Fabric runtime validation remain unverified by that run. See [v1.7.0 notes](CHANGELOG-v1.7.0.md).
 
 ### Preserved
 

@@ -8,11 +8,11 @@ A lightweight shared Cobblemon API and compatibility library for Fabric and NeoF
 
 **Author:** LevelsFR
 
-**Latest stable release:** [1.6.0 (Fabric + NeoForge)](https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0). **Development version:** `1.7.0-SNAPSHOT` on `1.21.1/dev`.
+**Latest stable release:** [1.6.0 (Fabric + NeoForge)](https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0). **Development version:** `1.7.0` (unreleased development build) on `1.21.1/dev`.
 
 **Downloads and documentation:** [GitHub release](https://github.com/LevelsFR/OS-Cobblemon-Library/releases/tag/v1.6.0) · [CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) · [Modrinth](https://modrinth.com/mod/os-cobblemon-library) · [Official API wiki](https://levelsfr.github.io/OS-Cobblemon-Library/). As checked on 2026-11-21, CurseForge and Modrinth still list v1.5.2; use the GitHub release to obtain the published v1.6.0 JARs.
 
-**v1.6.0 maintenance:** bounded retries for transient Maven HTTP 429/5xx responses, Cobblemon version-matrix regression coverage, and a NeoForge runtime smoke that verifies the ambient-weather hook. This release changes CI and tests without changing public APIs or gameplay behavior.
+**v1.7.0 development highlights:** a server-local Spawn Modifier API, form-aware filtering and deterministic stacking, the `/oscl` version command, and Gradle 9.5.1. See the [v1.7.0 notes](CHANGELOG-v1.7.0.md) for the verified CI results and remaining gameplay checks. These APIs are not included in the published 1.6.0 artifacts.
 
 OS Cobblemon Library provides reusable helpers for Pokémon, entities, storage, events, battles, Pokédex data, natural spawn-weight modifiers and compatibility boundaries so Cobblemon mods can share a consistent integration layer across Fabric and NeoForge.
 
@@ -121,7 +121,7 @@ The current Minecraft compatibility line uses:
 1.21.1/main  stable releases
 ```
 
-See [docs/BRANCHING.md](docs/BRANCHING.md) for the multi-version strategy and [docs/RELEASING.md](docs/RELEASING.md) for the release process. For this maintenance release, see the [v1.6.0 release notes](CHANGELOG-v1.6.0.md) and [complete version history](CHANGELOG.md).
+See [docs/BRANCHING.md](docs/BRANCHING.md) for the multi-version strategy and [docs/RELEASING.md](docs/RELEASING.md) for the release process. See the [v1.7.0 development notes](CHANGELOG-v1.7.0.md), [v1.6.0 stable release notes](CHANGELOG-v1.6.0.md) and [complete version history](CHANGELOG.md).
 
 ## Getting started
 

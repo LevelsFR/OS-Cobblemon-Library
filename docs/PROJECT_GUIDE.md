@@ -2,7 +2,7 @@
 
 A shared Cobblemon API and compatibility library for Fabric and NeoForge.
 
-Source snapshot: **2026-11-20**. This guide describes the checked-out source; download pages carry the latest stable release.
+Source snapshot: **2026-11-25**, v1.7.0 development branch. This guide describes the checked-out source; download pages carry the latest stable release.
 
 ## Status and official links
 
@@ -11,7 +11,7 @@ Source snapshot: **2026-11-20**. This guide describes the checked-out source; do
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/os-cobblemon-library) and [Modrinth](https://modrinth.com/mod/os-cobblemon-library) — distribution pages, both still listing v1.5.2 as checked on 2026-11-21.
 - [Official API wiki](https://levelsfr.github.io/OS-Cobblemon-Library/) — published from `site/` on the stable branch.
 
-Stable releases remain on `1.21.1/main`; `1.21.1/dev` continues at `1.7.0-SNAPSHOT` and may include APIs ahead of the latest stable release.
+Stable releases remain on `1.21.1/main`; `1.21.1/dev` currently builds `1.7.0` (unreleased), including APIs not available in the latest stable release.
 
 ## Features in the current source
 
@@ -19,6 +19,8 @@ Stable releases remain on `1.21.1/main`; `1.21.1/dev` continues at `1.7.0-SNAPSH
 - Immutable display snapshots, entity/ownership inspection and per-tick cached nearest-player distance queries.
 - Party, PC storage, event and Pokédex integration.
 - Battle inspection and version-gated initial and active-weather bridges.
+- Natural spawn-weight modifiers with scoped, form-aware filters and deterministic stacking (v1.7.0).
+- `/oscl` installed-version command on both loaders (v1.7.0).
 - Documented public APIs, Maven Local publishing and separate development/stable branches.
 
 ## Compatibility and dependencies
@@ -26,7 +28,8 @@ Stable releases remain on `1.21.1/main`; `1.21.1/dev` continues at `1.7.0-SNAPSH
 | Component | Value |
 | --- | --- |
 | Latest stable release | `1.6.0` |
-| Development version | `1.7.0-SNAPSHOT` |
+| Development version | `1.7.0` (unreleased) |
+| Gradle wrapper (development) | `9.5.1` |
 | Minecraft baseline | `1.21.1` |
 | JDK | `21` |
 | Active branch | `1.21.1/dev` |
@@ -57,11 +60,11 @@ The historical v1.5.2 synchronization did not create a GitHub release. The v1.6.
 ## Installation and first use
 
 OS Cobblemon Library is a dependency library and does not add standalone
-gameplay content, commands or a configuration screen. Install the loader JAR
+gameplay content or a configuration screen. In v1.7.0, `/oscl` displays the installed library version. Install the loader JAR
 when a consuming mod declares the library as a required dependency. Match the
 loader, Minecraft, Java and Cobblemon versions listed in this guide. For an
 unreleased source build, publish it to Maven Local or use a separate test
-instance; the consuming mod controls its own commands and configuration.
+instance; the consuming mod controls its own gameplay commands and configuration.
 
 ## Persistence boundary
 
@@ -93,6 +96,7 @@ Loader JARs are normally written under the corresponding `build/libs` directory.
 
 ## Documentation index
 
+- [v1.7.0 development notes](../CHANGELOG-v1.7.0.md) · [Spawn Modifier API](SPAWNING.md) · [Cobblemon spawn source audit](COBBLEMON_1_7_SPAWNING_AUDIT.md)
 - [Complete changelog](../CHANGELOG.md) · [v1.6.0 release notes](../CHANGELOG-v1.6.0.md) · [README](../README.md)
 - [API overview](API_OVERVIEW.md) · [API stability](API_STABILITY.md)
 - [Battle](BATTLE.md) · [Events](EVENTS.md) · [Storage](STORAGE.md) · [Pokédex](POKEDEX.md)
@@ -103,6 +107,8 @@ Loader JARs are normally written under the corresponding `build/libs` directory.
 - [Matcher](POKEMON_MATCHER.md) · [Size](POKEMON_SIZE.md) · [Snapshots](POKEMON_SNAPSHOTS.md) · [Types](POKEMON_TYPES.md)
 
 ## Validation and reporting a problem
+
+[Build run 45524029601](https://github.com/LevelsFR/OS-Cobblemon-Library/actions/runs/45524029601) passed on the v1.7.0 development source for all supported Cobblemon versions, including both loaders and Maven publication. NeoForge 1.8.4 startup smoke passed; full natural-spawn gameplay acceptance and equivalent Fabric runtime checks remain unverified by that run.
 
 A source audit, successful compilation, automated checks and in-game validation are different forms of evidence. A successful build does not establish runtime compatibility. Preserve the project-specific remaining release gates.
 
