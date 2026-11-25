@@ -29,6 +29,21 @@ class SpawnFilterTest {
     }
 
     @Test
+    void formFilterRejectsCandidatesFromOtherSpecies() {
+        SpawnCandidate alolanVulpix = new SpawnCandidate(VULPIX, List.of(
+                new SpawnCandidate.Form("alola", Set.of("ice"), Set.of("regional"))
+        ), Set.of(), "common");
+        SpawnCandidate pikachu = new SpawnCandidate("cobblemon:pikachu", List.of(
+                new SpawnCandidate.Form("", Set.of("electric"), Set.of())
+        ), Set.of(), "common");
+
+        SpawnFilter alolanVulpixOnly = SpawnFilter.builder().form(VULPIX, "alola").build();
+
+        assertTrue(alolanVulpixOnly.matches(alolanVulpix));
+        assertFalse(alolanVulpixOnly.matches(pikachu));
+    }
+
+    @Test
     void typeLabelsAndAspectsAreMatchedWithoutDoubleCountingDualTypes() {
         SpawnCandidate dualType = new SpawnCandidate("addon:glacier_bird", List.of(
                 new SpawnCandidate.Form("", Set.of("ice", "flying"), Set.of("legendary", "regional"))

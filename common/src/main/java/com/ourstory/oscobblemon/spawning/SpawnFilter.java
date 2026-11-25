@@ -63,6 +63,7 @@ public final class SpawnFilter {
         if (!anyAspects.isEmpty() && candidate.aspects().stream().noneMatch(anyAspects::contains)) return false;
         if (candidate.aspects().stream().anyMatch(excludedAspects::contains)) return false;
 
+        if (!forms.isEmpty() && !forms.containsKey(candidateSpecies)) return false;
         Set<String> allowedForms = forms.get(candidateSpecies);
         Set<String> deniedForms = excludedForms.getOrDefault(candidateSpecies, Set.of());
         for (SpawnCandidate.Form form : candidate.possibleForms()) {

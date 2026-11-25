@@ -52,7 +52,8 @@ import net.minecraft.resources.ResourceLocation;
 
 SpawnModifierHandle charm = SpawnModifiers.register(server,
         SpawnModifier.builder(
-                        ResourceLocation.fromNamespaceAndPath("examplemod", "player_fairy_bonus"),
+                        ResourceLocation.fromNamespaceAndPath(
+                                "examplemod", "player_fairy_bonus/" + player.getUUID()),
                         ResourceLocation.fromNamespaceAndPath("examplemod", "consumables"))
                 .scope(SpawnModifierScope.player(player.getUUID()))
                 .filter(SpawnFilter.builder().type("fairy").build())
@@ -62,6 +63,8 @@ SpawnModifierHandle charm = SpawnModifiers.register(server,
 ```
 
 The natural `PlayerSpawner` carries the responsible player's UUID. Player scope uses that UUID directly and never guesses from proximity. The three supported scopes are global to one server, one dimension, or one player. The capability is unavailable for a context that Cobblemon does not attribute to a `PlayerSpawner`; OSCL never turns that effect into a global one.
+
+Modifier IDs are unique per server, so a per-player registration must include the player's UUID (as above) or another player's registration will collide. Keep the source ID shared by the consuming feature if `removeSource` should clear bonuses for all of its players.
 
 ```java
 var capabilities = SpawnModifiers.capabilities();
@@ -103,7 +106,7 @@ Modifiers use a namespaced stacking group. The default group uses `MAX`:
 - the selected boost and reduction are multiplied together;
 - different groups multiply together.
 
-For example, boosts `1.75` and `1.25` plus a reduction `0.5` in one MAX group produce `0.875`. An explicit `multiplicativeCapped(group, cap)` policy multiplies all matching values in that group and caps the upper result at `cap`; reductions are not raised to the cap. A group cannot mix policy definitions on one server. Remove that group's existing registrations before changing its policy.
+Stacking groups are shared server-wide across mods. Leaving the default policy places a modifier in `os_cobblemon_library:default`, so default-`MAX` modifiers from different mods intentionally share one group. Use a feature-specific namespaced group such as `examplemod:winter_event` when the feature should stack independently. Mods should share an explicit group only when they intentionally coordinate and use the same policy; registering a different policy for an already-used group throws. For example, boosts `1.75` and `1.25` plus a reduction `0.5` in one MAX group produce `0.875`. An explicit `multiplicativeCapped(group, cap)` policy multiplies all matching values in that group and caps the upper result at `cap`; reductions are not raised to the cap. Remove that group's existing registrations before changing its policy.
 
 Each modifier multiplier must be finite and in `[1e-6, 1e6]`. Zero is unsupported. If combining different groups would overflow Cobblemon's `Float` weight range, OSCL preserves the original native weight for that candidate. A result below the representable positive range is kept at `Float.MIN_VALUE`, so OSCL never turns a candidate into a zero-weight candidate.
 
