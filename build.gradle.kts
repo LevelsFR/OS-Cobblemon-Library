@@ -2,9 +2,10 @@ plugins {
     java
     `java-library`
 
-    id("dev.architectury.loom") version "1.11.458" apply false
-    id("architectury-plugin") version "3.4.164" apply false
-    id("com.github.johnrengelman.shadow") version "8.1.1" apply false
+    id("dev.architectury.loom") version "1.17.493" apply false
+    id("architectury-plugin") version "3.5.170" apply false
+    id("com.gradleup.shadow") version "9.5.1" apply false
+    id("org.jetbrains.kotlin.jvm") version "2.4.21" apply false
 }
 
 allprojects {

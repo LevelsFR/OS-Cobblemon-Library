@@ -67,6 +67,10 @@ Requirements for the current compatibility line:
 - Cobblemon 1.8.2 up to, but not including, 1.8.5
 - Fabric or NeoForge
 
+Use `/oscl` in-game to display the installed OS Cobblemon Library version.
+The command reads the version from the loader's mod metadata, so it stays
+current when the library version changes.
+
 ## Building
 
 The Gradle wrapper is committed to the repository.
